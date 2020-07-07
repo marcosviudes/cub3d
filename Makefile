@@ -3,9 +3,9 @@
 #####################################
 NAME	:= cub3D
 C		:= gcc
-CFLAGS	:= #-Wall -Wextra -Werror# -O3 -Wall -Wextra -Werror -I
+CFLAGS	:= #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror -I
 MKDIR	:= mkdir -p
-LIBFT	:= libft/
+LIBFT	:= libft/libft.a
 OBJ		:= obj
 SRCS	:= src
 INCL	:= -L $(LIBFT)
@@ -31,13 +31,13 @@ OBJ_DIRS	:= $(patsubst $(SRCS)%, $(OBJ)%, $(DIRS))
 #endef
 
 ${NAME}:	$(OBJ_DIRS) $(ALLCSOBJS)
-		$(C) -o $(NAME) $(ALLOS) $(INCL) -I includes/
+		$(C) -o $(NAME) $(ALLOS) $(INCL) $(LIBFT) -I includes/
 		# $(ALLCSOBJS)
 $(OBJ_DIRS):
 	$(MKDIR)$(OBJ_DIRS)
 #$(foreach F,$(ALLCS),$(call COMPILE,$(C),$(call C2O,$(F)),$(F),$(CFLAGS)))
 %.o: %.c
-	$(C) -o $(patsubst $(SRCS)%,$(OBJ)%,$@) -c $^ $(CFLAGS) 
+	$(C) -o $(patsubst $(SRCS)%,$(OBJ)%,$@) -c $^ $(CFLAGS) -I includes/
 
 all:		${NAME}
 			
@@ -47,5 +47,5 @@ fclean:	clean
 			rm -f ${NAME}
 re:		fclean all
 debug:		$(OBJ_DIRS) $(ALLCSOBJS)
-		$(C) -o -g $(NAME) $(ALLCSOBJS)
-.PHONY:	all clean fclean re 
+		$(C) -o $(NAME)debug -g $(ALLOS) $(INCL) $(LIBFT) -I includes/
+.PHONY:	all clean fclean re debug
