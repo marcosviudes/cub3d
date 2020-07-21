@@ -5,6 +5,6 @@
 # include <stdlib.h>
 
 
-ft_iswhitespace(int c);
-
+int         ft_iswhitespace(int c);
+char    **ft_getsubstrings(char *string);
 #endif

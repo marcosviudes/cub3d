@@ -1,4 +1,7 @@
 #include <cub3d.h>
+#include <ft_utils.h>
+#include <libft.h>
+
 
 int ft_iswhitespace(int c)
 {
@@ -8,7 +11,7 @@ int ft_iswhitespace(int c)
     return(0);
 }
 char    **ft_getsubstrings(char *string)
-{
+{/*
     char **substrings;
     int i = 0;
     int j = 0;
@@ -16,7 +19,7 @@ char    **ft_getsubstrings(char *string)
     int len;
 	char *temp;
 
-    len = ft_strlen(substrings);
+    len = ft_strlen(*substrings);
 	temp = (char *)malloc(sizeof(len));
     while(string[i] != '\0')
     {
@@ -24,11 +27,13 @@ char    **ft_getsubstrings(char *string)
 		{
 			temp[i] = '\0';
 			word++;
-			substrings[word] = strdup(temp);
+			substrings[word] = ft_strdup(temp);
 		}
 		else 
 			temp[i] = string[i];
 		i++;        
     }
-    return(*substrings);
+    return(&*substrings);
+ */
+   return 0;
 }

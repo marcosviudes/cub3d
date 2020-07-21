@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 19:09:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/05 23:34:10 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/20 11:17:35 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <get_next_line.h>
 #include <libft.h>
+#include <cub3d.h>
 
 char			*ft_strchr(const char *str, int c)
 {

@@ -1,51 +1,57 @@
-#####################################
-### CONFIG
-#####################################
-NAME	:= cub3D
-C		:= gcc
-CFLAGS	:= #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror -I
-MKDIR	:= mkdir -p
-LIBFT	:= libft/libft.a
-OBJ		:= obj
-SRCS	:= src
-INCL	:= -L $(LIBFT)
-RM		:= rm -rf
+OS := $(shell uname)
 
-ALLCS		:= $(shell find src/ -type f -iname *.c)
-ALLOS		:= $(shell find obj/ -type f -iname *.o)
-ALLCSOBJS	:= $(patsubst %.c,%.o,$(ALLCS))
-#ALLCSOBJS	:= $(foreach F,$(ALLCS),$(call C2O,$(F)))
-DIRS		:= $(shell find $(SRCS) -type d)
-OBJ_DIRS	:= $(patsubst $(SRCS)%, $(OBJ)%, $(DIRS))
+NAME = cub3D
 
-#####################################
-### MACROS
-#####################################
-#define COMPILE
-#$(2) : $(3)
-#	$(1) -c -o $(2)$(3)$(4)
-#endef
-#
-#define C2O
-#$(patsubst %.c,%.o,patsubst($(SRCS)%, $(OBJ)%, $(1)))
-#endef
+LIBFT = ./libft/libft.a
+LIBFT_SRC := $(wildcard libft/*.c)
+LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
-${NAME}:	$(OBJ_DIRS) $(ALLCSOBJS)
-		$(C) -o $(NAME) $(ALLOS) $(INCL) $(LIBFT) -I includes/
-		# $(ALLCSOBJS)
-$(OBJ_DIRS):
-	$(MKDIR)$(OBJ_DIRS)
-#$(foreach F,$(ALLCS),$(call COMPILE,$(C),$(call C2O,$(F)),$(F),$(CFLAGS)))
-%.o: %.c
-	$(C) -o $(patsubst $(SRCS)%,$(OBJ)%,$@) -c $^ $(CFLAGS) -I includes/
+COMP = gcc #-Wall -Wextra -Werror -g3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror 
+INCLUDES = -Iincludes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+#ifeq ($(OS), Linux)
+#INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -lmlx -lXext -lX11 -lpthread
+#endif
 
-all:		${NAME}
-			
-clean:	
-			rm -rf $(OBJ)/*
-fclean:	clean 
-			rm -f ${NAME}
-re:		fclean all
-debug:		$(OBJ_DIRS) $(ALLCSOBJS)
-		$(C) -o $(NAME)debug -g $(ALLOS) $(INCL) $(LIBFT) -I includes/
-.PHONY:	all clean fclean re debug
+SRCS := $(shell find src/ -type f -iname *.c)
+OBJ := $(patsubst src/%.c, obj/%.o, $(SRCS))
+
+MLX = ./libs/minilibx_opengl_20191021/libmlx.a
+
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(MLX) $(OBJ)
+	$(COMP) $(INCLUDES) $(OBJ) $(LIBFT) -o $(NAME)
+
+$(LIBFT): $(LIBFT_OBJ)
+	ar rcs $(LIBFT) $(LIBFT_OBJ)
+
+libft/%.o: libft/%.c
+	$(COMP) -Iincludes -c $< -o $@
+
+obj/%.o: src/%.c
+	mkdir -p obj
+	$(COMP) -Iincludes -c $< -o $@
+
+run: $(NAME)
+	@./$(NAME) ./res/map1.cub
+
+runs: $(NAME)
+	@./$(NAME) ./res/map1.cub -save
+
+$(MLX):
+	@ make -C ./libs/
+
+norme:
+	norminette src/*
+
+clean:
+	rm -rf libft/*.o obj/* mlx/*.o
+	rm -rf screenshot.bmp
+
+fclean: clean
+	rm -rf $(NAME) *.dSYM $(LIBFT)
+	make -C ./mlx clean
+
+re: fclean all
+
+rerun: re run
