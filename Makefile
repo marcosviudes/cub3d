@@ -1,57 +1,62 @@
-OS := $(shell uname)
-
-NAME = cub3D
-
-LIBFT = ./libft/libft.a
-LIBFT_SRC := $(wildcard libft/*.c)
-LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
-
-COMP = gcc #-Wall -Wextra -Werror -g3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror 
-INCLUDES = -Iincludes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
-#ifeq ($(OS), Linux)
-#INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -lmlx -lXext -lX11 -lpthread
-#endif
+#####################################
+### CONFIG
+#####################################
+NAME		:= cub3D
+CC 			:= gcc  
+CFLAGS		:= #-Wall -Wextra -Werror -g3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror
+LIBFT 		:= ./libft/libft.a
+LIBFTSRC	:= $(wildcard libft/*.c)
+LIBFTOBJ	:= $(patsubst libft/%.c, libft/%.o, $(LIBFTSRC))
+RM			:= rm -rf
+MKDIR		:= mkdir -p
 
 SRCS := $(shell find src/ -type f -iname *.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRCS))
-
 MLX = ./libs/minilibx_opengl_20191021/libmlx.a
+INCLUDES 	:= #-Iincludes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 
+ifdef DEBUG
+	CFLAGS +=-g
+endif
+#####################################
+### RULES
+#####################################
+
+$(NAME): $(LIBFT) $(OBJ)#$(MLX) 
+	$(CC) $(INCLUDES) $(OBJ) $(LIBFT) -o $(NAME) $(CFLAGS)
+
+$(LIBFT): $(LIBFTOBJ)
+	ar rcs $(LIBFT) $(LIBFTOBJ)
+$(MLX):
+	@ make -C ./libs/minilibx_mms_20200219
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJ)
-	$(COMP) $(INCLUDES) $(OBJ) $(LIBFT) -o $(NAME)
-
-$(LIBFT): $(LIBFT_OBJ)
-	ar rcs $(LIBFT) $(LIBFT_OBJ)
-
 libft/%.o: libft/%.c
-	$(COMP) -Iincludes -c $< -o $@
+	$(CC) -I includes -c $< -o $@
 
 obj/%.o: src/%.c
-	mkdir -p obj
-	$(COMP) -Iincludes -c $< -o $@
+	$(MKDIR) obj
+	$(CC) -I includes -c $< -o $@
 
-run: $(NAME)
-	@./$(NAME) ./res/map1.cub
-
-runs: $(NAME)
-	@./$(NAME) ./res/map1.cub -save
-
-$(MLX):
-	@ make -C ./libs/
-
-norme:
+normi:
 	norminette src/*
 
 clean:
-	rm -rf libft/*.o obj/* mlx/*.o
-	rm -rf screenshot.bmp
+	$(RM) libft/*.o obj/* mlx/*.o
 
 fclean: clean
-	rm -rf $(NAME) *.dSYM $(LIBFT)
+	$(RM) $(NAME) *.dSYM $(LIBFT)
 	make -C ./mlx clean
 
 re: fclean all
 
-rerun: re run
+.PHONY:	all clean fclean re debug
+
+#####################################
+
+#run: $(NAME)
+#	@./$(NAME) ./res/map1.cub
+#runs: $(NAME)
+#	@./$(NAME) ./res/map1.cub -save
+#rerun: re run
+#$(RM) screenshot.bmp

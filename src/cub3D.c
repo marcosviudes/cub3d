@@ -1,7 +1,7 @@
 #include <cub3d.h>
 #include <get_next_line.h>
 #include <ft_utils.h>
-#include <mlx.h>
+//#include <mlx.h>
 
 int main(int argc, char *argv[])
 {
