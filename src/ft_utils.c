@@ -11,7 +11,7 @@ int ft_iswhitespace(int c)
     return(0);
 }
 char    **ft_getsubstrings(char *string)
-{/*
+{
     char **substrings;
     int i = 0;
     int j = 0;
@@ -34,6 +34,6 @@ char    **ft_getsubstrings(char *string)
 		i++;        
     }
     return(&*substrings);
- */
+ 
    return 0;
 }
