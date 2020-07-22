@@ -3,32 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 19:09:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/20 11:17:35 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/22 16:29:55 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <get_next_line.h>
 #include <libft.h>
 #include <cub3d.h>
-
-char			*ft_strchr(const char *str, int c)
-{
-	int			i;
-
-	i = 0;
-	if ((char)c == '\0')
-		return ((char *)str + ft_strlen((char *)str));
-	while (str[i])
-	{
-		if (str[i] == c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	return (NULL);
-}
 
 char			*ft_strcdup(const char *src, int c)
 {
@@ -51,7 +35,7 @@ char			*ft_strcdup(const char *src, int c)
 	s2[j] = '\0';
 	return (s2);
 }
-
+/*
 size_t			ft_strnlen(const char *s, size_t maxlen)
 {
 	size_t		len;
@@ -62,3 +46,4 @@ size_t			ft_strnlen(const char *s, size_t maxlen)
 			break ;
 	return (len - 1);
 }
+*/

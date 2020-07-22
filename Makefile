@@ -50,13 +50,14 @@ fclean: clean
 
 re: fclean all
 
-debug: $(LIBFT)
-	$(CC) $(DFLAGS) $(INCLUDES) $(SRCS) $(LIBFT)
+debug: 
+	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes
+	
 
 .PHONY:	all clean fclean re debug
 
 #####################################
-
+#$(INCLUDES)
 #run: $(NAME)
 #	@./$(NAME) ./res/map1.cub
 #runs: $(NAME)
