@@ -50,7 +50,7 @@ fclean: clean
 
 re: fclean all
 
-debug: 
+debug: fclean
 	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes
 	
 
