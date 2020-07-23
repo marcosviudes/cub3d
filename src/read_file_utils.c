@@ -43,6 +43,7 @@ int ft_iswhitespace(int c)
  
 //    return 0;
 // }
+/*
 char    **ft_getsubstrings(char *string)
 {
     char **substrings;
@@ -53,13 +54,13 @@ char    **ft_getsubstrings(char *string)
 
     if (NULL == (temp = (char *)malloc(sizeof(len))))
         return (NULL);
-    substrings = (char**)malloc(4*sizeof(temp));
+    substrings = (char*)malloc(4*sizeof(temp));
     while(string[i] != '\0')
     {
         if(string[i] == ' '|| string[i] == ',')
         {
             temp[i] = '\0';
-            substrings[i] = (char*)malloc(sizeof(temp + 1));
+            substrings[words] = (char*)malloc(sizeof(temp + 1));
             substrings[words] = temp;
             words++;
             temp = ft_calloc(1, sizeof(len));
@@ -73,4 +74,4 @@ char    **ft_getsubstrings(char *string)
     return(&*substrings);
  
    return 0;
-}
+}*/

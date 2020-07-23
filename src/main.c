@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     int         gnlret;
     fd = open(argv[1] , O_RDONLY);
     
+    config = (t_config *)calloc(1, sizeof(t_config));
     while((gnlret = get_next_line(fd, &line)) > 0)
     {
         read_line(config, line);
