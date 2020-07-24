@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/23 22:01:58 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/24 13:04:57 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int     read_line(t_config *config, char *line)
 		return(read_map(config, line));
 	spline = ft_split(line, ' ');
     if(ft_cmpstr(*spline, "R"))
-		{
-			config->ResolutionWidht = atoi(spline[1]);
-			config->ResolutionHeight = atoi(spline[2]);
-		}
+		fillResolution(config, spline);
     else if(ft_cmpstr(*spline, "NO"))
 		config->tex_path_north = spline[1];
     else if (ft_cmpstr(*spline, "SO"))
@@ -54,31 +51,32 @@ int     read_line(t_config *config, char *line)
 int		read_map(t_config *config, char *line)
 {
 	return (0)	;
-}/*
-int		ft_cmpstr(char* string1, char* string2)
-{
-	int i;
+}
 
-	i = 0;
-	if(string1 && string2)
-	{
-		while(string1[i] != '\0' || string2[i] != '\0')
-		{
-			if(string1[i] != string2[i])
-				return (0);
-			i++;
-		}
-		return (1);
+int			fillResolution(t_config *config, char **spline)
+{	
+	if(!spline[1])
+		config->ResolutionWidht = -1;
+	else
+		config->ResolutionWidht = atoi(spline[1]);
+	if(!spline[2])
+		config->ResolutionHeight = -1;
+	else
+		config->ResolutionHeight = atoi(spline[2]);
+	if (config->ResolutionWidht > 2880 || config->ResolutionHeight > 1395)
+	{	
+		config->ResolutionWidht = 2880;
+		config->ResolutionHeight = 1395;
 	}
-	return (0);
-}*/
-/*
 
-	
-	
-
-
-int     check_resolution(t_config *config, char line)
+		return (0);
+}
+void		checkResolution(t_config *config)
 {
-        printf("hola");
-}*/
+	if(!config->ResolutionHeight || !config->ResolutionWidht)
+		printf("No se ha encontrado resolución\n");
+	else if(config->ResolutionHeight == 0 && config->ResolutionWidht == 0)
+		printf("Resolucion invalida\n");
+	if(config->ResolutionHeight == -1 || config->ResolutionWidht == -1)
+		printf("faltan numeros de resolucion\n");
+}

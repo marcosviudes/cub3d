@@ -6,5 +6,7 @@
 
 
 int         ft_iswhitespace(int c);
-char    **ft_getsubstrings(char *string);
+char        **ft_getsubstrings(char *string);
+int         fillResolution(t_config *config, char **spline);
+void		checkResolution(t_config *config);
 #endif

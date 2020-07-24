@@ -15,7 +15,11 @@ int main(int argc, char *argv[])
     while((gnlret = get_next_line(fd, &line)) > 0)
     {
         read_line(config, line);
-    }
+       
+    } 
+    checkResolution(config);
     printf("hasta aqui funciona\n");
+    printf("El valor del width es:  -%i-\n", config->ResolutionWidht);
+    printf("El valor del height es: -%i-\n", config->ResolutionHeight);
     return (0);
 }
