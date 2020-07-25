@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 19:09:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/22 16:29:55 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/25 14:35:52 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,3 @@ char			*ft_strcdup(const char *src, int c)
 	s2[j] = '\0';
 	return (s2);
 }
-/*
-size_t			ft_strnlen(const char *s, size_t maxlen)
-{
-	size_t		len;
-
-	len = 0;
-	while (len++ < maxlen)
-		if (*s++ == '\0')
-			break ;
-	return (len - 1);
-}
-*/

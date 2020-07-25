@@ -8,6 +8,10 @@
 # include <libft.h>
 # include <get_next_line.h>
 
+#define MAX_WIDHT 2560
+#define MAX_HEIGHT 1395
+
+
 typedef struct      s_config
 {
     int             ResolutionWidht;
@@ -17,10 +21,18 @@ typedef struct      s_config
     char            *tex_path_west;
     char            *tex_path_east;
 	char			*tex_sprite;
-    char			*floor;
-	char			*ceiling;
+    int			    floor[3];
+	int 			ceiling[3];
 	struct t_map	*map;
-
+	struct t_flags	*flags;
+	int				resolutionflag;
+    int             floorflag;
+    int             cealingflag;
+    int             texturenorthflag;
+    int             texturesouthflag;
+    int             texturewestflag;
+    int             textureeastflag;
+    int             texturespriteflag;
 }                   t_config;
 
 typedef struct      s_dir
@@ -36,11 +48,18 @@ typedef struct	    s_player
     struct s_dir    *next;
 
 }					t_player;
+
 typedef struct      s_map
 {
-	char			*stringmap;
+	char			*mapbuff;
     char            **map;
-}                   t_map;
+
+}                   t_map;    
+
+typedef struct		s_flags
+{
+    int				resolution;
+}					t_flags;
 
 int      read_line(t_config *config, char *line);
 int     check_resolution(t_config *config, char line);

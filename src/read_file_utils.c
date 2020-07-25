@@ -11,6 +11,20 @@ int ft_iswhitespace(int c)
         return(1);
     return(0);
 }
+int ft_strisnum(char *string)
+{
+    int i;
+    
+    i = 0;
+    while(string[i] != '\0')
+    {
+        if(!(string[i] >= '0' && string[i] <= '9'))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int		ft_cmpstr(char* string1, char* string2)
 {
 	int i;
