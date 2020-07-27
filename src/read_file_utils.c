@@ -41,68 +41,19 @@ int		ft_cmpstr(char* string1, char* string2)
 		return (1);
 	}
 	return (0);
-}
-// char    **ft_getsubstrings(char *string)
-// {
-//     char **substrings;
-//     int i = 0;
-// 	int word = 0;
-//     int len;
-// 	char *temp = "";
-
-//     len = ft_strlen(string);
-// 	if (NULL == (temp = (char *)malloc(sizeof(len))))
-//         return (NULL);
-//     **substrings = (char*)malloc(sizeof(temp));
-//     while(string[i] != '\0')
-//     {
-//         if(string[i] == ' ' || string[i] == ',')
-// 		{
-// 			temp[i] = '\0';
-// 			substrings[word] = ft_strdup(temp);
-// 			word++;
-//             temp = NULL;
-//             temp = (char *)malloc(sizeof(len));
-// 		}
-// 		else
-//         {
-// 			temp[i] = string[i];
-//         }
-//         i++;        
-//     }
-//     return(&*substrings);
- 
-//    return 0;
-// }
-/*
-char    **ft_getsubstrings(char *string)
+}/*
+int ft_strisnum(char *string)
 {
-    char **substrings;
-    int i = 0;
-	int words = 0;
-    int len;
-	char *temp = 0;
-
-    if (NULL == (temp = (char *)malloc(sizeof(len))))
-        return (NULL);
-    substrings = (char*)malloc(4*sizeof(temp));
+    int i;
+    
+    i = 0;
     while(string[i] != '\0')
     {
-        if(string[i] == ' '|| string[i] == ',')
-        {
-            temp[i] = '\0';
-            substrings[words] = (char*)malloc(sizeof(temp + 1));
-            substrings[words] = temp;
-            words++;
-            temp = ft_calloc(1, sizeof(len));
-        }
-        else 
-        {
-            temp[i] = string[i];
-        }
-        i++;
+        if(string[i] >= '0' && string[i] <= '9')
+            i++;
+        else
+            return (0);
     }
-    return(&*substrings);
- 
-   return 0;
-}*/
+    return (1);
+}
+*/

@@ -51,7 +51,7 @@ fclean: clean
 re: fclean all
 
 debug: fclean
-	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes
+	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes -o $(NAME)
 	
 
 .PHONY:	all clean fclean re debug
