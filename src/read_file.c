@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/27 13:14:12 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/28 13:01:01 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 int				fill_resolution(t_config *config, char **spline)
 {
-	int 		i;
+	int			i;
 	int			resolution[3];
 
 	i = 1;
+	if (spline[3] != NULL)
+		return (1);
 	while (i < 3)
 	{
 		if (!spline[i])
@@ -65,29 +67,29 @@ int				fill_ambientcolor(t_config *config, char **spline)
 	return (0);
 }
 
-void			fill_texture(t_config *config, char **spline)
+void			fill_texture(t_config *config, char **spline, int key)
 {
-	if (ft_cmpstr(*spline, "NO"))
+	if (key == K_NO)
 	{
 		config->tex_path_north = spline[1];
 		config->flags.texturenorth += 1;
 	}
-	else if (ft_cmpstr(*spline, "SO"))
+	else if (key == K_SO)
 	{
 		config->tex_path_south = spline[1];
 		config->flags.texturesouth += 1;
 	}
-	else if (ft_cmpstr(*spline, "WE"))
+	else if (key == K_WE)
 	{
 		config->tex_path_west = spline[1];
 		config->flags.texturewest += 1;
 	}
-	else if (ft_cmpstr(*spline, "EA"))
+	else if (key == K_EA)
 	{
 		config->tex_path_east = spline[1];
 		config->flags.textureeast += 1;
 	}
-	else if (ft_cmpstr(*spline, "S"))
+	else if (key == K_S)
 	{
 		config->tex_sprite = spline[1];
 		config->flags.texturesprite += 1;
@@ -96,32 +98,47 @@ void			fill_texture(t_config *config, char **spline)
 
 int				read_map(t_config *config, char *line)
 {
-	return (0)	;
+//	static char	*config->map->buff;
+	char		*temp;
+	char		*temp2;
+
+	if (config->map->buff == NULL)
+		config->map->buff = ft_strdup("");
+	temp = ft_strjoin(config->map->buff, line);
+	temp2 = ft_strjoin(temp, "\n");
+	free(temp);
+	free(config->map->buff);
+	config->map->buff = temp2;
+	return (0);
+	/*
+	char		*buff;
+
+	if (!config->map->buff)
+		config->map->buff = ft_strdup("");
+	buff = ft_strjoin(config->map->buff, line);
+	return (0)	;*/
 }
 
 int				read_line(t_config *config, char *line)
 {
 	int		i;
 	char	**spline;
+	int		key;
 
 	i = 0;
-	while (ft_iswhitespace(line[i]) == 1)
+	spline = ft_split(line, ' ');
+	key = get_key(*spline);
+	if (*spline == NULL)
+		return (0);
+	while (ft_iswhitespace(line[i]))
 		i++;
 	if (ft_isdigit(line[i]))
 		return (read_map(config, line));
-	spline = ft_split(line, ' ');
-	if (*spline == NULL)
-		return (0);
-	if (ft_cmpstr(*spline, "R"))
-		fill_resolution(config, spline);
-	else if (ft_cmpstr(*spline, "NO") ||
-			ft_cmpstr(*spline, "SO") ||
-			ft_cmpstr(*spline, "WE") ||
-			ft_cmpstr(*spline, "EA") ||
-			ft_cmpstr(*spline, "S"))
-		fill_texture(config, spline);
-	else if (ft_cmpstr(*spline, "F") ||
-				ft_cmpstr(*spline, "C"))
+	if (key == K_R)
+		return (fill_resolution(config, spline));
+	else if (key >= K_NO && key <= K_S)
+		fill_texture(config, spline, key);
+	else if (key == K_F || key == K_C)
 		fill_ambientcolor(config, spline);
 	return (0);
 }

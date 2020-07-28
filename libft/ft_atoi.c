@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 18:20:50 by mviudes           #+#    #+#             */
-/*   Updated: 2019/11/15 19:18:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/28 09:10:42 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int				ft_atoi(const char *str)
 	i = 0;
 	neg = 1;
 	r = 0;
+	if (!str)
+		return(0);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '-')

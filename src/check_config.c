@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/27 13:20:43 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/28 09:17:46 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			check_resolution(t_config *config)
 {
-	if (config->resolutionwidht > MAX_WIDHT
+	if (config->resolutionwidht > MAX_WIDHT 
 		|| config->resolutionwidht > MAX_HEIGHT)
 	{
 		config->resolutionwidht = MAX_WIDHT;
@@ -50,4 +50,9 @@ int		check_floor(t_config *config)
 		i++;
 	}
 	return 0;
+}
+
+void	check_ceiling(t_config *config)
+{
+	return;
 }
