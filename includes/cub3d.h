@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/28 13:01:10 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/30 13:03:41 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 
 typedef struct		s_dir
 {
-	double			x;
-	double			y;
+	int				x;
+	int				y;
 }					t_dir;
 
 typedef struct		s_player
@@ -58,6 +58,8 @@ typedef struct		s_map
 {
 	char			*buff;
 	char			**map;
+	int				max_height;
+	int				max_widht;
 	t_maperror		errors;
 
 }					t_map;
@@ -72,6 +74,8 @@ typedef struct		s_flags
 	int				texturewest;
 	int				textureeast;
 	int				texturesprite;
+	int				readingmap;
+	int				initpos;
 }					t_flags;
 
 typedef struct		s_config
@@ -86,20 +90,24 @@ typedef struct		s_config
 	char			*tex_sprite;
 	int				floorcolor[3];
 	int				ceilingcolor[3];
-	t_map			*map;
+	t_map			map;
 	t_flags			flags;
+	t_dir			init_pos;
 }					t_config;
 
 int					read_line(t_config *config, char *line);
 int					get_key(char* spline);
 int					fill_resolution(t_config *config, char **spline);
-int					fill_ambientcolor(t_config *config, char **spline);
+//int					fill_ambientcolor(t_config *config, char **spline);
 void				fill_texture(t_config *config, char **spline, int key);
 void				check_resolution(t_config *config);
 void				check_textures(t_config *config);
 int					check_floor(t_config *config);
-void				check_ceiling(t_config *config);
+int					check_ceiling(t_config *config);
 int					read_map(t_config *config, char	*line);
-int					ft_cmpstr(char *string1, char *string2);
+int					copy_map(t_config *config, char *line);
+int					get_size_map(t_config *config, char *line);
 
+int			fill_ambientcolor(int *color, char **spline);
+int			select_ambient(t_config *config, char *line, char **spline, int key);
 #endif

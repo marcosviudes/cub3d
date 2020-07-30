@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/28 13:01:01 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/30 13:17:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,6 @@ int				fill_resolution(t_config *config, char **spline)
 	config->resolutionwidht = resolution[1];
 	config->resolutionheight = resolution[2];
 	config->flags.resolution += 1;
-	return (0);
-}
-
-int				fill_ambientcolor(t_config *config, char **spline)
-{
-	int		rgb[3];
-	int		i;
-	char	**numbers;
-
-	i = 0;
-	numbers = ft_split(spline[1], ',');
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(numbers[i]);
-		i++;
-	}
-	i = -1;
-	if (*spline[0] == 'F')
-	{
-		while (i++ < 3)
-			config->floorcolor[i] = rgb[i];
-		config->flags.floor += 1;
-	}
-	if (*spline[0] == 'C')
-	{
-		while (i++ < 3)
-			config->ceilingcolor[i] = rgb[i];
-		config->flags.cealing += 1;
-	}
 	return (0);
 }
 
@@ -96,28 +67,7 @@ void			fill_texture(t_config *config, char **spline, int key)
 	}
 }
 
-int				read_map(t_config *config, char *line)
-{
-//	static char	*config->map->buff;
-	char		*temp;
-	char		*temp2;
 
-	if (config->map->buff == NULL)
-		config->map->buff = ft_strdup("");
-	temp = ft_strjoin(config->map->buff, line);
-	temp2 = ft_strjoin(temp, "\n");
-	free(temp);
-	free(config->map->buff);
-	config->map->buff = temp2;
-	return (0);
-	/*
-	char		*buff;
-
-	if (!config->map->buff)
-		config->map->buff = ft_strdup("");
-	buff = ft_strjoin(config->map->buff, line);
-	return (0)	;*/
-}
 
 int				read_line(t_config *config, char *line)
 {
@@ -135,10 +85,79 @@ int				read_line(t_config *config, char *line)
 	if (ft_isdigit(line[i]))
 		return (read_map(config, line));
 	if (key == K_R)
-		return (fill_resolution(config, spline));
+		fill_resolution(config, spline);
 	else if (key >= K_NO && key <= K_S)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
-		fill_ambientcolor(config, spline);
+		select_ambient(config, line, spline, key);
+	//	fill_ambientcolor(config, spline);
+	free(spline);
 	return (0);
 }
+
+
+int				select_ambient(t_config *config, char *line, char **spline, int key)
+{
+	if (key == K_F)
+	{
+		config->flags.floor += 1;
+		return (fill_ambientcolor(config->floorcolor, spline));
+	}
+	else if (key == K_C)
+	{
+		config->flags.cealing += 1;
+		return (fill_ambientcolor(config->ceilingcolor, spline));
+	}
+	else
+		return (0);
+}
+
+int				fill_ambientcolor(int *color, char **spline)
+{
+	int			rgb[3];
+	int			i;
+	char		**numbers;
+
+	i = 0;
+	numbers = ft_split(spline[1], ',');
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(numbers[i]);
+		i++;
+	}
+	i = -1;
+	while (i++ < 3)
+		color[i] = rgb[i];
+	free(numbers);
+	return (0);
+}
+/*
+int				fill_ambientcolor(t_config *config, char **spline)
+{
+	int		rgb[3];
+	int		i;
+	char	**numbers;
+
+	i = 0;
+	numbers = ft_split(spline[1], ',');
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(numbers[i]);
+		i++;
+	}
+	i = -1;
+	if (*spline[0] == 'F')
+	{
+		while (i++ < 3)
+			config->floorcolor[i] = rgb[i];
+		config->flags.floor += 1;
+	}
+	if (*spline[0] == 'C')
+	{
+		while (i++ < 3)
+			config->ceilingcolor[i] = rgb[i];
+		config->flags.cealing += 1;
+	}
+	return (0);
+}*/
+
