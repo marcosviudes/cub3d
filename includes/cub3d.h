@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 13:03:41 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/30 23:14:48 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <math.h>
 # include <libft.h>
 # include <get_next_line.h>
-
 
 # define MAX_WIDHT 2560
 # define MAX_HEIGHT 1395
@@ -35,11 +34,18 @@
 # define K_MAP	9
 
 
+typedef struct		s_pos
+{
+	double			x;
+	double			y;
+}					t_pos;
+
 typedef struct		s_dir
 {
 	int				x;
 	int				y;
 }					t_dir;
+
 
 typedef struct		s_player
 {
@@ -108,6 +114,9 @@ int					read_map(t_config *config, char	*line);
 int					copy_map(t_config *config, char *line);
 int					get_size_map(t_config *config, char *line);
 
+int			check_textures_north(t_config *config);
+
+void			get_init_position(t_config *config, int widht, int height);
 int			fill_ambientcolor(int *color, char **spline);
 int			select_ambient(t_config *config, char *line, char **spline, int key);
 #endif

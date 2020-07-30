@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 12:07:17 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/30 15:56:44 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,78 @@ int			check_ceiling(t_config *config)
 	return (0);
 }
 
+int			check_textures_north(t_config *config)
+{
+	if (config->flags.texturenorth > 1)
+		printf("se ha encontrado mas de una textura N\n");
+	else if (config->flags.texturenorth <= 0)
+		printf("no se ha encontrado textura N\n");
+	else if (config->flags.texturenorth = 1 && !config->tex_path_north)
+		printf ("textura N invalida\n");
+	else if (!config->tex_path_north)
+		printf ("debe introducir una textura N\n");
+	else
+		return (1);
+}
 
+int			check_textures_south(t_config *config)
+{
+	if (config->flags.texturesouth > 1)
+		printf("se ha encontrado mas de una textura SO\n");
+	else if (config->flags.texturesouth <= 0)
+		printf("no se ha encontrado textura SO\n");
+	else if (config->flags.texturesouth = 1 && !config->tex_path_south)
+		printf ("textura SO invalida\n");
+	else if (!config->tex_path_south)
+		printf ("debe introducir una textura SO\n");
+	else
+		return (1);
+}
+int			check_textures_west(t_config *config)
+{
+	if (config->flags.texturewest > 1)
+		printf("se ha encontrado mas de una textura WE\n");
+	else if (config->flags.texturewest <= 0)
+		printf("no se ha encontrado textura WE\n");
+	else if (config->flags.texturewest = 1 && !config->tex_path_west)
+		printf ("textura WE invalida\n");
+	else if (!config->tex_path_west)
+		printf ("debe introducir una Textura W\n");
+	else
+		return (1);
+}
+int			check_textures_east(t_config *config)
+{
+	if (config->flags.textureeast > 1)
+		printf("se ha encontrado mas de una textura EA\n");
+	else if (config->flags.textureeast <= 0)
+		printf("no se ha encontrado textura EA\n");
+	else if (config->flags.textureeast = 1 && !config->tex_path_east)
+		printf ("Textura EA invalida\n");
+	else if (!config->tex_path_east)
+		printf ("debe introducir una textura EA\n");
+	else
+		return (1);
+}
+
+int			check_textures_sprite(t_config *config)
+{
+	if (config->flags.texturesprite > 1)
+		printf("se ha encontrado mas de una textura S\n");
+	else if (config->flags.texturesprite <= 0)
+		printf("no se ha encontrado textura S\n");
+	else if (config->flags.texturesprite = 1 && !config->tex_sprite)
+		printf ("textura S invalida\n");
+	else if (!config->tex_sprite)
+		printf ("debe introducir una textura S\n");
+	else
+		return (1);
+}
 void		check_textures(t_config *config)
 {
-
+	check_textures_north(config);
+	check_textures_south(config);
+	check_textures_west(config);
+	check_textures_east(config);
+	check_textures_sprite(config);
 }

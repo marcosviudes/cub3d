@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 13:05:50 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/30 23:18:18 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ int main(int argc, char *argv[])
 	return (0);
 }
 	
-//mover la funcion de leer la posicon inicial a una funcion secundaria; leer al pasarlo;
+//¿Existe alguna funcion que al pasarle un char y una string devuelva si ah aencontrado el char en la string?
+//¿Existe alguna manera de identar una estrucutra?
+//Terminar la lectura del mapa;
+//validar el mapa;
+
+//Checkear toda la configuracion;
+//Ordenar toda la configuracion;
+
+//Mirar como funcionaa la mlx;
+
