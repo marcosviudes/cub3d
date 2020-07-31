@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 23:18:18 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/31 11:07:48 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int main(int argc, char *argv[])
 	check_textures(config);
 	check_floor(config);
 	check_ceiling(config);
+	print_map(config);
+	free(config);
 	return (0);
 }
 	
-//¿Existe alguna funcion que al pasarle un char y una string devuelva si ah aencontrado el char en la string?
-//¿Existe alguna manera de identar una estrucutra?
 //Terminar la lectura del mapa;
 //validar el mapa;
 
@@ -61,3 +61,21 @@ int main(int argc, char *argv[])
 
 //Mirar como funcionaa la mlx;
 
+
+int		print_map(t_config *config)
+{
+	int	i;
+	int j;
+
+	while (j <= config->map.max_height)
+	{
+		while (i <= config->map.max_widht)
+			{
+				printf("%i ", config->map.map[j][i]);
+				i++;
+			}
+			printf("\n");
+		j++;
+	}
+	return(0);
+}

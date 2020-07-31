@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 23:14:48 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/31 11:16:43 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define K_C	8
 # define K_MAP	9
 
+# define VALID_CHAR_MAP " 012NSEW"
 
 typedef struct		s_pos
 {
@@ -63,7 +64,7 @@ typedef struct		s_maperror
 typedef struct		s_map
 {
 	char			*buff;
-	char			**map;
+	int				**map;
 	int				max_height;
 	int				max_widht;
 	t_maperror		errors;
@@ -110,9 +111,7 @@ void				check_resolution(t_config *config);
 void				check_textures(t_config *config);
 int					check_floor(t_config *config);
 int					check_ceiling(t_config *config);
-int					read_map(t_config *config, char	*line);
-int					copy_map(t_config *config, char *line);
-int					get_size_map(t_config *config, char *line);
+
 
 int			check_textures_north(t_config *config);
 

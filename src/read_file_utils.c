@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/29 10:43:58 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/31 10:39:38 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,19 @@ int		get_key(char *spline)
 		return (K_F);
 	if (ft_cmpstr(spline, "C"))
 		return (K_C);
+	return (0);
+}
+
+int			find_char_str(char c, char const *string)
+{
+	int		i;
+
+	i = 0;
+	while(string[i] != '\0')
+		{
+			if (string[i] == c)
+				return (c);
+			i++;
+		}
 	return (0);
 }

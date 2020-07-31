@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 23:15:05 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/31 11:17:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include <read_map.h>
 
 int		get_size_map(t_config *config, char *line)
 {
@@ -32,6 +33,7 @@ int				read_map(t_config *config, char *line)
 {
 	config->flags.readingmap = 1;
 	get_size_map(config, line);
+//	config->map.map = (int**)calloc(config->map.max_height * config->map.max_widht * sizeof (int), 1);
 	return (0);
 }
 
@@ -57,3 +59,4 @@ void		get_init_position(t_config *config, int widht, int height)
 	config->init_pos.y = height;
 	config->flags.initpos += 1;
 }
+

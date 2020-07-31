@@ -6,13 +6,14 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/30 13:17:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/07/31 11:18:58 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <libft.h>
 #include <ft_utils.h>
+#include <read_map.h>
 
 int				fill_resolution(t_config *config, char **spline)
 {
@@ -90,7 +91,6 @@ int				read_line(t_config *config, char *line)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
 		select_ambient(config, line, spline, key);
-	//	fill_ambientcolor(config, spline);
 	free(spline);
 	return (0);
 }
@@ -131,33 +131,3 @@ int				fill_ambientcolor(int *color, char **spline)
 	free(numbers);
 	return (0);
 }
-/*
-int				fill_ambientcolor(t_config *config, char **spline)
-{
-	int		rgb[3];
-	int		i;
-	char	**numbers;
-
-	i = 0;
-	numbers = ft_split(spline[1], ',');
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(numbers[i]);
-		i++;
-	}
-	i = -1;
-	if (*spline[0] == 'F')
-	{
-		while (i++ < 3)
-			config->floorcolor[i] = rgb[i];
-		config->flags.floor += 1;
-	}
-	if (*spline[0] == 'C')
-	{
-		while (i++ < 3)
-			config->ceilingcolor[i] = rgb[i];
-		config->flags.cealing += 1;
-	}
-	return (0);
-}*/
-
