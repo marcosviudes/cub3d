@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/03 12:34:01 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/03 13:14:23 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ int				copy_map(t_config *config, char *line)
 	return (0);
 }
 
-void		get_init_position(t_config *config, int widht, int height)
-{
-	config->init_pos.x = widht;
-	config->init_pos.y = height;
-	config->flags.initpos += 1;
-}
 
 void		allocate_map(t_config  *config)
 {
@@ -69,9 +63,16 @@ void		allocate_map(t_config  *config)
 
 	i = 0;
 	config->map.map = ft_calloc(sizeof(int*), config->map.max_height);
-	while(i < config->map.max_height)
+	while (i < config->map.max_height)
 	{
 		config->map.map[i] = ft_calloc(sizeof(int), config->map.max_widht);
 		i++;
 	}
+}
+
+void		get_init_position(t_config *config, int widht, int height)
+{
+	config->init_pos.x = widht;
+	config->init_pos.y = height;
+	config->flags.initpos += 1;
 }

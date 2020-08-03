@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/03 12:34:32 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/03 13:15:29 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int main(int argc, char *argv[])
 	free(config);
 	return (0);
 }
-	
+
+//Reservar memoria para el mapa;
 //Terminar la lectura del mapa;
+//Pasar el mapa
 //validar el mapa;
 
 //Checkear toda la configuracion;
