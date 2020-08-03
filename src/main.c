@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 11:07:48 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/03 12:34:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int main(int argc, char *argv[])
 	{
 		read_line(config, line);
 		if (!config->lastline)
-		break ;
+			break ;
 	} 
-	
 	printf("hasta aqui funciona\n");
 	printf("El valor del width es:  -%i-\n", config->resolutionwidht);
 	printf("El valor del height es: -%i-\n", config->resolutionheight);
@@ -43,7 +42,7 @@ int main(int argc, char *argv[])
 	printf("La textura del sprinte es: %s\n", config->tex_sprite);
 	printf("El tamaño del mapa es    : |%ix%i|\n", config->map.max_widht, config->map.max_height);
 	printf("La posicion  inicial es  : |%ix%i|\n", config->init_pos.x, config->init_pos.y);
-	printf("\nChecks----------:\n");
+	printf("\nChecks----------:\n\n");
 	check_resolution(config);
 	check_textures(config);
 	check_floor(config);
@@ -66,16 +65,27 @@ int		print_map(t_config *config)
 {
 	int	i;
 	int j;
+	int k;
 
-	while (j <= config->map.max_height)
+	i = 0;
+	j = 0;
+	k = 0;
+
+	printf("\nmap---------:\n\n");
+	while (j < config->map.max_height)
 	{
-		while (i <= config->map.max_widht)
+		while (i < config->map.max_widht)
 			{
-				printf("%i ", config->map.map[j][i]);
+				printf("%i", config->map.map[j][i]);
 				i++;
+				if (i > k)
+					k = i;
 			}
 			printf("\n");
 		j++;
+		i = 0;
 	}
+	printf("\n");
+	printf("El map printeado mide %ix%i", k, j);
 	return(0);
 }

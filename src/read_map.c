@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 11:17:32 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/03 12:34:01 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int				read_map(t_config *config, char *line)
 {
 	config->flags.readingmap = 1;
 	get_size_map(config, line);
-//	config->map.map = (int**)calloc(config->map.max_height * config->map.max_widht * sizeof (int), 1);
+	if (config->lastline == 0)
+	{
+		allocate_map(config);
+	}
 	return (0);
 }
 
@@ -60,3 +63,15 @@ void		get_init_position(t_config *config, int widht, int height)
 	config->flags.initpos += 1;
 }
 
+void		allocate_map(t_config  *config)
+{
+	int		i;
+
+	i = 0;
+	config->map.map = ft_calloc(sizeof(int*), config->map.max_height);
+	while(i < config->map.max_height)
+	{
+		config->map.map[i] = ft_calloc(sizeof(int), config->map.max_widht);
+		i++;
+	}
+}

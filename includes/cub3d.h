@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 11:16:43 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/03 10:07:45 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct		s_config
 int					read_line(t_config *config, char *line);
 int					get_key(char* spline);
 int					fill_resolution(t_config *config, char **spline);
-//int					fill_ambientcolor(t_config *config, char **spline);
+//int				fill_ambientcolor(t_config *config, char **spline);
 void				fill_texture(t_config *config, char **spline, int key);
 void				check_resolution(t_config *config);
 void				check_textures(t_config *config);
@@ -113,9 +113,9 @@ int					check_floor(t_config *config);
 int					check_ceiling(t_config *config);
 
 
-int			check_textures_north(t_config *config);
+int					check_textures_north(t_config *config);
 
-void			get_init_position(t_config *config, int widht, int height);
-int			fill_ambientcolor(int *color, char **spline);
-int			select_ambient(t_config *config, char *line, char **spline, int key);
+void				get_init_position(t_config *config, int widht, int height);
+int					fill_ambientcolor(int *color, char **spline);
+int					select_ambient(t_config *config, char *line, char **spline, int key);
 #endif
