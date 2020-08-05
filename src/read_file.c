@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 11:18:58 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/04 11:45:58 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,15 @@ int				read_line(t_config *config, char *line)
 	while (ft_iswhitespace(line[i]))
 		i++;
 	if (ft_isdigit(line[i]))
-		return (read_map(config, line));
+		read_map(config, line);
 	if (key == K_R)
 		fill_resolution(config, spline);
 	else if (key >= K_NO && key <= K_S)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
 		select_ambient(config, line, spline, key);
+	free(line);
+	line = NULL;
 	free(spline);
 	return (0);
 }

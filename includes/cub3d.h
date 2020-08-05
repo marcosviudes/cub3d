@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/03 10:07:45 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/05 13:36:03 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,18 @@ typedef struct		s_maperror
 	int				firstline;
 }					t_maperror;
 
+typedef struct 		s_lstbuff
+{
+	char				*line;
+	struct s_lstbuff	*next;
+}					t_lstbuff;
+
 typedef struct		s_map
 {
-	char			*buff;
 	int				**map;
 	int				max_height;
 	int				max_widht;
+	t_lstbuff		*buff;
 	t_maperror		errors;
 
 }					t_map;
@@ -118,4 +124,5 @@ int					check_textures_north(t_config *config);
 void				get_init_position(t_config *config, int widht, int height);
 int					fill_ambientcolor(int *color, char **spline);
 int					select_ambient(t_config *config, char *line, char **spline, int key);
+void				free_all_config(t_config  *config);
 #endif
