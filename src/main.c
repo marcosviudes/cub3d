@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/05 12:38:30 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/06 13:19:36 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int main(int argc, char *argv[])
 
 //Checkear toda la configuracion;
 //Ordenar toda la configuracion;
+//get intit direction;
 
 //Mirar como funcionaa la mlx;
 

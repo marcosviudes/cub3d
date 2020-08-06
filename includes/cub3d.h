@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/05 13:36:03 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/06 12:52:42 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define K_F	7
 # define K_C	8
 # define K_MAP	9
+
+# define FOV	0.66
 
 # define VALID_CHAR_MAP " 012NSEW"
 
@@ -103,6 +105,7 @@ typedef struct		s_config
 	char			*tex_sprite;
 	int				floorcolor[3];
 	int				ceilingcolor[3];
+	char			init_dir;
 	t_map			map;
 	t_flags			flags;
 	t_dir			init_pos;

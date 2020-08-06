@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:21:33 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/05 13:36:04 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/06 12:00:02 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			find_char_str(char c, char const *string);
 t_lstbuff *ft_lstbuff_new(char const *content);
 void		ft_lstbuffadd_back(t_lstbuff **lst, t_lstbuff *new);
 t_lstbuff	*ft_lstbufflast(t_lstbuff *lst);
-char		*ft_lstpop_first(t_lstbuff *lst);
+char		*ft_lstpop_first(t_lstbuff **lst);
 /*borrar al entregar*/
 int			print_map(t_config *config);
 #endif

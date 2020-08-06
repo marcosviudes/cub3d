@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/05 13:36:00 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/06 13:33:59 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,27 +106,66 @@ t_lstbuff	*ft_lstbufflast(t_lstbuff *lst)
 		lst = lst->next;
 	return (lst);
 }
+char 		*ft_lstpop_first(t_lstbuff **lst)
+{
+	char *string;
+    t_lstbuff *next;
+	
+	next = NULL;
+    if (*lst == NULL) {
+        return NULL;
+    }
+    next = (*lst)->next;
+    string = (*lst)->line;
+    free(*lst);
+    *lst = next;
+    return (string);
+}
 
 int			fill_map(t_config *config)
 {
 	int		row;
 	int		column;
-	char	*line;
+	char	*temp;
 	int		i;
+	int		j;
+	int		firstwhitespaces;
 
+	firstwhitespaces = 0;
 	row = 0;
-	line = 0;
-	while(config->map.max_height > row)
+	temp = 0;
+	while(row < config->map.max_height)
 	{
-		while(lst)
-		config->map.map[row][column];
+		temp = ft_lstpop_first(&config->map.buff);
+		i = 0;
+		firstwhitespaces = 0;
+		while(temp[i] != '\0' || i < config->map.max_widht)
+			{
+				if(ft_iswhitespace(temp[i]))
+				{
+//					if(firstwhitespaces == 0)
+						config->map.map[row][i] = 4;
+//					else 
+//						i++;
+				}
+				else if (ft_isdigit(temp[i]))
+				{
+					config->map.map[row][i] = temp[i] - '0';
+					firstwhitespaces = 1;
+				}
+				else if (ft_isascii(temp[i]))
+				{	
+					get_init_position(config, i, row);
+					config->map.map[row][i] = 0;
+				}
+				else 
+					config->map.map[row][i] = 4;
+				i++;		
+			}
+		j++;
 		row++;
-		i++;
+		temp = NULL;
 	}
-	return(0)
-}
-
-char		*ft_lstpop_first(t_lstbuff *lst)
-{
-	
+	free(temp);
+	return(0);
 }
