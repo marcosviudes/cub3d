@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/06 13:33:59 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/07 12:36:54 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,13 @@ int			fill_map(t_config *config)
 	firstwhitespaces = 0;
 	row = 0;
 	temp = 0;
+	map_fill_with(config, '4');
 	while(row < config->map.max_height)
 	{
 		temp = ft_lstpop_first(&config->map.buff);
 		i = 0;
 		firstwhitespaces = 0;
-		while(temp[i] != '\0' || i < config->map.max_widht)
+		while(temp[i] != '\0')
 			{
 				if(ft_iswhitespace(temp[i]))
 				{
@@ -169,3 +170,25 @@ int			fill_map(t_config *config)
 	free(temp);
 	return(0);
 }
+
+int			map_fill_with(t_config *config, char c)
+{
+	int j;
+	int i;
+
+	i = 0;
+	j = 0;
+	
+	while (j < config->map.max_height)
+	{
+		while (i < config->map.max_widht)
+			{
+				config->map.map[j][i] = c - '0';
+				i++;
+			}
+		j++;
+		i = 0;
+	}
+	return (0);
+}
+
