@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/12 12:13:53 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/17 12:35:21 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <read_map.h>
 #include <draw_utils.h>
 #include <draw_map.h>
+#include <math.h>
 
 int main(int argc, char *argv[])
 {
@@ -55,12 +56,13 @@ int main(int argc, char *argv[])
 	print_map(config);
 
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
+	mlx->player = (t_player *)calloc(1, sizeof(t_player));
 	mlx->config = config;
 
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
-//	draw_map(config, mlx->mlx, mlx->win);
-	mlx_loop_hook(mlx->mlx, draw_map, mlx);
+	init_player(mlx->config, mlx);
+	mlx_loop_hook(mlx->mlx, engine, mlx);
 	mlx_loop(mlx->mlx);
 	
 	return (0);

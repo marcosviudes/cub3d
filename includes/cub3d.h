@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/17 10:22:47 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/17 12:45:56 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <libft.h>
 # include <get_next_line.h>
+# include <ft_math.h>
 
 # define FOV	0.66
 
@@ -52,6 +53,7 @@ typedef struct		s_player
 {
 	float			posx;
 	float			posy;
+	float			angle;
 	struct s_pos	pos;
 	struct s_dir	dir;
 
@@ -117,7 +119,7 @@ typedef struct		s_mlx
 	void			*win;
 	void			*img;
 	t_config		*config;
-	t_player		player;
+	t_player		*player;
 }					t_mlx;
 
 int					read_line(t_config *config, char *line);
@@ -139,5 +141,6 @@ void				free_all_config(t_config  *config);
 int					map_fill_with(t_config *config, char c);
 int					check_map_walls(t_config *config);
 
-void				engine(t_mlx *mlx);
+int					engine(t_mlx *mlx);
+int					init_player(t_config *config, t_mlx *mlx);
 #endif
