@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/07 12:36:54 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/11 12:35:59 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int		get_size_map(t_config *config, char *line)
 			line[i] == 'E') &&
 			line[i])
 		i++;
-//	while (ft_strchr(VALID_CHAR_MAP, line[i]) && line[i])
-//		i++;
 	if (i > config->map.max_widht)
 		config->map.max_widht = i;
 	return 1;
@@ -167,6 +165,7 @@ int			fill_map(t_config *config)
 		row++;
 		temp = NULL;
 	}
+//	check_map_walls(config);
 	free(temp);
 	return(0);
 }
@@ -192,3 +191,46 @@ int			map_fill_with(t_config *config, char c)
 	return (0);
 }
 
+int			check_map_walls(t_config *config)
+{
+	int i;
+	int j;
+	int width;
+	int heigh;
+	int temp;
+
+	i = 1;
+	j = 1;
+	width = config->map.max_widht - 1;
+	heigh = config->map.max_height -1;
+
+	while (j < heigh)
+	{
+		while (i < width)
+			{
+				if (config->map.map[j][i] == 4)
+				{
+					if (config->map.map[j+1][i] == 0)
+					{
+						return(printf("mapa abierto\n"));
+					}
+					if (config->map.map[j][i+1] == 0)
+					{
+						return(printf("mapa abierto\n"));
+					}
+					if (config->map.map[j-1][i] == 0)
+					{
+						return(printf("mapa abierto\n"));
+					}
+					if (config->map.map[j][i-1] == 0)
+					{
+						return(printf("mapa abierto\n"));
+					}
+				}
+				i++;
+			}
+		j++;
+		i = 0;
+	}
+	return (0);
+}

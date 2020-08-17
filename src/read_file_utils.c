@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 10:39:38 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/11 14:59:42 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ft_utils.h>
 #include <libft.h>
 #include <stdlib.h>
+#include <read_map.h>
 
 int		ft_iswhitespace(int c)
 {

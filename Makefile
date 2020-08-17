@@ -15,7 +15,7 @@ MKDIR		:= mkdir -p
 SRCS := $(shell find src/ -type f -iname *.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRCS))
 MLX = ./mlx
-INCLUDES 	:= -I includes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+INCLUDES 	:= -I includes -Imlx -Llibft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 
 #####################################
 ### RULES
@@ -52,7 +52,9 @@ re: fclean all
 
 debug: fclean
 	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes -o $(NAME)
-	
+
+debugmlx:	fclean
+	$(CC) $(DFLAGS) $(INCLUDES) $(SRCS) libft/*.c -I includes -o $(NAME)
 
 .PHONY:	all clean fclean re debug
 

@@ -6,11 +6,12 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/07/31 10:42:05 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/11 13:11:40 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include <read_map.h>
 
 void		check_resolution(t_config *config)
 {
@@ -19,14 +20,14 @@ void		check_resolution(t_config *config)
 	if (config->flags.resolution <= 0)
 		printf("No se ha encontrado resolucion\n");
 	if (config->resolutionwidht > MAX_WIDHT
-		|| config->resolutionwidht > MAX_HEIGHT)
+		|| config->resolutionheight > MAX_HEIGHT)
 	{
 		config->resolutionwidht = MAX_WIDHT;
-		config->resolutionwidht = MAX_HEIGHT;
+		config->resolutionheight = MAX_HEIGHT;
 	}
-	if (config->resolutionwidht == 0 && config->resolutionwidht == 0)
+	if (config->resolutionwidht == 0 && config->resolutionheight == 0)
 		printf("Resolucion invalida\n");
-	if (config->resolutionwidht == -1 || config->resolutionwidht == -1)
+	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
 		printf("faltan numeros de resolucion\n");
 }
 

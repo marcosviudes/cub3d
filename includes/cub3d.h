@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/07 11:05:59 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/17 10:22:47 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,21 @@
 # include <libft.h>
 # include <get_next_line.h>
 
-# define MAX_WIDHT 2560
-# define MAX_HEIGHT 1395
-# define MAX_COLOR_RANGE 255
-
-# define K_R 	1
-# define K_NO	2
-# define K_SO	3
-# define K_WE	4
-# define K_EA	5
-# define K_S	6
-# define K_F	7
-# define K_C	8
-# define K_MAP	9
-
 # define FOV	0.66
 
-# define VALID_CHAR_MAP " 012NSEW"
+# define WIN_NAME "CUB3D"
+
+# define KEY_W
+# define KEY_A
+# define KEY_S
+# define KEY_D
+# define KEY_F
+# define KEY_LEFT
+# define KEY_RIGHT
+# define KEY_ESC
+
+# define MOV_SPEED
+# define ROT_SPEED
 
 typedef struct		s_pos
 {
@@ -52,9 +50,10 @@ typedef struct		s_dir
 
 typedef struct		s_player
 {
-	double			posx;
-	double			posy;
-	struct s_dir	*next;
+	float			posx;
+	float			posy;
+	struct s_pos	pos;
+	struct s_dir	dir;
 
 }					t_player;
 
@@ -71,6 +70,7 @@ typedef struct 		s_lstbuff
 
 typedef struct		s_map
 {
+	float			map_size;
 	int				**map;
 	int				max_height;
 	int				max_widht;
@@ -111,10 +111,18 @@ typedef struct		s_config
 	t_dir			init_pos;
 }					t_config;
 
+typedef struct		s_mlx
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	t_config		*config;
+	t_player		player;
+}					t_mlx;
+
 int					read_line(t_config *config, char *line);
 int					get_key(char* spline);
 int					fill_resolution(t_config *config, char **spline);
-//int				fill_ambientcolor(t_config *config, char **spline);
 void				fill_texture(t_config *config, char **spline, int key);
 void				check_resolution(t_config *config);
 void				check_textures(t_config *config);
@@ -129,4 +137,7 @@ int					fill_ambientcolor(int *color, char **spline);
 int					select_ambient(t_config *config, char *line, char **spline, int key);
 void				free_all_config(t_config  *config);
 int					map_fill_with(t_config *config, char c);
+int					check_map_walls(t_config *config);
+
+void				engine(t_mlx *mlx);
 #endif
