@@ -6,12 +6,13 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/11 13:11:40 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/08/24 11:17:47 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <read_map.h>
+#include <ft_utils.h>
 
 void		check_resolution(t_config *config)
 {
@@ -19,16 +20,16 @@ void		check_resolution(t_config *config)
 		printf("se ha encontrado mas de un resolucion\n");
 	if (config->flags.resolution <= 0)
 		printf("No se ha encontrado resolucion\n");
+	if (config->resolutionwidht == 0 && config->resolutionheight == 0)
+		printf("Resolucion invalida\n");
+	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
+		printf("faltan numeros de resolucion\n");
 	if (config->resolutionwidht > MAX_WIDHT
 		|| config->resolutionheight > MAX_HEIGHT)
 	{
 		config->resolutionwidht = MAX_WIDHT;
 		config->resolutionheight = MAX_HEIGHT;
 	}
-	if (config->resolutionwidht == 0 && config->resolutionheight == 0)
-		printf("Resolucion invalida\n");
-	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
-		printf("faltan numeros de resolucion\n");
 }
 
 int			check_floor(t_config *config)
@@ -140,4 +141,17 @@ void		check_textures(t_config *config)
 	check_textures_west(config);
 	check_textures_east(config);
 	check_textures_sprite(config);
+}
+void		free_map(t_map map){
+	return; 
+}
+void		free_all_config(t_config *config)
+{
+	ft_nullfree(config->tex_path_north);
+	ft_nullfree(config->tex_path_east);
+	ft_nullfree(config->tex_path_south);
+	ft_nullfree(config->tex_path_west);
+	ft_nullfree(config->floorcolor);
+	ft_nullfree(config->ceilingcolor);
+	free_map(config->map);
 }

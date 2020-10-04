@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/10 10:33:39 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/04 14:26:18 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ int				fill_resolution(t_config *config, char **spline)
 		else if (!ft_strisnum(spline[i]))
 			resolution[i] = 0;
 		else
-			resolution[i] = atoi(spline[i]);
+			resolution[i] = ft_atoi(spline[i]);
 		i++;
 	}
+	i = 0;
+	while(spline[i]){
+		free(spline[i]);
+		i++;
+	}
+	free(spline);
 	config->resolutionwidht = resolution[1];
 	config->resolutionheight = resolution[2];
 	config->flags.resolution += 1;
@@ -66,6 +72,12 @@ void			fill_texture(t_config *config, char **spline, int key)
 		config->tex_sprite = spline[1];
 		config->flags.texturesprite += 1;
 	}
+	int i = 0;
+	while(spline[i]){
+		free(spline[i]);
+		i++;
+	}
+	free(spline);
 }
 
 
@@ -78,22 +90,27 @@ int				read_line(t_config *config, char *line)
 
 	i = 0;
 	spline = ft_split(line, ' ');
-	key = get_key(*spline);
+	key = get_key(spline[0]);
 	if (*spline == NULL)
 		return (0);
 	while (ft_iswhitespace(line[i]))
 		i++;
-	if (ft_isdigit(line[i]))
+	if (ft_isdigit(line[i])){
 		read_map(config, line);
+		i = 0;
+		while(spline[i]){
+			free(spline[i]);
+			i++;
+		}
+		free(spline);
+	}
 	if (key == K_R)
 		fill_resolution(config, spline);
 	else if (key >= K_NO && key <= K_S)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
 		select_ambient(config, line, spline, key);
-	free(line);
 	line = NULL;
-	free(spline);
 	return (0);
 }
 

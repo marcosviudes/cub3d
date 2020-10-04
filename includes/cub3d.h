@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/17 12:45:56 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/09/02 13:30:34 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,23 @@
 
 # define WIN_NAME "CUB3D"
 
-# define KEY_W
-# define KEY_A
-# define KEY_S
-# define KEY_D
-# define KEY_F
-# define KEY_LEFT
-# define KEY_RIGHT
-# define KEY_ESC
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
+# define KEY_F			3
+# define KEY_ONE		18
+# define KEY_TWO		19
+# define KEY_TRHEE		20
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+# define KEY_ESC		53
+# define KEY_SHIFT		257
 
-# define MOV_SPEED
+# define KEY_PRESS		2
+# define KEY_RELEASE	3
+
+# define MOV_SPEED     20
 # define ROT_SPEED
 
 typedef struct		s_pos
@@ -47,6 +54,16 @@ typedef struct		s_dir
 	int				x;
 	int				y;
 }					t_dir;
+
+typedef struct		s_move
+{
+	int				forward;
+	int				backwards;
+	int				left;
+	int				right;
+	int				rotleft;
+	int				rotright;
+}					t_move;
 
 
 typedef struct		s_player
@@ -108,9 +125,9 @@ typedef struct		s_config
 	int				floorcolor[3];
 	int				ceilingcolor[3];
 	char			init_dir;
+	t_pos			init_pos;
 	t_map			map;
 	t_flags			flags;
-	t_dir			init_pos;
 }					t_config;
 
 typedef struct		s_mlx
@@ -118,8 +135,13 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*win;
 	void			*img;
+	char			*img_data;
+	int     		bpp;
+	int 		    size_line;
+	int		    	endian;
 	t_config		*config;
 	t_player		*player;
+	t_move			move;
 }					t_mlx;
 
 int					read_line(t_config *config, char *line);
@@ -142,5 +164,11 @@ int					map_fill_with(t_config *config, char c);
 int					check_map_walls(t_config *config);
 
 int					engine(t_mlx *mlx);
+int					 deal_key(int key, t_mlx *mlx);
+int					release_key(int	key, t_mlx *mlx);
 int					init_player(t_config *config, t_mlx *mlx);
+void				move_player(t_mlx *mlx);
+void				error_exit(char *error);
+
+
 #endif

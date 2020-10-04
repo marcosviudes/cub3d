@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.h                                         :+:      :+:    :+:   */
+/*   Rraycasting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/12 10:39:44 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/21 11:26:29 by mviudes          ###   ########.fr       */
+/*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
+/*   Updated: 2020/08/20 12:47:29 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _DRAW_MAP_H
-# define _DRAW_MAP_H
+#include <cub3d.h>
 
-int	draw_map(t_mlx *mlx);
-
-#endif
+int	release_key(int	key, t_mlx *mlx)
+{
+	if(key == KEY_W)
+		mlx->move.forward = 0;
+	return(0);
+}
+int deal_key(int key, t_mlx *mlx)
+{
+	if(key == KEY_W)
+		mlx->move.forward = 1;
+	if(key == KEY_ESC)
+		exit(EXIT_SUCCESS);
+	return (0);
+}

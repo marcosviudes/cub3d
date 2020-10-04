@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/17 12:54:59 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/03 13:23:48 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	draw_map(t_mlx *mlx)
 	posy = 0;
 	posx = 0;
 	offset = 2;
-	size = 40;
+	size = 20;
 	while (j < height)
 	{
 		i = 0;
@@ -101,24 +101,30 @@ void	draw_player(t_mlx *mlx, t_player *player)
 	float diry;
 
 	angle = ft_radians(player->angle);
-	dirx = cos(angle);
-	diry = sin(angle);
+	dirx = player->posx + cos(angle) * 20;
+	diry = player->posy + sin(angle) * 20;
 	draw_square(mlx->mlx, mlx->win, player->posx , player->posy, 10 , 0x00FFFFFF);
-	draw_line(mlx->mlx, mlx->win, player->posx + 5, player->posy + 5, dirx * 20, diry * 20, 0x00F100FC);
+	draw_line(mlx->mlx, mlx->win, player->posx + 5, player->posy + 5, dirx, diry, 0x00F100FC);
 }
 
 int		engine(t_mlx *mlx)
 {
-	
-	draw_map(mlx);
+	move_player(mlx);
 	draw_player(mlx, mlx->player);
-	
+	mlx->move.forward = 0;
+//	printf("x = %f, y = %f\n", mlx->player->posx, mlx->player->posy);
+	draw_map(mlx);
 	return (0);
 }
 int		init_player(t_config *config, t_mlx *mlx)
 {
-	mlx->player->posx = 90;
-	mlx->player->posy = 90;
-	mlx->player->angle = 180;
+	mlx->player->posx = 300;
+	mlx->player->posy = 300;
+	mlx->player->angle = 90;
 	return (0);
+}
+void	move_player(t_mlx *mlx)
+{
+	if(mlx->move.forward == 1)
+		mlx->player->posy -= 0.3;
 }

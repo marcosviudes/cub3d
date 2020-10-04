@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/11 12:35:59 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/04 14:40:06 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,18 +175,16 @@ int			map_fill_with(t_config *config, char c)
 	int j;
 	int i;
 
-	i = 0;
 	j = 0;
-	
 	while (j < config->map.max_height)
 	{
+		i = 0;
 		while (i < config->map.max_widht)
 			{
 				config->map.map[j][i] = c - '0';
 				i++;
 			}
 		j++;
-		i = 0;
 	}
 	return (0);
 }
