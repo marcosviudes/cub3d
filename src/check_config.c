@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/24 11:17:47 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/05 14:26:00 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			check_textures_north(t_config *config)
 	if (config->flags.texturenorth > 1)
 		printf("se ha encontrado mas de una textura N\n");
 	else if (config->flags.texturenorth <= 0)
-		printf("no se ha encontrado textura N\n");
+		printf("no se ha encontrado textura NO\n");
 	else if (config->flags.texturenorth == 1 && !config->tex_path_north)
 		printf ("textura N invalida\n");
 	else if (!config->tex_path_north)

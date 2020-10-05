@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/04 11:41:31 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/05 14:21:07 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 	check_floor(config);
 	check_ceiling(config);
 	print_map(config);
+	
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	mlx->player = (t_player *)calloc(1, sizeof(t_player));
 	mlx->config = config;
@@ -66,48 +67,12 @@ int main(int argc, char *argv[])
 	mlx_loop(mlx->mlx);
 	
 	return (0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	return (0);
 }
 
-//Pasar el mapa
 //validar el mapa;
 
 //Checkear toda la configuracion;
-//Ordenar toda la configuracion;
 //get intit direction;
-
-//Mirar como funcionaa la mlx;
-
 
 int		print_map(t_config *config)
 {

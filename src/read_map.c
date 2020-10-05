@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/04 14:40:06 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/05 14:07:29 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int			copy_map(t_config *config, char *line)
 	newstr = ft_strdup(line);
 	tmp = ft_lstbuff_new(newstr);
 	ft_lstbuffadd_back(&(config->map.buff),tmp);
-	//free(tmp);
 	return (0);
 }
 
@@ -142,10 +141,7 @@ int			fill_map(t_config *config)
 			{
 				if(ft_iswhitespace(temp[i]))
 				{
-//					if(firstwhitespaces == 0)
 						config->map.map[row][i] = 4;
-//					else 
-//						i++;
 				}
 				else if (ft_isdigit(temp[i]))
 				{
@@ -163,10 +159,10 @@ int			fill_map(t_config *config)
 			}
 		j++;
 		row++;
+		free(temp);
 		temp = NULL;
 	}
 //	check_map_walls(config);
-	free(temp);
 	return(0);
 }
 
