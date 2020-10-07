@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:21:33 by mviudes           #+#    #+#             */
-/*   Updated: 2020/09/21 13:23:06 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/06 14:31:06 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_lstbuff	*ft_lstbufflast(t_lstbuff *lst);
 char		*ft_lstpop_first(t_lstbuff **lst);
 /*borrar al entregar*/
 int			print_map(t_config *config);
+int		print_sprites(t_config *config);
 
 void		ft_nullfree(void *ptr);
 

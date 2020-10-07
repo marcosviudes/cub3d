@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/05 14:20:02 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/06 12:24:06 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int				read_line(t_config *config, char *line)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
 		select_ambient(config, line, spline, key);
+	i = 0;
 	while(spline[i]){
 		free(spline[i]);
 		i++;

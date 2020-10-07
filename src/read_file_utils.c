@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/04 11:49:37 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 14:47:34 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,15 @@ int			find_char_str(char c, char const *string)
 			i++;
 		}
 	return (0);
+}
+
+char		*remove_char(char *string, char c)
+{
+	int i;
+
+	i = 0;
+	while(string[i])
+	{
+		i++;
+	}
 }

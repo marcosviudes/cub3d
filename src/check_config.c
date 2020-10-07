@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/05 14:26:00 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 14:41:56 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int			check_floor(t_config *config)
 		printf("No se ha encontrado colores para el suelo\n");
 	while (i < 3)
 	{
-		if (config->floorcolor[i] <= 0)
-			printf("los colores del suelo deben ser mayor a 0\n");
+		if (config->floorcolor[i] < 0)
+			printf("los colores del suelo deben ser mayor o igual a 0\n");
 		if (config->floorcolor[i] > MAX_COLOR_RANGE)
 			printf("los colores de suelo no pueden ser mayor a 255\n");
 		i++;
@@ -63,8 +63,8 @@ int			check_ceiling(t_config *config)
 		printf("No se ha encontrado colores para el techo\n");
 	while (i < 3)
 	{
-		if (config->ceilingcolor[i] <= 0)
-			printf("los colores del techo deben ser mayor a 0\n");
+		if (config->ceilingcolor[i] < 0)
+			printf("los colores del techo deben ser mayor o igual a 0\n");
 		if (config->ceilingcolor[i] > MAX_COLOR_RANGE)
 			printf("los colores techo no pueden ser mayor a 255\n");
 		i++;
@@ -145,13 +145,16 @@ void		check_textures(t_config *config)
 void		free_map(t_map map){
 	return; 
 }
-void		free_all_config(t_config *config)
+void		check_direction(t_config *config)
 {
-	ft_nullfree(config->tex_path_north);
-	ft_nullfree(config->tex_path_east);
-	ft_nullfree(config->tex_path_south);
-	ft_nullfree(config->tex_path_west);
-	ft_nullfree(config->floorcolor);
-	ft_nullfree(config->ceilingcolor);
-	free_map(config->map);
+	char c;
+
+	c = '\0';
+	c = config->init_dir;
+	if(config->flags.initpos == 0)
+		printf("No se ha encontrado Direccion\n");
+	if(config->flags.initpos > 1)
+		printf("Se ha encontrado mas de una resolucion\n");
+	if(c != 'N' && c != 'S' && c != 'W' && c != 'E' && c == '\0')
+		printf("Direccion invalida\n");
 }

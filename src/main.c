@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/05 14:21:07 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 14:43:20 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,15 @@ int main(int argc, char *argv[])
 	printf("La textura del sprinte es: %s\n", config->tex_sprite);
 	printf("El tamaño del mapa es    : |%ix%i|\n", config->map.max_widht, config->map.max_height);
 	printf("La posicion  inicial es  : |%ix%i|\n", (int)config->init_pos.x, (int)config->init_pos.y);
+	printf("la dirccion inicial es 	 : %c\n", config->init_dir);
+	print_sprites(config);
 	printf("\nChecks----------:\n\n");
 	check_resolution(config);
 	check_textures(config);
 	check_floor(config);
 	check_ceiling(config);
+	check_map_walls(config);
+	check_direction(config);
 	print_map(config);
 	
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
@@ -69,11 +73,21 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
-//validar el mapa;
+//comprobar bordes
+//
 
-//Checkear toda la configuracion;
-//get intit direction;
+int		print_sprites(t_config *config){
+	int	i;
 
+	i = 0;
+	printf("sprites-----:\n");
+	while(i < config->spritecount){
+		printf("\tel sprite [%i] tiene la posicion : x = [%i]; y = [%i];\n", i, config->sprite[i].pos.x, config->sprite[i].pos.y);
+		i++;
+	}
+	printf("El numero de sprties son : -%i-\n", i);
+	return 0;
+}
 int		print_map(t_config *config)
 {
 	int	i;

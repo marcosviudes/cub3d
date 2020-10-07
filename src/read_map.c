@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/05 14:07:29 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 14:42:11 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				read_map(t_config *config, char *line)
 	{
 		allocate_map(config);
 		fill_map(config);
+		get_sprites(config);
 	}
 	return (0);
 }
@@ -128,7 +129,6 @@ int			fill_map(t_config *config)
 	int		j;
 	int		firstwhitespaces;
 
-	firstwhitespaces = 0;
 	row = 0;
 	temp = 0;
 	map_fill_with(config, '4');
@@ -136,20 +136,15 @@ int			fill_map(t_config *config)
 	{
 		temp = ft_lstpop_first(&config->map.buff);
 		i = 0;
-		firstwhitespaces = 0;
 		while(temp[i] != '\0')
 			{
 				if(ft_iswhitespace(temp[i]))
-				{
 						config->map.map[row][i] = 4;
-				}
 				else if (ft_isdigit(temp[i]))
-				{
 					config->map.map[row][i] = temp[i] - '0';
-					firstwhitespaces = 1;
-				}
 				else if (ft_isascii(temp[i]))
 				{	
+					config->init_dir = temp[i];
 					get_init_position(config, i, row);
 					config->map.map[row][i] = 0;
 				}
@@ -162,7 +157,6 @@ int			fill_map(t_config *config)
 		free(temp);
 		temp = NULL;
 	}
-//	check_map_walls(config);
 	return(0);
 }
 
@@ -206,19 +200,19 @@ int			check_map_walls(t_config *config)
 				{
 					if (config->map.map[j+1][i] == 0)
 					{
-						return(printf("mapa abierto\n"));
+						printf("mapa abierto\n");
 					}
 					if (config->map.map[j][i+1] == 0)
 					{
-						return(printf("mapa abierto\n"));
+						printf("mapa abierto\n");
 					}
 					if (config->map.map[j-1][i] == 0)
 					{
-						return(printf("mapa abierto\n"));
+						printf("mapa abierto\n");
 					}
 					if (config->map.map[j][i-1] == 0)
 					{
-						return(printf("mapa abierto\n"));
+						printf("mapa abierto\n");
 					}
 				}
 				i++;
@@ -226,5 +220,44 @@ int			check_map_walls(t_config *config)
 		j++;
 		i = 0;
 	}
+
+	i = 0;
+	j = 0;
 	return (0);
+}
+void		get_sprites(t_config *config)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	k = 0;
+	j = 0;
+	while (j < config->map.max_height)
+	{
+		i = 0;
+		while (i < config->map.max_widht){
+			if(config->map.map[j][i] == 2)
+				config->spritecount++;
+			i++;
+		}
+		j++;
+	}
+	free(config->sprite);
+	if(!(config->sprite = (t_sprite*)malloc(sizeof (t_sprite) * config->spritecount - 1)))
+		return;
+	j = 0;
+	while (j < config->map.max_height)
+	{
+		i = 0;
+		while (i < config->map.max_widht){
+			if(config->map.map[j][i] == 2 && k < config->spritecount){
+				config->sprite[k].pos.x = i + 1;
+				config->sprite[k].pos.y = j + 1;
+				k++;
+			}
+			i++;
+		}
+		j++;
+	}
 }

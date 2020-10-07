@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/09/02 13:30:34 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:43:44 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ typedef struct		s_player
 
 }					t_player;
 
-typedef struct		s_maperror
+typedef struct		s_sprite
 {
-	int				firstline;
-}					t_maperror;
+	t_dir			pos;
+}					t_sprite;
 
 typedef struct 		s_lstbuff
 {
@@ -94,8 +94,6 @@ typedef struct		s_map
 	int				max_height;
 	int				max_widht;
 	t_lstbuff		*buff;
-	t_maperror		errors;
-
 }					t_map;
 
 typedef struct		s_flags
@@ -125,7 +123,9 @@ typedef struct		s_config
 	int				floorcolor[3];
 	int				ceilingcolor[3];
 	char			init_dir;
+	int				spritecount;
 	t_pos			init_pos;
+	t_sprite		*sprite;
 	t_map			map;
 	t_flags			flags;
 }					t_config;
@@ -150,6 +150,7 @@ int					fill_resolution(t_config *config, char **spline);
 void				fill_texture(t_config *config, char **spline, int key);
 void				check_resolution(t_config *config);
 void				check_textures(t_config *config);
+void				check_direction(t_config *config);
 int					check_floor(t_config *config);
 int					check_ceiling(t_config *config);
 
@@ -162,6 +163,7 @@ int					select_ambient(t_config *config, char *line, char **spline, int key);
 void				free_all_config(t_config  *config);
 int					map_fill_with(t_config *config, char c);
 int					check_map_walls(t_config *config);
+void				get_sprites(t_config *config);
 
 int					engine(t_mlx *mlx);
 int					 deal_key(int key, t_mlx *mlx);
