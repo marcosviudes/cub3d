@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:21:33 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/06 14:31:06 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:58:25 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char		**ft_getsubstrings(char *string);
 int			ft_strisnum(char *string);
 int			ft_cmpstr(char *string1, char *string2);
 int			find_char_str(char c, char const *string);
-
+void        ft_remchar(char *string, char c);
 /*pruebas*/
 
 t_lstbuff *ft_lstbuff_new(char const *content);

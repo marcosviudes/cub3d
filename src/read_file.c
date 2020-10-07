@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/06 12:24:06 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:59:02 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int				fill_ambientcolor(int *color, char **spline)
 	char		**numbers;
 
 	i = 0;
+	ft_remchar(spline[1], ' ');
 	numbers = ft_split(spline[1], ',');
 	while (i < 3)
 	{

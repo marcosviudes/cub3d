@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/07 14:47:34 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:55:51 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,18 @@ int			find_char_str(char c, char const *string)
 	return (0);
 }
 
-char		*remove_char(char *string, char c)
+void ft_remchar(char *string, char c)
 {
-	int i;
+    int i;
+    int j;
 
-	i = 0;
-	while(string[i])
-	{
-		i++;
-	}
+    i = 0;
+    j = 0;
+    while (string[i])
+    {
+        if (string[i] != c) 
+            string[j++] = string[i];
+        i++;       
+    }
+    string[j]=0;
 }
