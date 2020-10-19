@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:42:01 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/17 12:50:00 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/16 17:07:18 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,6 @@
 #endif
 #include <cub3d.h>
 
-float	ft_radians(float degrees);
+float	ft_toradians(float degrees);
+float	ft_todeg(float radians);
+int 	ft_sign(int number);

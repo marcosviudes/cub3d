@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/07 17:02:23 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/17 13:43:08 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	int         lastline;
 	fd = open(argv[1] ,O_RDONLY);
 	
-	config = (t_config *)calloc(1, sizeof(t_config));
+	config = /*(t_config *)*/ft_calloc(1, sizeof(t_config));
 	while((config->lastline = get_next_line(fd, &line)) > EOF)
 	{
 		read_line(config, line);
@@ -61,20 +61,18 @@ int main(int argc, char *argv[])
 	print_map(config);
 	
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
-	mlx->player = (t_player *)calloc(1, sizeof(t_player));
+//	mlx->player = (t_player *)calloc(1, sizeof(t_player));
 	mlx->config = config;
-	getchar();
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
+
 	init_player(mlx->config, mlx);
 	mlx_loop_hook(mlx->mlx, engine, mlx);
+	mlx_hook(mlx->win, KEY_PRESS, (1L << 0), press_key,mlx);
+	mlx_hook(mlx->win, KEY_RELEASE, (1L << 1), 	release_key , mlx);
 	mlx_loop(mlx->mlx);
-	
 	return (0);
 }
-
-//comprobar bordes
-//
 
 int		print_sprites(t_config *config){
 	int	i;

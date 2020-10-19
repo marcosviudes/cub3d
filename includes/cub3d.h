@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/07 13:43:44 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/19 14:23:07 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <get_next_line.h>
 # include <ft_math.h>
 
-# define FOV	0.66
 
 # define WIN_NAME "CUB3D"
 
@@ -40,8 +39,14 @@
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
 
-# define MOV_SPEED     20
-# define ROT_SPEED
+# define ROT_CONST		0.0872665
+# define MOV			10
+# define MOV_SPEED		1
+# define ROT_SPEED		1.5
+
+# define FOV	0.66
+
+#define CHUNK_SIZE 20
 
 typedef struct		s_pos
 {
@@ -70,9 +75,11 @@ typedef struct		s_player
 {
 	float			posx;
 	float			posy;
+	int				mapx;
+	int				mapy;
 	float			angle;
-	struct s_pos	pos;
-	struct s_dir	dir;
+	struct s_pos	dir;
+	struct s_pos	lastdir;
 
 }					t_player;
 
@@ -135,12 +142,12 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*win;
 	void			*img;
-	char			*img_data;
+	char			*img_addr;
 	int     		bpp;
-	int 		    size_line;
+	int 		    line_lenght;
 	int		    	endian;
 	t_config		*config;
-	t_player		*player;
+	t_player		player;
 	t_move			move;
 }					t_mlx;
 
@@ -166,11 +173,12 @@ int					check_map_walls(t_config *config);
 void				get_sprites(t_config *config);
 
 int					engine(t_mlx *mlx);
-int					 deal_key(int key, t_mlx *mlx);
+int					press_key(int key, t_mlx *mlx);
 int					release_key(int	key, t_mlx *mlx);
 int					init_player(t_config *config, t_mlx *mlx);
 void				move_player(t_mlx *mlx);
 void				error_exit(char *error);
+void				start_dir(char init_dir, t_mlx *mlx);
 
-
+void				raycasting(t_mlx *mlx);	
 #endif
