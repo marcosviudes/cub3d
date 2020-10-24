@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/19 14:23:07 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/22 13:49:58 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
 
-# define ROT_CONST		0.0872665
+# define ROT_CONST		0.00872665
 # define MOV			10
 # define MOV_SPEED		1
 # define ROT_SPEED		1.5
 
-# define FOV	0.66
-
-#define CHUNK_SIZE 20
+# define FOV			60
+# define P_HEIGHT		0.5
+#define CHUNK_SIZE 		64
 
 typedef struct		s_pos
 {
@@ -73,15 +73,23 @@ typedef struct		s_move
 
 typedef struct		s_player
 {
-	float			posx;
-	float			posy;
+	double			posx;
+	double			posy;
 	int				mapx;
 	int				mapy;
 	float			angle;
+	double			height;
+	int				distoplane;
 	struct s_pos	dir;
 	struct s_pos	lastdir;
 
 }					t_player;
+
+typedef struct		s_plane
+{
+	int				height;
+	int				widht;
+}					t_plane;
 
 typedef struct		s_sprite
 {
@@ -149,6 +157,7 @@ typedef struct		s_mlx
 	t_config		*config;
 	t_player		player;
 	t_move			move;
+	t_plane			plane;
 }					t_mlx;
 
 int					read_line(t_config *config, char *line);

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/19 14:39:21 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/22 12:34:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	draw_player(t_mlx *mlx)
 	double xdir = mlx->player.dir.x * 20 + (mlx->player.posx + 5);
 	double ydir = - mlx->player.dir.y * 20 + (mlx->player.posy + 5);
 	
-	draw_square(mlx, mlx->win, mlx->player.posx, mlx->player.posy, 10, 0x00FFFFFF);
+	draw_square(mlx, mlx->win, mlx->player.posx, mlx->player.posy, 10, 0x00000000);
 	draw_line(mlx, mlx->win, mlx->player.posx + 5 , mlx->player.posy + 5 , (int)xdir, (int)ydir, 0x00F100FC);
 }
 
@@ -236,10 +236,18 @@ void	start_dir(char init_dir, t_mlx *mlx){
 int		init_player(t_config *config, t_mlx *mlx)
 {
 	start_dir(config->init_dir, mlx);
+	mlx->player.height = P_HEIGHT;
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
-	mlx->player.posx = mlx->player.mapy + CHUNK_SIZE/2 -5; // 	el 5 es temporal para dibujaar al jugador
-	mlx->player.posy = mlx->player.mapy + CHUNK_SIZE/2 -5;//	en el mapa de pruebas;
+	mlx->player.posx = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
+	mlx->player.posy = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
+
+	mlx->plane.height = mlx->config->resolutionheight;
+	mlx->plane.widht = mlx->config->resolutionwidht;
+	mlx->player.distoplane = (mlx->plane.widht/2) * tan(ft_torad(FOV));
+//	mlx->player.distoplane = (mlx->plane.widht * tan(ft_torad(FOV)))/2;
+	
+	 
 	return (0);
 }
 void	move_player(t_mlx *mlx)
@@ -270,8 +278,9 @@ void	move_player(t_mlx *mlx)
 		mlx->player.dir.x = mlx->player.dir.x * cos(ROT_CONST) - mlx->player.dir.y * sin(ROT_CONST);
 		mlx->player.dir.y = mlx->player.lastdir.x * sin(ROT_CONST) + mlx->player.dir.y * cos(ROT_CONST);
 	}
-		printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
-		//float angle = atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI;
-		//printf("%i\n", (int)angle);
+		//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
+	//	float angle = atan2f(mlx->player.dir.y, mlx->player.dir.x) * 180/M_PI;
+		//printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
+	//	printf("%i\n", (int)angle);
 }
 //printf("%i\n", (int)atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI);

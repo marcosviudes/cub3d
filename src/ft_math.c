@@ -6,14 +6,14 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:44:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/16 17:05:56 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/10/21 11:54:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_math.h>
 #include <math.h>
 
-float	ft_toradians(float degree)
+float	ft_torad(float degree)
 {
 	return(degree * (M_PI / 180.0));
 }
