@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/22 13:49:58 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/19 13:14:53 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 
 # define WIN_NAME "CUB3D"
+# define F_EXT	 ".cub"
 
 # define KEY_W			13
 # define KEY_A			0
@@ -46,7 +47,12 @@
 
 # define FOV			60
 # define P_HEIGHT		0.5
-#define CHUNK_SIZE 		64
+# define CHUNK_SIZE 	59
+
+# define IS_RIGHT		> 0
+# define IS_LEFT		< 0
+# define IS_UP			> 0
+# define IS_DOWN		< 0
 
 typedef struct		s_pos
 {
@@ -163,6 +169,7 @@ typedef struct		s_mlx
 int					read_line(t_config *config, char *line);
 int					get_key(char* spline);
 int					fill_resolution(t_config *config, char **spline);
+void				check_extension(char *path, char *ext);
 void				fill_texture(t_config *config, char **spline, int key);
 void				check_resolution(t_config *config);
 void				check_textures(t_config *config);

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/07 14:41:56 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/17 12:02:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		check_resolution(t_config *config)
 		printf("se ha encontrado mas de un resolucion\n");
 	if (config->flags.resolution <= 0)
 		printf("No se ha encontrado resolucion\n");
-	if (config->resolutionwidht == 0 && config->resolutionheight == 0)
+	if (config->resolutionwidht == 0 || config->resolutionheight == 0)
 		printf("Resolucion invalida\n");
 	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
 		printf("faltan numeros de resolucion\n");
@@ -152,9 +152,26 @@ void		check_direction(t_config *config)
 	c = '\0';
 	c = config->init_dir;
 	if(config->flags.initpos == 0)
-		printf("No se ha encontrado Direccion\n");
+		printf("No se ha encontrado Jugador\n");
 	if(config->flags.initpos > 1)
-		printf("Se ha encontrado mas de una resolucion\n");
+		printf("Se ha encontrado mas de una Jugador\n");
 	if(c != 'N' && c != 'S' && c != 'W' && c != 'E' && c == '\0')
 		printf("Direccion invalida\n");
+}
+
+void		check_extension(char *path, char *ext){
+	char *ptr_ext;
+	int extlen;
+
+	while(*path != '\0')
+		{
+			if(*path == ext[0])
+				ptr_ext = path;
+			path++;
+		}
+	extlen = ft_strlen(ext);
+	if(ft_strncmp(ptr_ext, ext, extlen +1) == 0)
+		return;
+	printf("Error: Archivo con extension invalida");
+	exit(-1);
 }

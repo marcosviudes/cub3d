@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/22 12:34:32 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/19 11:57:15 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int	draw_map(t_mlx *mlx)
 	j = 0;
 	posy = 0;
 	posx = 0;
-	offset = 2;
+	offset = 0;
 	size = CHUNK_SIZE;
 	while (j < height)
 	{
@@ -207,8 +207,8 @@ int		engine(t_mlx *mlx)
 	move_player(mlx);
 	draw_player(mlx);
 	raycasting(mlx);
-	//printf("x = %f, y = %f, deg =\n", mlx->player.posx, mlx->player.posy);
-	//printf("%i , %i\n", (int)mlx->player.dir.x, (int)mlx->player.dir.y);
+	printf("x = %f, y = %f, deg =\n", mlx->player.posx, mlx->player.posy);
+	printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
@@ -236,6 +236,10 @@ void	start_dir(char init_dir, t_mlx *mlx){
 int		init_player(t_config *config, t_mlx *mlx)
 {
 	start_dir(config->init_dir, mlx);
+
+	mlx->player.dir.x = -0.5;
+	mlx->player.dir.y = 0.5;
+
 	mlx->player.height = P_HEIGHT;
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
@@ -284,3 +288,10 @@ void	move_player(t_mlx *mlx)
 	//	printf("%i\n", (int)angle);
 }
 //printf("%i\n", (int)atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI);
+
+void drawline_lendown(t_mlx *mlx, int posx, int posy, int len){
+	int lasty;
+
+	lasty = posy +len;
+	draw_line(mlx, mlx->win, posx , posy, posx, lasty ,0x00001FFF);
+}

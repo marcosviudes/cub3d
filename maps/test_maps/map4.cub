@@ -1,0 +1,16 @@
+R 1000 1000
+NO \t\t\t\t        ./textures/stone.xpm
+SO ./textures/stone.xpm
+WE ./textures/stone.xpm
+EA ./textures/stone.xpm
+S ./textures/stone.xpm
+F 220,100,0            
+C 225,30,0
+
+111
+101
+101
+101
+1S1
+101
+111

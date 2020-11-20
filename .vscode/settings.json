@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"draw_map.h": "c",
+		"cub3d.h": "c",
+		"stdio.h": "c",
+		"draw_utils.h": "c"
+	}
+}

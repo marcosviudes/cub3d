@@ -52,7 +52,8 @@ re: fclean all
 
 debug: fclean
 	$(CC) $(DFLAGS) $(SRCS) libft/*.c -I includes -o $(NAME)
-
+debugfile: fclean
+	$(CC) $(DFLAGS) $(INCLUDES) $(SRCS) libft/*.c -I includes -o $(NAME) -D MAP_DEBUG
 debugmlx:	fclean
 	$(CC) $(DFLAGS) $(INCLUDES) $(SRCS) libft/*.c -I includes -o $(NAME)
 

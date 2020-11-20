@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/08 11:56:45 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/15 09:38:01 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,35 @@ int				fill_resolution(t_config *config, char **spline)
 
 void			fill_texture(t_config *config, char **spline, int key)
 {
+	char *texture;
+
+	texture = ft_strdup(spline[1]) ;
+	while(ft_iswhitespace(*texture)){
+		texture++;
+	}
 	if (key == K_NO)
 	{
-		config->tex_path_north = ft_strdup(spline[1]);
+		config->tex_path_north = texture;
 		config->flags.texturenorth += 1;
 	}
 	else if (key == K_SO)
 	{
-		config->tex_path_south = ft_strdup(spline[1]);
+		config->tex_path_south = texture;
 		config->flags.texturesouth += 1;
 	}
 	else if (key == K_WE)
 	{
-		config->tex_path_west = ft_strdup(spline[1]);
+		config->tex_path_west = texture;
 		config->flags.texturewest += 1;
 	}
 	else if (key == K_EA)
 	{
-		config->tex_path_east = ft_strdup(spline[1]);
+		config->tex_path_east = texture;
 		config->flags.textureeast += 1;
 	}
 	else if (key == K_S)
 	{
-		config->tex_sprite = ft_strdup(spline[1]);
+		config->tex_sprite = texture;
 		config->flags.texturesprite += 1;
 	}
 }
@@ -78,6 +84,15 @@ int				read_line(t_config *config, char *line)
 	int		key;
 
 	i = 0;
+	while(line[i] != '\0'){
+		if(ft_iswhitespace(line[i])){
+			line[i] = ' ';
+		}
+		i++;
+		}
+	i = 0;
+	if (ft_isdigit(line[i]) || config->flags.readingmap == 1)
+		read_map(config, line);
 	if(!(spline = ft_split(line, ' ')) || line[0] == '\0'){
 		free(spline);
 		return(0);
@@ -85,8 +100,6 @@ int				read_line(t_config *config, char *line)
 	key = get_key(spline[0]);
 	while (ft_iswhitespace(line[i]))
 		i++;
-	if (ft_isdigit(line[i]))
-		read_map(config, line);
 	if (key == K_R)
 		fill_resolution(config, spline);
 	else if (key >= K_NO && key <= K_S)

@@ -1,0 +1,10 @@
+R 800 400
+NO tests/textures/grass.xpm
+SO tests/textures/brownstone.xpm
+WE tests/textures/grass.xpm
+EA tests/textures/whitestone.xpm
+S tests/textures/sprite/42.xpm
+
+F 220,100,0
+C 225,30,0
+100N111111000000011111

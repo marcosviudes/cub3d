@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/17 13:43:08 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/08 14:24:53 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ int main(int argc, char *argv[])
 
 	int         lastline;
 	fd = open(argv[1] ,O_RDONLY);
-	
+	if(fd <= 0)
+		{
+			printf("no se encontro archivo");
+			return(-1);
+		}	
+	check_extension(argv[1], F_EXT);
 	config = /*(t_config *)*/ft_calloc(1, sizeof(t_config));
 	while((config->lastline = get_next_line(fd, &line)) > EOF)
 	{
@@ -59,7 +64,9 @@ int main(int argc, char *argv[])
 	check_map_walls(config);
 	check_direction(config);
 	print_map(config);
-	
+	#if MAP_DEBUG
+		return(0);
+	#endif
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 //	mlx->player = (t_player *)calloc(1, sizeof(t_player));
 	mlx->config = config;
@@ -120,9 +127,8 @@ void		ft_nullfree(void *ptr){
 	free(ptr);
 }
 
-void exerror(char *serror){
-	ft_putstr_fd("Error", 1);
-	ft_putstr_fd(serror,1);
-	write(1, "\n", 1);
+void error_exit(char *error){
+	ft_putstr_fd("Error\n", 1);
+	ft_putstr_fd(error,1);
 	exit(-1);
 	}
