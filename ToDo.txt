@@ -1,0 +1,6 @@
+Terminar la comprobacion de los errores.
+comprobación archivos invalidos.
+
+
+comenzar a pintar el muro.
+comprobar errores en la obtencion del rayo.
