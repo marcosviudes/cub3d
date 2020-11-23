@@ -1,0 +1,30 @@
+Resolucion:
+    uno o dos valores a 0
+    valores maximos
+    espacios entre numeros
+    letras entre numeros
+    falta de resolución
+    falta de numeros
+Texturas:
+    Texturas inexistente
+Colores:
+    Mas de 3 Colores
+    todos a cero invalido
+    espacios entre numeros y comas
+    letras entre los numeros
+Mapa:
+    mapa no rodeado por 1
+    posicion valida en todo el mapa
+    posicion invalida/inexistnete
+Otros errores:
+    NO estan toda la configuración
+
+Norminette
+Leaks:
+    sytem("leaks cub3d");
+
+Argumentos al programa:
+    pasar 0 Argumentos
+    pasar 4 Argumentos
+    pasar archivo inexistente
+    pasar != "--save"

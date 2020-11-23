@@ -21,8 +21,10 @@
 # include <ft_math.h>
 
 
-# define WIN_NAME "CUB3D"
-# define F_EXT	 ".cub"
+# define WIN_NAME 		"CUB3D"
+# define F_EXT	 		".cub"
+# define SAVE			"--save"
+# define SAVE_LEN		6
 
 # define KEY_W			13
 # define KEY_A			0

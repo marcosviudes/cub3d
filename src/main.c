@@ -32,9 +32,22 @@ int main(int argc, char *argv[])
 		{
 			printf("no se encontro archivo");
 			return(-1);
-		}	
+		}
+	if(argc != 2 || argc != 3)
+		{
+			printf("Numero de argumentos invalidos");
+			return(-1);
+		}
+	if(argc == 3)
+	{
+		if(ft_strcmp(argv[3], SAVE, SAVE_LEN))
+			{
+				printf("Argumento invalido");
+				return(-1);
+			}
+	}
 	check_extension(argv[1], F_EXT);
-	config = /*(t_config *)*/ft_calloc(1, sizeof(t_config));
+	config = ft_calloc(1, sizeof(t_config));
 	while((config->lastline = get_next_line(fd, &line)) > EOF)
 	{
 		read_line(config, line);
@@ -131,4 +144,4 @@ void error_exit(char *error){
 	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(error,1);
 	exit(-1);
-	}
+}

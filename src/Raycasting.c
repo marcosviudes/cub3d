@@ -143,10 +143,12 @@ void	raycasting(t_mlx *mlx){
 
 		/*calculate first last pix*/
 
-		firstpix = (-lineheight / 2) + (planex / 2);
+		firstpix = (-lineheight / 2) + (planey / 2);
 		if(firstpix < 0)
 			firstpix = 0;
-		lastpix = (lineheight / 2) + (planex / 2);
+		lastpix = (lineheight / 2) + (planey / 2);
+		if(lastpix >= planey)
+			lastpix = planey -1;
 		/*-------------*/
 		
 		angle += DEG_RAD;

@@ -84,27 +84,6 @@ void	draw_square(t_mlx *mlx, void *win, int posx, int posy, int size, int color)
 		y++;
 	}
 }
-/*
-void	draw_line(void *mlx, void *win, int x1, int y1, int x2, int y2, int color)
-{
-	int slope;
-	int x;
-	int y;
-
-	x = x1;
-	if (x1 > x2)
-	{
-		x = x2;
-		x2 = x1;
-	}	
-	slope = (y2 - y1)/(x2 - x1);
-	while (x <= x2)
-	{
-		y = slope * (x - x1) + y1;
-		mlx_pixel_put(mlx, win, x, y, color);
-		x++;
-	}
-}*/ 
 
 void draw_line(t_mlx *mlx, void *win,int x1, int y1, int x2, int y2,int color)
 {
@@ -295,3 +274,5 @@ void drawline_lendown(t_mlx *mlx, int posx, int posy, int len){
 	lasty = posy +len;
 	draw_line(mlx, mlx->win, posx , posy, posx, lasty ,0x00001FFF);
 }
+
+c
