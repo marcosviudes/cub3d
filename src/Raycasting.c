@@ -116,9 +116,9 @@ float	ray_hordist(t_mlx *mlx, double angle){
 void	raycasting(t_mlx *mlx){
 	int	i;
 
-	float dista;
-	float distb;
-	float near;
+	float disty;
+	float distx;
+	float walldist;
 	int	planex;
 	int planey;
 	int ray_angle;
@@ -128,24 +128,31 @@ void	raycasting(t_mlx *mlx){
 	int x;
 	double angle;
 
+	int firstpix;
+	int lastpix;
 	planex = mlx->config->resolutionwidht;
 	planey = mlx->config->resolutionheight;
 	i = 0;
 	x = 0;
 	angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
 	while(i < planex){
-		dista = ray_verdist(mlx, angle);
-		distb = ray_hordist(mlx, angle);
-		near = fminf(dista, distb);
-		lineheight = (int)(planex/near);
-		/*while(x < (mlx->plane.widht -1)){
-			drawline_lendown(mlx,x,10, lineheight);
-			x++;
-		}*/
+		disty = ray_verdist(mlx, angle);
+		distx = ray_hordist(mlx, angle);
+		walldist = fminf(disty, distx);
+		lineheight = (int)(planex/walldist);
+
+		/*calculate first last pix*/
+
+		firstpix = (-lineheight / 2) + (planex / 2);
+		if(firstpix < 0)
+			firstpix = 0;
+		lastpix = (lineheight / 2) + (planex / 2);
+		/*-------------*/
+		
 		angle += DEG_RAD;
 		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
 	//	printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
-		//printf("%f\n", near);
+		//printf("%f\n", walldist);
 		i++;
 	}
 	

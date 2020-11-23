@@ -54,6 +54,11 @@
 # define IS_UP			> 0
 # define IS_DOWN		< 0
 
+# define RED			0x00ff0000
+# define GREEN			0x0049ff00
+# define BLUE			0x00002eff
+# define PINK			0x00ff00dc
+
 typedef struct		s_pos
 {
 	double			x;
