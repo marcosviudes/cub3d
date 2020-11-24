@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		}
 	if(argc == 3)
 	{
-		if(ft_strcmp(argv[3], SAVE, SAVE_LEN))
+		if(ft_strncmp(argv[3], SAVE, SAVE_LEN))
 			{
 				printf("Argumento invalido");
 				return(-1);
