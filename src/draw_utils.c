@@ -274,5 +274,3 @@ void drawline_lendown(t_mlx *mlx, int posx, int posy, int len){
 	lasty = posy +len;
 	draw_line(mlx, mlx->win, posx , posy, posx, lasty ,0x00001FFF);
 }
-
-c
