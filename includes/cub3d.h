@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/19 13:14:53 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/27 13:59:09 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 # define WIN_NAME 		"CUB3D"
 # define F_EXT	 		".cub"
+# define TEX_EXT		".XPM"
 # define SAVE			"--save"
-# define SAVE_LEN		6
+# define SAVE_LEN		7
 
 # define KEY_W			13
 # define KEY_A			0
@@ -100,8 +101,8 @@ typedef struct		s_player
 
 typedef struct		s_plane
 {
-	int				height;
-	int				widht;
+	int				x;
+	int				y;
 }					t_plane;
 
 typedef struct		s_sprite
@@ -157,6 +158,19 @@ typedef struct		s_config
 	t_map			map;
 	t_flags			flags;
 }					t_config;
+typedef struct		s_ray
+{
+	double			dirx;
+	double			diry;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	int				hit;
+	int				side;
+	double			perpwalldist;
+
+}					t_ray;
 
 typedef struct		s_mlx
 {
@@ -167,6 +181,7 @@ typedef struct		s_mlx
 	int     		bpp;
 	int 		    line_lenght;
 	int		    	endian;
+	t_ray			ray;
 	t_config		*config;
 	t_player		player;
 	t_move			move;

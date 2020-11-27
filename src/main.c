@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/08 14:24:53 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/27 13:23:17 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int main(int argc, char *argv[])
 			printf("no se encontro archivo");
 			return(-1);
 		}
-	if(argc != 2 || argc != 3)
+	if(argc != 2 && argc != 3)
 		{
 			printf("Numero de argumentos invalidos");
 			return(-1);
 		}
 	if(argc == 3)
 	{
-		if(ft_strncmp(argv[3], SAVE, SAVE_LEN))
+		if(ft_strncmp(argv[2], SAVE, SAVE_LEN))
 			{
 				printf("Argumento invalido");
 				return(-1);

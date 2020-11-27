@@ -6,14 +6,14 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/19 14:39:29 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/27 14:38:18 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <draw_utils.h>
-
-float	ray_verdist(t_mlx *mlx, double angle){
+/*
+float	ray_hordist(t_mlx *mlx, double angle){
 	float dist;
 	double ray_x;
 	double ray_y;
@@ -26,9 +26,7 @@ float	ray_verdist(t_mlx *mlx, double angle){
 	hit = 0;
 
 //	angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
-	if(mlx->player.dir.y == 0)
-		return(NAN);
-	if(mlx->player.dir.x == 0)
+	if(fabs(mlx->player.dir.y) < 0.00001)
 		return(NAN);
 	if(mlx->player.dir.y IS_UP){
 		ray_y = floor(mlx->player.posy/CHUNK_SIZE) * (CHUNK_SIZE) - 1;
@@ -62,7 +60,7 @@ float	ray_verdist(t_mlx *mlx, double angle){
 		return(0);
 	return(dist);
 }
-float	ray_hordist(t_mlx *mlx, double angle){
+float	ray_verdist(t_mlx *mlx, double angle){
 
 	float dist;
 	double ray_x;
@@ -111,16 +109,17 @@ float	ray_hordist(t_mlx *mlx, double angle){
 		return(0);
 	return(dist);
 }
-
+void	raycasting(t_mlx *mlx){
+	return;
+}*/
 
 void	raycasting(t_mlx *mlx){
 	int	i;
 
+	double camerax;
 	float disty;
 	float distx;
 	float walldist;
-	int	planex;
-	int planey;
 	int ray_angle;
 	int numrays;
 	int lineheight;
@@ -130,32 +129,37 @@ void	raycasting(t_mlx *mlx){
 
 	int firstpix;
 	int lastpix;
-	planex = mlx->config->resolutionwidht;
-	planey = mlx->config->resolutionheight;
+	int widht = mlx->config->resolutionwidht;
 	i = 0;
 	x = 0;
 	angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
-	while(i < planex){
-		disty = ray_verdist(mlx, angle);
-		distx = ray_hordist(mlx, angle);
-		walldist = fminf(disty, distx);
-		lineheight = (int)(planex/walldist);
+	angle = angle + 30 * DEG_RAD;
+	while(x < widht){
+		/*ray position and direction*/
+		camerax = 2 * x / (double)widht - 1;
+		mlx->ray.dirx = mlx->player.dir.x + mlx->plane.x * camerax;
+		mlx->ray.dirx = mlx->player.dir.y + mlx->plane.y * camerax;
+		mlx->ray.deltadistx = abs(1 / mlx->ray.dirx);
+		mlx->ray.deltadisty = abs(1 / mlx->ray.dirx);
+		mlx->ray.hit = 0;
+		/*Dist calculation*/
 
+		/*wall calculation*/
 		/*calculate first last pix*/
 
-		firstpix = (-lineheight / 2) + (planey / 2);
+		firstpix = (-lineheight / 2) + (mlx->plane.y / 2);
 		if(firstpix < 0)
 			firstpix = 0;
-		lastpix = (lineheight / 2) + (planey / 2);
-		if(lastpix >= planey)
-			lastpix = planey -1;
+		lastpix = (lineheight / 2) + (mlx->plane.y / 2);
+		if(lastpix >= mlx->plane.y )
+			lastpix = mlx->plane.y  -1;
 		/*-------------*/
-		
-		angle += DEG_RAD;
+		printf("%f", walldist);
+		angle -= 60 *DEG_RAD;
 		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
 	//	printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
 		//printf("%f\n", walldist);
-		i++;
+		x++;
 	}
 	
 }

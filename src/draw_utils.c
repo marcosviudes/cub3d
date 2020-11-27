@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/19 11:57:15 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/11/27 13:52:21 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,16 +219,18 @@ int		init_player(t_config *config, t_mlx *mlx)
 	mlx->player.dir.x = -0.5;
 	mlx->player.dir.y = 0.5;
 
-	mlx->player.height = P_HEIGHT;
+	mlx->player.height = P_HEIGHT;/*
+	mlx->ray.planex = 0;
+	mlx->ray.planey = 0.66;*/
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
 	mlx->player.posx = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
 	mlx->player.posy = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
 
-	mlx->plane.height = mlx->config->resolutionheight;
-	mlx->plane.widht = mlx->config->resolutionwidht;
-	mlx->player.distoplane = (mlx->plane.widht/2) * tan(ft_torad(FOV));
-//	mlx->player.distoplane = (mlx->plane.widht * tan(ft_torad(FOV)))/2;
+	mlx->plane.x = mlx->config->resolutionheight;
+	mlx->plane.y = mlx->config->resolutionwidht;
+	mlx->player.distoplane = (mlx->plane.x/2) * tan(ft_torad(FOV));
+	mlx->player.distoplane = (mlx->plane.x * tan(ft_torad(FOV)))/2;
 	
 	 
 	return (0);
