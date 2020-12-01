@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/27 13:59:09 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/01 12:48:56 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
 
-# define ROT_CONST		0.00872665
-# define MOV			10
+//0.00872665
+# define ROT_CONST		0.00872665 /2
+# define MOV			3
 # define MOV_SPEED		1
 # define ROT_SPEED		1.5
 
 # define FOV			60
 # define P_HEIGHT		0.5
-# define CHUNK_SIZE 	59
+# define CHUNK_SIZE 	64
 
 # define IS_RIGHT		> 0
 # define IS_LEFT		< 0
@@ -101,8 +102,8 @@ typedef struct		s_player
 
 typedef struct		s_plane
 {
-	int				x;
-	int				y;
+	double				x;
+	double				y;
 }					t_plane;
 
 typedef struct		s_sprite
@@ -166,9 +167,11 @@ typedef struct		s_ray
 	double			sidedisty;
 	double			deltadistx;
 	double			deltadisty;
+	int				stepx;
+	int				stepy;
 	int				hit;
 	int				side;
-	double			perpwalldist;
+	double			walldist;
 
 }					t_ray;
 

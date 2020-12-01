@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/27 13:52:21 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/01 12:49:10 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,12 @@ int		engine(t_mlx *mlx)
 {
 	mlx->img = mlx_new_image(mlx->mlx, mlx->config->resolutionwidht, mlx->config->resolutionheight);
 	mlx->img_addr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->line_lenght, &mlx->endian);
-	draw_map(mlx);
 	move_player(mlx);
-	draw_player(mlx);
 	raycasting(mlx);
-	printf("x = %f, y = %f, deg =\n", mlx->player.posx, mlx->player.posy);
-	printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
+	//draw_map(mlx);
+	//draw_player(mlx);
+	//printf("x = %f, y = %f, deg =\n", mlx->player.posx, mlx->player.posy);
+	//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
@@ -197,18 +197,26 @@ void	start_dir(char init_dir, t_mlx *mlx){
 	if(init_dir == 'N'){
 		mlx->player.dir.x = 0;
 		mlx->player.dir.y = 1;
+		mlx->plane.y = 0;
+		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'S'){
 		mlx->player.dir.x = 0;
 		mlx->player.dir.y = -1;
+		mlx->plane.y = 0;
+		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'W'){
 		mlx->player.dir.x = -1;
 		mlx->player.dir.y = 0;
+		mlx->plane.y = 0;
+		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'E'){
 		mlx->player.dir.x = 1;
 		mlx->player.dir.y = 0;
+		mlx->plane.y = 0;
+		mlx->plane.y = 0.66;
 	}
 }
 
@@ -224,11 +232,11 @@ int		init_player(t_config *config, t_mlx *mlx)
 	mlx->ray.planey = 0.66;*/
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
-	mlx->player.posx = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
-	mlx->player.posy = mlx->player.mapy * CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
+	mlx->player.posx = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
+	mlx->player.posy = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
 
-	mlx->plane.x = mlx->config->resolutionheight;
-	mlx->plane.y = mlx->config->resolutionwidht;
+	mlx->plane.x = 0;
+	mlx->plane.y = 	0.66;
 	mlx->player.distoplane = (mlx->plane.x/2) * tan(ft_torad(FOV));
 	mlx->player.distoplane = (mlx->plane.x * tan(ft_torad(FOV)))/2;
 	

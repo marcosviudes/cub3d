@@ -1,4 +1,4 @@
-R  724 328
+R  1920 1080
 NO ./path_to_the_north_texture
 SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
@@ -9,7 +9,7 @@ F 220,100,6
 C 225,30,4
 
 11111111111
-10001010001
+12001010001
 1001N100001
-10001000001
+10001020001
 11111111111
