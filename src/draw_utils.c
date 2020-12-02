@@ -197,25 +197,25 @@ void	start_dir(char init_dir, t_mlx *mlx){
 	if(init_dir == 'N'){
 		mlx->player.dir.x = 0;
 		mlx->player.dir.y = 1;
-		mlx->plane.y = 0;
+		mlx->plane.x = 0;
 		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'S'){
 		mlx->player.dir.x = 0;
 		mlx->player.dir.y = -1;
-		mlx->plane.y = 0;
-		mlx->plane.y = 0.66;
+		mlx->plane.x = 0;
+		mlx->plane.y = -0.66;
 	}
 	else if(init_dir == 'W'){
 		mlx->player.dir.x = -1;
 		mlx->player.dir.y = 0;
-		mlx->plane.y = 0;
-		mlx->plane.y = 0.66;
+		mlx->plane.x = 0;
+		mlx->plane.y = -0.66;
 	}
 	else if(init_dir == 'E'){
 		mlx->player.dir.x = 1;
 		mlx->player.dir.y = 0;
-		mlx->plane.y = 0;
+		mlx->plane.x = 0;
 		mlx->plane.y = 0.66;
 	}
 }
@@ -228,9 +228,7 @@ int		init_player(t_config *config, t_mlx *mlx)
 	mlx->player.dir.y = 0.5;
 
 	mlx->player.height = P_HEIGHT;
-	mlx->player.speed = MOV_DEF * MOV_SPEED;/*
-	mlx->ray.planex = 0;
-	mlx->ray.planey = 0.66;*/
+	mlx->player.speed = MOV_DEF * MOV_SPEED;
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
 	mlx->player.posx = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
