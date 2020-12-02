@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/01 12:49:10 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/02 13:58:49 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,8 @@ int		init_player(t_config *config, t_mlx *mlx)
 	mlx->player.dir.x = -0.5;
 	mlx->player.dir.y = 0.5;
 
-	mlx->player.height = P_HEIGHT;/*
+	mlx->player.height = P_HEIGHT;
+	mlx->player.speed = MOV_DEF * MOV_SPEED;/*
 	mlx->ray.planex = 0;
 	mlx->ray.planey = 0.66;*/
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
@@ -245,17 +246,26 @@ int		init_player(t_config *config, t_mlx *mlx)
 }
 void	move_player(t_mlx *mlx)
 {
+	double speed;
+	
+	speed = mlx->player.speed;
 	if(mlx->move.forward == 1){
-		mlx->player.posy -= MOV * MOV_SPEED;
+		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.x * speed)][(int)mlx->player.posy] == 0)
+			mlx->player.posx += mlx->player.dir.x * speed;
+		if(mlx->config->map.map[(int)mlx->player.posx][(int)(mlx->player.posy + mlx->player.dir.y * speed)] == 0)
+			mlx->player.posy += mlx->player.dir.y * speed;
 	}
 	if(mlx->move.backwards == 1){
-		mlx->player.posy += MOV * MOV_SPEED;
+		if(mlx->config->map.map[(int)(mlx->player.mapx - mlx->player.dir.x * speed)][mlx->player.mapy] == 0)
+			mlx->player.posx -= mlx->player.dir.x * speed;
+		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy - mlx->player.dir.y * speed)] == 0)
+			mlx->player.posy -= mlx->player.dir.y * speed;
 	}
 	if(mlx->move.left == 1){
-		mlx->player.posx -= MOV * MOV_SPEED;
+		mlx->player.posx -= MOV_DEF * MOV_SPEED;
 	}
 	if(mlx->move.right == 1){
-		mlx->player.posx += MOV * MOV_SPEED;
+		mlx->player.posx += MOV_DEF * MOV_SPEED;
 	}
 	if(mlx->move.rotright == 1)
 	{
@@ -273,7 +283,8 @@ void	move_player(t_mlx *mlx)
 	}
 		//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	//	float angle = atan2f(mlx->player.dir.y, mlx->player.dir.x) * 180/M_PI;
-		//printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
+	printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
+	//printf("%d	%d\n", mlx->player.mapx, mlx->player.mapy);
 	//	printf("%i\n", (int)angle);
 }
 //printf("%i\n", (int)atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI);

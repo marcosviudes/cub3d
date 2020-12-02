@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/01 12:48:56 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/02 13:57:56 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@
 
 //0.00872665
 # define ROT_CONST		0.00872665 /2
-# define MOV			3
-# define MOV_SPEED		1
 # define ROT_SPEED		1.5
+# define MOV_DEF		.3
+# define MOV_SPEED		1
+# define DEF_HIGHT		0.5
 
 # define FOV			60
 # define P_HEIGHT		0.5
@@ -94,6 +95,7 @@ typedef struct		s_player
 	int				mapy;
 	float			angle;
 	double			height;
+	double			speed;
 	int				distoplane;
 	struct s_pos	dir;
 	struct s_pos	lastdir;

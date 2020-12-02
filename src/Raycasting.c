@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/01 14:48:17 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/02 12:58:17 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	raycasting(t_mlx *mlx){
 		/*wall calculation*/
 		/*calculate first last pix*/
 		lineheight = (int)(height / mlx->ray.walldist);
-		lineheight *= 2;
+		lineheight *= DEF_HIGHT;
 		firstpix = (-lineheight / 2) + (height / 2);
 		if(firstpix < 0)
 			firstpix = 0;
