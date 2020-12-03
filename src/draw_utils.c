@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/02 13:58:49 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/03 14:46:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ int		engine(t_mlx *mlx)
 {
 	mlx->img = mlx_new_image(mlx->mlx, mlx->config->resolutionwidht, mlx->config->resolutionheight);
 	mlx->img_addr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->line_lenght, &mlx->endian);
+	mlx->player.mapx = (int)mlx->player.posx;
+	mlx->player.mapy = (int)mlx->player.posy;
 	move_player(mlx);
 	raycasting(mlx);
 	//draw_map(mlx);
@@ -223,21 +225,18 @@ void	start_dir(char init_dir, t_mlx *mlx){
 int		init_player(t_config *config, t_mlx *mlx)
 {
 	start_dir(config->init_dir, mlx);
-
-	mlx->player.dir.x = -0.5;
-	mlx->player.dir.y = 0.5;
-
+	mlx->player.dir.x = 0.5;
+	mlx->player.dir.x = 0.5;
+	
 	mlx->player.height = P_HEIGHT;
 	mlx->player.speed = MOV_DEF * MOV_SPEED;
 	mlx->player.mapx = (int)mlx->config->init_pos.x;
 	mlx->player.mapy = (int)mlx->config->init_pos.y;
-	mlx->player.posx = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
+	mlx->player.posx = mlx->player.mapx + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
 	mlx->player.posy = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
-
-	mlx->plane.x = 0;
-	mlx->plane.y = 	0.66;
-	mlx->player.distoplane = (mlx->plane.x/2) * tan(ft_torad(FOV));
-	mlx->player.distoplane = (mlx->plane.x * tan(ft_torad(FOV)))/2;
+	
+	//mlx->player.distoplane = (mlx->plane.x/2) * tan(ft_torad(FOV));
+	//mlx->player.distoplane = (mlx->plane.x * tan(ft_torad(FOV)))/2;
 	
 	 
 	return (0);
@@ -254,16 +253,22 @@ void	move_player(t_mlx *mlx)
 			mlx->player.posy += mlx->player.dir.y * speed;
 	}
 	if(mlx->move.backwards == 1){
-		if(mlx->config->map.map[(int)(mlx->player.mapx - mlx->player.dir.x * speed)][mlx->player.mapy] == 0)
+		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.x * speed)][mlx->player.mapy] == 0)
 			mlx->player.posx -= mlx->player.dir.x * speed;
-		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy - mlx->player.dir.y * speed)] == 0)
+		if(mlx->config->map.map[(int)mlx->player.posx][(int)(mlx->player.posy - mlx->player.dir.y * speed)] == 0)
 			mlx->player.posy -= mlx->player.dir.y * speed;
 	}
 	if(mlx->move.left == 1){
-		mlx->player.posx -= MOV_DEF * MOV_SPEED;
+		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
+			mlx->player.posx -= mlx->player.dir.y * sin(speed);
+		if(mlx->config->map.map[(int)(mlx->player.posx)][(int)(mlx->player.posy + mlx->player.dir.x * speed)] == 0)
+			mlx->player.posy += mlx->player.dir.x * sin(speed);
 	}
 	if(mlx->move.right == 1){
-		mlx->player.posx += MOV_DEF * MOV_SPEED;
+		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
+			mlx->player.posx += sin(mlx->player.dir.y) * speed;
+		if(mlx->config->map.map[(int)(mlx->player.posx)][(int)(mlx->player.posy - mlx->player.dir.x * speed)] == 0)
+			mlx->player.posy -= sin(mlx->player.dir.x) * speed;
 	}
 	if(mlx->move.rotright == 1)
 	{
@@ -271,6 +276,10 @@ void	move_player(t_mlx *mlx)
 		mlx->player.lastdir.y = mlx->player.dir.y;
 		mlx->player.dir.x = mlx->player.dir.x * cos(-ROT_CONST) - mlx->player.dir.y * sin(-ROT_CONST);
 		mlx->player.dir.y = mlx->player.lastdir.x * sin(-ROT_CONST) + mlx->player.dir.y * cos(-ROT_CONST);
+		mlx->plane.oldx = mlx->plane.x;
+		mlx->plane.oldy = mlx->plane.y;
+		mlx->plane.x = mlx->plane.x * cos(-ROT_CONST) - mlx->plane.y * sin(-ROT_CONST);
+		mlx->plane.y = mlx->plane.oldx * sin(-ROT_CONST) + mlx->plane.y * cos(-ROT_CONST);
 	}
 	if(mlx->move.rotleft == 1)
 	{
@@ -278,10 +287,13 @@ void	move_player(t_mlx *mlx)
 		mlx->player.lastdir.y = mlx->player.dir.y;
 		mlx->player.dir.x = mlx->player.dir.x * cos(ROT_CONST) - mlx->player.dir.y * sin(ROT_CONST);
 		mlx->player.dir.y = mlx->player.lastdir.x * sin(ROT_CONST) + mlx->player.dir.y * cos(ROT_CONST);
+		mlx->plane.oldx = mlx->plane.x;
+		mlx->plane.x = mlx->plane.x * cos(ROT_CONST) - mlx->plane.y * sin(ROT_CONST);
+		mlx->plane.y = mlx->plane.oldx * sin(ROT_CONST) + mlx->plane.y * cos(ROT_CONST);
 	}
 		//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	//	float angle = atan2f(mlx->player.dir.y, mlx->player.dir.x) * 180/M_PI;
-	printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
+//	printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
 	//printf("%d	%d\n", mlx->player.mapx, mlx->player.mapy);
 	//	printf("%i\n", (int)angle);
 }

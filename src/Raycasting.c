@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/02 12:58:17 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/03 14:45:00 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,7 @@ void	raycasting(t_mlx *mlx){
 	int height = mlx->config->resolutionheight;
 	i = 0;
 	x = 1;
-	angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
-	angle = angle + 30 * DEG_RAD;
+
 	while(x < widht){
 		/*ray position and direction*/
 		mapx =  mlx->player.mapx;
@@ -183,12 +182,12 @@ void	raycasting(t_mlx *mlx){
 				mapy += mlx->ray.stepy;
 				mlx->ray.side = 1;
 			}
-			if(mlx->config->map.map[mapy][mapx] > 0)
+			if(mlx->config->map.map[mapx][mapy] > 0)
 			//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, mlx->ray.sidedistx, mlx->ray.sidedisty, 0x0004FF00);
 				mlx->ray.hit = 1;
 		}
 		/*DDA Distance*/
-
+	
 		if(mlx->ray.side == 0){
 			mlx->ray.walldist = (mapx - mlx->player.posx + (1 - mlx->ray.stepx)/2) / mlx->ray.dirx;
 		}
@@ -199,7 +198,7 @@ void	raycasting(t_mlx *mlx){
 		/*wall calculation*/
 		/*calculate first last pix*/
 		lineheight = (int)(height / mlx->ray.walldist);
-		lineheight *= DEF_HIGHT;
+		//lineheight *= DEF_HIGHT;
 		firstpix = (-lineheight / 2) + (height / 2);
 		if(firstpix < 0)
 			firstpix = 0;
@@ -207,15 +206,17 @@ void	raycasting(t_mlx *mlx){
 		if(lastpix >= height)
 			lastpix = height - 1;
 		draw_line(mlx, mlx->win,x,0,x, firstpix, 0x0002EFD9);
+		//mlx->player.dir.y > 0
+		//mlx->player.dir.x > 0
 		if(mlx->ray.side == 0){
-			if(mlx->player.dir.y > 0)
+			if(mlx->ray.dirx > 0)
 				color = BLUE;
 			else
 				color = RED;
 		}
 		else
 		{
-			if(mlx->player.dir.x > 0)
+			if(mlx->ray.diry> 0)
 				color = GREEN;
 			else
 				color = PINK;

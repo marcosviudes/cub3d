@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/02 13:57:56 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/03 11:12:51 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define KEY_RELEASE	3
 
 //0.00872665
-# define ROT_CONST		0.00872665 /2
+# define ROT_CONST		0.00872665 * 3
 # define ROT_SPEED		1.5
 # define MOV_DEF		.3
 # define MOV_SPEED		1
@@ -104,6 +104,8 @@ typedef struct		s_player
 
 typedef struct		s_plane
 {
+	double				oldx;
+	double				oldy;
 	double				x;
 	double				y;
 }					t_plane;
