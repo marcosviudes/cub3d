@@ -142,6 +142,7 @@ typedef struct		s_flags
 	int				texturesprite;
 	int				readingmap;
 	int				initpos;
+	int				screenshot;
 }					t_flags;
 
 typedef struct		s_config
@@ -205,7 +206,7 @@ void				check_textures(t_config *config);
 void				check_direction(t_config *config);
 int					check_floor(t_config *config);
 int					check_ceiling(t_config *config);
-
+void    			check_args(int argc, char *argv[], int fd);
 
 int					check_textures_north(t_config *config);
 
