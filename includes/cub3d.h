@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/03 11:12:51 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/08 13:59:24 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIN_NAME 		"CUB3D"
 # define F_EXT	 		".cub"
-# define TEX_EXT		".XPM"
+# define TEX_EXT		".xpm"
 # define SAVE			"--save"
 # define SAVE_LEN		7
 
@@ -45,9 +45,9 @@
 
 //0.00872665
 # define ROT_CONST		0.00872665 * 3
-# define ROT_SPEED		1.5
-# define MOV_DEF		.3
-# define MOV_SPEED		1
+# define ROT_SPEED		1.8
+# define MOV_DEF		.33
+# define MOV_SPEED		.5
 # define DEF_HIGHT		0.5
 
 # define FOV			60
@@ -159,7 +159,7 @@ typedef struct		s_config
 	int				ceilingcolor[3];
 	char			init_dir;
 	int				spritecount;
-	t_pos			init_pos;
+	t_dir			init_pos;
 	t_sprite		*sprite;
 	t_map			map;
 	t_flags			flags;
@@ -180,6 +180,18 @@ typedef struct		s_ray
 
 }					t_ray;
 
+typedef struct		s_tex
+{
+	void			*img;
+	char			*img_addr;
+	int     		bpp;
+	int		    	endian;
+	int 		    line_lenght;
+	int				img_widht;
+	int				img_height;
+
+}					t_tex;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
@@ -189,6 +201,8 @@ typedef struct		s_mlx
 	int     		bpp;
 	int 		    line_lenght;
 	int		    	endian;
+	int				prueba;
+	t_tex			tex[5];
 	t_ray			ray;
 	t_config		*config;
 	t_player		player;
@@ -209,6 +223,7 @@ int					check_ceiling(t_config *config);
 void    			check_args(int argc, char *argv[], int fd);
 
 int					check_textures_north(t_config *config);
+void 				get_textures(t_config *config, t_mlx *mlx);	
 
 void				get_init_position(t_config *config, int widht, int height);
 int					fill_ambientcolor(int *color, char **spline);
@@ -226,5 +241,8 @@ void				move_player(t_mlx *mlx);
 void				error_exit(char *error);
 void				start_dir(char init_dir, t_mlx *mlx);
 
-void				raycasting(t_mlx *mlx);	
+void				raycasting(t_mlx *mlx);
+int					get_text_id(int side, float dirx, float diry);
+
+void   				draw_sprites(t_mlx *mlx);
 #endif

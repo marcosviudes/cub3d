@@ -3,8 +3,8 @@
 #####################################
 NAME		:= cub3D
 CC 			:= gcc  
-CFLAGS		:= -Wall -Wextra -Werror -pedantic -O3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror
-DFLAGS		:= -g
+CFLAGS		:= -Wall -Wextra -Werror -Wpedantic -O3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror
+DFLAGS		:= -g #-fsanitize=address 
 LIBFT 		:= ./libft/libft.a
 LIBFTSRC	:= $(wildcard libft/*.c)
 LIBFTOBJ	:= $(patsubst libft/%.c, libft/%.o, $(LIBFTSRC))

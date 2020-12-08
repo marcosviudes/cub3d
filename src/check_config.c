@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/17 12:02:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/06 11:07:36 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		check_resolution(t_config *config)
 	if (config->resolutionwidht == 0 || config->resolutionheight == 0)
 		printf("Resolucion invalida\n");
 	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
-		printf("faltan numeros de resolucion\n");
+		printf("Falta numeros de resolución\n");
 	if (config->resolutionwidht > MAX_WIDHT
 		|| config->resolutionheight > MAX_HEIGHT)
 	{
@@ -82,6 +82,7 @@ int			check_textures_north(t_config *config)
 		printf ("textura N invalida\n");
 	else if (!config->tex_path_north)
 		printf ("debe introducir una textura N\n");
+	check_extension(config->tex_path_north, TEX_EXT);
 	return (1);
 }
 
@@ -155,14 +156,18 @@ void		check_direction(t_config *config)
 		printf("No se ha encontrado Jugador\n");
 	if(config->flags.initpos > 1)
 		printf("Se ha encontrado mas de una Jugador\n");
-	if(c != 'N' && c != 'S' && c != 'W' && c != 'E' && c == '\0')
-		printf("Direccion invalida\n");
+	if((c == 'N' || c == 'S' || c == 'W' || c == 'E') && c != '\0')
+		return;	
+	printf("Direccion invalida\n");
 }
 
 void		check_extension(char *path, char *ext){
 	char *ptr_ext;
 	int extlen;
 
+	ptr_ext = NULL;
+	if(!path || !ext)
+		return;
 	while(*path != '\0')
 		{
 			if(*path == ext[0])
@@ -170,8 +175,8 @@ void		check_extension(char *path, char *ext){
 			path++;
 		}
 	extlen = ft_strlen(ext);
-	if(ft_strncmp(ptr_ext, ext, extlen +1) == 0)
+	if(ptr_ext != NULL && ft_strncmp(ptr_ext, ext, extlen +1) == 0)
 		return;
-	printf("Error: Archivo con extension invalida");
-	exit(-1);
+	printf("Error: Archivo con extension invalida\n");
+	//exit(-1);
 }

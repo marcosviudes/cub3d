@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/03 14:34:52 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/08 13:50:22 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <draw_map.h>
 #include <math.h>
 
+int	prueba(t_mlx *mlx);
 int main(int argc, char *argv[])
 {
 	int         fd;
@@ -61,18 +62,25 @@ int main(int argc, char *argv[])
 	check_direction(config);
 	print_map(config);
 	#if MAP_DEBUG
-		system("leaks cub3D");
+		//system("leaks cub3D");
 		return(0);
 	#endif
+//	void *pene;
+//	pene = mlx_init();
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	mlx->config = config;
+	mlx->prueba = 0;
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
 	init_player(mlx->config, mlx);
+	get_textures(mlx->config, mlx);
 	mlx_loop_hook(mlx->mlx, engine, mlx);
 	mlx_hook(mlx->win, KEY_PRESS, (1L << 0), press_key,mlx);
 	mlx_hook(mlx->win, KEY_RELEASE, (1L << 1), 	release_key , mlx);
+//	mlx_loop_hook(pene,prueba,mlx);
+	//mlx_hook(mlx->win, 17, 1L << 17, error_exit, "");
 	mlx_loop(mlx->mlx);
+//	mlx_loop(pene);
 	return (0);
 }
 
@@ -113,7 +121,7 @@ int		print_map(t_config *config)
 		i = 0;
 	}
 	printf("\n");
-	printf("El map printeado mide %ix%i", k, j);
+	printf("El map printeado mide %ix%i\n", k, j);
 	return(0);
 }
 
@@ -126,4 +134,10 @@ void error_exit(char *error){
 	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(error,1);
 	exit(-1);
+}
+
+int	prueba(t_mlx *mlx){
+	mlx->prueba++;
+	//printf("esto funcioina\n");
+	return(0);
 }

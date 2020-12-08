@@ -6,126 +6,20 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/03 14:45:00 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/08 14:41:35 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <draw_utils.h>
-/*
-float	ray_hordist(t_mlx *mlx, double angle){
-	float dist;
-	double ray_x;
-	double ray_y;
-	double ya_dist;
-	double xa_dist;
-	int	mapx;
-	int	mapy;
-	int hit;
-
-	hit = 0;
-
-//	angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
-	if(fabs(mlx->player.dir.y) < 0.00001)
-		return(NAN);
-	if(mlx->player.dir.y IS_UP){
-		ray_y = floor(mlx->player.posy/CHUNK_SIZE) * (CHUNK_SIZE) - 1;
-		ya_dist = -CHUNK_SIZE;
-		xa_dist = CHUNK_SIZE/tan(angle);
-	}
-	if(mlx->player.dir.y IS_DOWN){
-		ray_y = floor(mlx->player.posy/CHUNK_SIZE) * CHUNK_SIZE + CHUNK_SIZE;
-		ya_dist = CHUNK_SIZE;
-		xa_dist = CHUNK_SIZE/-tan(angle);
-	}
-	
-	ray_x = mlx->player.posx + (mlx->player.posy - ray_y)/tan(angle);
-	mapx = mlx->player.posx /CHUNK_SIZE;
-	mapy = mlx->player.posy /CHUNK_SIZE;
-	while(hit != 1){
-		mapx = ray_x/CHUNK_SIZE;
-		mapy = ray_y/CHUNK_SIZE;
-		if (mapx < 0||mapy <0 || mapx > mlx->config->map.max_widht)
-			return(NAN);
-		if(mlx->config->map.map[mapy][mapx] == 1){
-			hit = 1;
-			break;
-		}
-		ray_x += xa_dist;
-		ray_y += ya_dist;
-	}
-	dist = fabs((mlx->player.posx - ray_x)/cos(angle));
-	draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
-	if(dist < 0)
-		return(0);
-	return(dist);
-}
-float	ray_verdist(t_mlx *mlx, double angle){
-
-	float dist;
-	double ray_x;
-	double ray_y;
-	double ya_dist;
-	double xa_dist;
-	int	mapx;
-	int	mapy;
-	int paso;
-	int hit = 0;
-	//angle = atan2f(mlx->player.dir.y, mlx->player.dir.x);
-	if(mlx->player.dir.y == 0)
-		return(NAN);
-	if(mlx->player.dir.x IS_RIGHT){
-		ray_x = floor(mlx->player.posx/CHUNK_SIZE) * (CHUNK_SIZE) + CHUNK_SIZE;
-		xa_dist = CHUNK_SIZE;
-		ya_dist = CHUNK_SIZE * -tan(angle);
-	}
-	if(mlx->player.dir.x IS_LEFT){
-		ray_x = floor(mlx->player.posx/CHUNK_SIZE) * CHUNK_SIZE - 1;
-		xa_dist = -CHUNK_SIZE;
-		ya_dist = CHUNK_SIZE * tan(angle);
-	}
-	ray_y = mlx->player.posy + (mlx->player.posx - ray_x) * tan(angle);
-	mapx = mlx->player.posx /CHUNK_SIZE;
-	mapy = mlx->player.posy /CHUNK_SIZE;
-	mapx = ray_x/CHUNK_SIZE;
-	mapy = ray_y/CHUNK_SIZE;
-	if (mapx < 0||mapy < 0 )
-		return(NAN);
-	paso = 0;
-	while(paso <= mlx->config->map.max_height ){
-			mapx = ray_x/CHUNK_SIZE;
-			mapy = ray_y/CHUNK_SIZE;
-		if (mapx <= 0||mapy <0 || mapy >= mlx->config->map.max_height)
-			return(NAN);
-		if(mlx->config->map.map[mapy][mapx] == 1){
-			hit = 1;
-			break;}
-		ray_x += xa_dist;
-		ray_y += ya_dist;
-	}
-	draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00E80E67);
-	dist = fabs((mlx->player.posx - ray_x)/cos(angle));
-	if(dist < 0)
-		return(0);
-	return(dist);
-}
-void	raycasting(t_mlx *mlx){
-	return;
-}*/
 
 void	raycasting(t_mlx *mlx){
 	int	i;
+	int id;
 	int color;
 	double camerax;
-	float disty;
-	float distx;
-	float walldist;
-	int ray_angle;
-	int numrays;
 	int lineheight;
-	int side;
 	int x;
-	double angle;
 	int mapx;
 	int mapy;
 	int firstpix;
@@ -133,18 +27,19 @@ void	raycasting(t_mlx *mlx){
 	int widht = mlx->config->resolutionwidht;
 	int height = mlx->config->resolutionheight;
 	i = 0;
-	x = 1;
+	x = 0;
 
 	while(x < widht){
 		/*ray position and direction*/
 		mapx =  mlx->player.mapx;
 		mapy =  mlx->player.mapy;
-		camerax = (2 * x / (double)widht) - 1;
-		mlx->ray.dirx = mlx->player.dir.x + mlx->plane.x * camerax;
-		mlx->ray.diry = mlx->player.dir.y + mlx->plane.y * camerax;
+		camerax = (2 * x / (double)(widht)) - 1;
+		mlx->ray.dirx = mlx->player.dir.x + (mlx->plane.x * camerax);
+		mlx->ray.diry = mlx->player.dir.y + (mlx->plane.y * camerax);
 		mlx->ray.deltadistx = fabs(1 / mlx->ray.dirx);
 		mlx->ray.deltadisty = fabs(1 / mlx->ray.diry);
 		mlx->ray.hit = 0;
+		lineheight = 0;
 		/*Dist calculation*/
 
 		if(mlx->ray.dirx < 0)
@@ -191,10 +86,10 @@ void	raycasting(t_mlx *mlx){
 		if(mlx->ray.side == 0){
 			mlx->ray.walldist = (mapx - mlx->player.posx + (1 - mlx->ray.stepx)/2) / mlx->ray.dirx;
 		}
-		else
+		else{
 			mlx->ray.walldist = (mapy - mlx->player.posy + (1 - mlx->ray.stepy)/2) / mlx->ray.diry;
-
-		//printf("%f\n", mlx->ray.walldist);
+		}
+		mlx->ray.walldist = fabs(mlx->ray.walldist);
 		/*wall calculation*/
 		/*calculate first last pix*/
 		lineheight = (int)(height / mlx->ray.walldist);
@@ -205,9 +100,12 @@ void	raycasting(t_mlx *mlx){
 		lastpix = (lineheight / 2) + (height / 2);
 		if(lastpix >= height)
 			lastpix = height - 1;
-		draw_line(mlx, mlx->win,x,0,x, firstpix, 0x0002EFD9);
-		//mlx->player.dir.y > 0
-		//mlx->player.dir.x > 0
+//		draw_line(mlx, mlx->win,x,0,x, firstpix, 0x0002EFD9);
+		draw_verline(mlx, mlx->win, x, 0, firstpix,  0x0002EFD9);
+		draw_verline(mlx, mlx->win, x, lastpix, height -1,  0x00786202);
+//		draw_line(mlx, mlx->win,x,height -1,x,lastpix , 0x00786202);
+	//	draw_line(mlx, mlx->win,x,lastpix,x, height -1, 0x00786202);
+		//Wall color
 		if(mlx->ray.side == 0){
 			if(mlx->ray.dirx > 0)
 				color = BLUE;
@@ -221,15 +119,42 @@ void	raycasting(t_mlx *mlx){
 			else
 				color = PINK;
 		}
-		draw_line(mlx, mlx->win,x, lastpix, x, firstpix, color);
+		draw_line(mlx, mlx->win,x, firstpix, x, lastpix, color);
 		/*-------------*/
-	//	printf("%f\n", walldist);
+		i= firstpix;
+		int tex_y;
+		int tex_x;
+		double temp;
+		double wallx;
+		
+		id = get_text_id(mlx->ray.side, mlx->ray.dirx, mlx->ray.diry);
+		if (mlx->ray.side == 0) 
+			wallx = mlx->player.posy + (mlx->ray.walldist * mlx->ray.diry);
+      	else           
+		  	wallx = mlx->player.posx + (mlx->ray.walldist * mlx->ray.dirx);
+		wallx -= floor(wallx);
+		tex_x = (int)(wallx * (64));
+		while (i <= lastpix)
+		{
+		tex_y = abs((((i * 256 - height * 128 +
+						 lineheight * 128)
+						  * 64) /
+						  lineheight) / 
+						  256);
+		ft_memcpy(mlx->img_addr + 4 * widht * i + x * 4,
+			&mlx->tex[id].img_addr[tex_y % mlx->tex[id].img_height * mlx->tex[id].line_lenght + tex_x % mlx->tex[id].img_widht * mlx->tex[id].bpp / 8], sizeof(int));
+			i++;
+		}
+		/*--------------*/
+
+		
+
+		//printf("%f\n", walldist);
 		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
-	//	printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
+		//printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
 		//printf("%f\n", walldist);
 		x++;
 	}
-	
 }
 
 int	press_key(int	key, t_mlx *mlx)
@@ -262,9 +187,7 @@ int release_key(int key, t_mlx *mlx)
 		mlx->move.rotleft = 0;
 	if(key == KEY_RIGHT)
 		mlx->move.rotright= 0;
-	if(key == KEY_ESC){
-		system("leaks cub3D");
+	if(key == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/03 14:46:32 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/08 14:00:47 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,50 +20,7 @@ void            my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
     dst = mlx->img_addr + (y * mlx->line_lenght + x * (mlx->bpp / 8));
     *(unsigned int*)dst = color;
 }
-/*
-void		mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-{
-	unsigned char *src;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
 
-	src = (unsigned char *)&color;
-	r = src[0];
-	g = src[1];
-	b = src[2];
-	mlx->img_addr[y * mlx->line_lenght + x * mlx->bpp / 8] = r;
-	mlx->img_addr[y * mlx->line_lenght + x * mlx->bpp / 8 + 1] = g;
-	mlx->img_addr[y * mlx->line_lenght + x * mlx->bpp / 8 + 2] = b;
-}*//*
-void	my_mlx_pixel_put(t_mlx *mlx,int x, int y, int color)
-{
-	int				i;
-	unsigned int	j;
-
-	i = 0;
-	j = x * (mlx->bpp / 8) + y * mlx->line_lenght;
-	while (i < (mlx->bpp / 8))
-	{
-		mlx->img_addr[j + i] = color;
-		color >>= 8;
-		i++;
-	}
-}*//*
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-{
-	int				i;
-	unsigned int	j;
-
-	i = 0;
-	j = x * (mlx->bpp / 8) + mlx->line_lenght;
-	while (i < (mlx->bpp / 8))
-	{
-		mlx->img_addr[j + i] = color;
-		color >>= 8;
-		i++;
-	}
-}*/
 void	draw_square(t_mlx *mlx, void *win, int posx, int posy, int size, int color)
 {
 
@@ -129,6 +86,16 @@ void draw_line(t_mlx *mlx, void *win,int x1, int y1, int x2, int y2,int color)
     }
   }
 }
+void draw_verline(t_mlx *mlx, void *win,int x, int y1,int y2,int color){
+	int y;
+	
+	y = y1;
+	while(y < y2)
+	{
+		my_mlx_pixel_put(mlx, x, y, color);
+		y++;
+	}
+}
 
 int	draw_map(t_mlx *mlx)
 {
@@ -147,7 +114,7 @@ int	draw_map(t_mlx *mlx)
 	posy = 0;
 	posx = 0;
 	offset = 0;
-	size = CHUNK_SIZE;
+	size = 10;
 	while (j < height)
 	{
 		i = 0;
@@ -171,11 +138,12 @@ int	draw_map(t_mlx *mlx)
 
 void	draw_player(t_mlx *mlx)
 {
-	double xdir = mlx->player.dir.x * 20 + (mlx->player.posx + 5);
-	double ydir = - mlx->player.dir.y * 20 + (mlx->player.posy + 5);
-	
-	draw_square(mlx, mlx->win, mlx->player.posx, mlx->player.posy, 10, 0x00000000);
-	draw_line(mlx, mlx->win, mlx->player.posx + 5 , mlx->player.posy + 5 , (int)xdir, (int)ydir, 0x00F100FC);
+	//double xdir = mlx->player.dir.x * 20 + (mlx->player.posx + 5);
+	//double ydir = - mlx->player.dir.y * 20 + (mlx->player.posy + 5);
+	int draw_posx = mlx->player.posx;
+	int draw_posy = mlx->player.posy;
+	draw_square(mlx, mlx->win,draw_posx , draw_posy, 10, 0x00000000);
+	//draw_line(mlx, mlx->win, mlx->player.posx + 5 , mlx->player.posy + 5 , (int)xdir, (int)ydir, 0x00F100FC);
 }
 
 int		engine(t_mlx *mlx)
@@ -186,9 +154,10 @@ int		engine(t_mlx *mlx)
 	mlx->player.mapy = (int)mlx->player.posy;
 	move_player(mlx);
 	raycasting(mlx);
+	draw_sprites(mlx);
 	//draw_map(mlx);
 	//draw_player(mlx);
-	//printf("x = %f, y = %f, deg =\n", mlx->player.posx, mlx->player.posy);
+	//printf("x = %f, y = %f,\n", mlx->player.posx, mlx->player.posy);
 	//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx, mlx->img);
@@ -197,48 +166,42 @@ int		engine(t_mlx *mlx)
 
 void	start_dir(char init_dir, t_mlx *mlx){
 	if(init_dir == 'N'){
-		mlx->player.dir.x = 0;
-		mlx->player.dir.y = 1;
+		mlx->player.dir.x = -1;
+		mlx->player.dir.y = 0;
 		mlx->plane.x = 0;
 		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'S'){
-		mlx->player.dir.x = 0;
-		mlx->player.dir.y = -1;
+		mlx->player.dir.x = 1;
+		mlx->player.dir.y = 0;
 		mlx->plane.x = 0;
 		mlx->plane.y = -0.66;
 	}
 	else if(init_dir == 'W'){
-		mlx->player.dir.x = -1;
-		mlx->player.dir.y = 0;
-		mlx->plane.x = 0;
-		mlx->plane.y = -0.66;
+		mlx->player.dir.x = 0;
+		mlx->player.dir.y = -1;
+		mlx->plane.x = -0.66;
+		mlx->plane.y = 0;
 	}
 	else if(init_dir == 'E'){
-		mlx->player.dir.x = 1;
-		mlx->player.dir.y = 0;
-		mlx->plane.x = 0;
-		mlx->plane.y = 0.66;
+		mlx->player.dir.x = 0;
+		mlx->player.dir.y = 1;
+		mlx->plane.x = 0.66;
+		mlx->plane.y = 0;
 	}
 }
 
 int		init_player(t_config *config, t_mlx *mlx)
 {
 	start_dir(config->init_dir, mlx);
-	mlx->player.dir.x = 0.5;
-	mlx->player.dir.x = 0.5;
 	
 	mlx->player.height = P_HEIGHT;
 	mlx->player.speed = MOV_DEF * MOV_SPEED;
-	mlx->player.mapx = (int)mlx->config->init_pos.x;
-	mlx->player.mapy = (int)mlx->config->init_pos.y;
+	mlx->player.mapx = mlx->config->init_pos.x;
+	mlx->player.mapy = mlx->config->init_pos.y;
 	mlx->player.posx = mlx->player.mapx + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
 	mlx->player.posy = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
-	
-	//mlx->player.distoplane = (mlx->plane.x/2) * tan(ft_torad(FOV));
-	//mlx->player.distoplane = (mlx->plane.x * tan(ft_torad(FOV)))/2;
-	
-	 
+ 
 	return (0);
 }
 void	move_player(t_mlx *mlx)
@@ -260,9 +223,9 @@ void	move_player(t_mlx *mlx)
 	}
 	if(mlx->move.left == 1){
 		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
-			mlx->player.posx -= mlx->player.dir.y * sin(speed);
+			mlx->player.posx -= mlx->player.dir.y * speed;
 		if(mlx->config->map.map[(int)(mlx->player.posx)][(int)(mlx->player.posy + mlx->player.dir.x * speed)] == 0)
-			mlx->player.posy += mlx->player.dir.x * sin(speed);
+			mlx->player.posy += mlx->player.dir.x * speed;
 	}
 	if(mlx->move.right == 1){
 		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
@@ -299,9 +262,40 @@ void	move_player(t_mlx *mlx)
 }
 //printf("%i\n", (int)atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI);
 
-void drawline_lendown(t_mlx *mlx, int posx, int posy, int len){
-	int lasty;
-
-	lasty = posy +len;
-	draw_line(mlx, mlx->win, posx , posy, posx, lasty ,0x00001FFF);
+int		get_text_id(int side, float dirx, float diry){
+	if(side == 0){
+			if(dirx > 0)
+				return(0);
+			else
+				return(1);
+		}
+		else
+		{
+			if(diry> 0)
+				return(2);
+			else
+				return(3);
+		}
 }
+/*
+void	draw_wall(t_mlx *mlx, int firstpix, int lastpix, int x)
+{
+	int i;
+	int id;
+
+	i = firstpix;
+	id = get_text_id(mlx->ray.side, mlx->ray.dirx, mlx->ray.diry);
+	while (i <= lastpix)
+	{
+		rc->tex_y = abs((((i * 256 - rc->win_y * 128 +
+						rc->line_height * 128) *
+						64) /
+						rc->line_height) /
+						256);
+		ft_memcpy(rc->img_data + 4 * rc->win_x * i + x * 4,
+					&rc->tex[rc->tex_id].data[rc->tex_y % rc->tex_height *
+					rc->tex[rc->tex_id].size_l + rc->tex_x % rc->tex_width *
+					rc->tex[rc->tex_id].bpp / 8], sizeof(int));
+		i++;
+	}
+}*/

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/11/15 09:38:01 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/06 10:35:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int				fill_resolution(t_config *config, char **spline)
 			resolution[i] = -1;
 		else if (!ft_strisnum(spline[i]))
 			resolution[i] = 0;
+		else if(ft_strlen(spline[i]) > 5)
+			resolution[i] = 10000;
 		else
 			resolution[i] = ft_atoi(spline[i]);
 		i++;
@@ -44,7 +46,9 @@ void			fill_texture(t_config *config, char **spline, int key)
 {
 	char *texture;
 
-	texture = ft_strdup(spline[1]) ;
+	if(spline[2] != NULL)
+		return;
+	texture = ft_strdup(spline[1]);
 	while(ft_iswhitespace(*texture)){
 		texture++;
 	}
@@ -134,7 +138,7 @@ int				select_ambient(t_config *config, char *line, char **spline, int key)
 	}
 		return (0);
 }
-
+/*
 int				fill_ambientcolor(int *color, char **spline)
 {
 	int			rgb[3];
@@ -153,6 +157,31 @@ int				fill_ambientcolor(int *color, char **spline)
 	i = -1;
 	while (i++ < 3)
 		color[i] = rgb[i];
+	free(numbers);
+	return (0);
+}
+*/
+int				fill_ambientcolor(int *color, char **spline)
+{
+	int			rgb[3];
+	int			i;
+	char		**numbers;
+
+	i = 0;
+//	ft_remchar(spline[1], ' ');
+	numbers = ft_split(spline[1], ',');
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(numbers[i]);
+		free(numbers[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		color[i] = rgb[i];
+		i++;
+	}
 	free(numbers);
 	return (0);
 }

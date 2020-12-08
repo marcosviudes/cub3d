@@ -1,6 +1,7 @@
 Terminar la comprobacion de los errores.
 comprobación archivos invalidos.
 
-
+comprobar todas las texturas (la extension)
+hacer un exit con check extension
 comenzar a pintar el muro.
 comprobar errores en la obtencion del rayo.

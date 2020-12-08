@@ -1,15 +1,14 @@
 R  1920 1080
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
-
+NO ./textures/fuhrer.xpm
+SO ./textures/bluestone.xpm		
+WE ./textures/colorstone.xpm
+EA ./textures/mossy.xpm
+S ./textures/barrel.xpm
 F 220,100,6
 C 225,30,4
 
-11111111111
-10000000000111111111111
-100W000000000000000000001
-10000000000111111111111
-11111111111
+1111111111111
+100000000002111111111111
+100000W00000000020000011
+100000000001111111111111
+1111111111111

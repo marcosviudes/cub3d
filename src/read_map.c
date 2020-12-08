@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/11 10:36:35 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/05 10:24:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void		allocate_map(t_config  *config)
 
 void		get_init_position(t_config *config, int widht, int height)
 {
-	config->init_pos.x = widht;
-	config->init_pos.y = height;
+	config->init_pos.x = height;
+	config->init_pos.y = widht;
 	config->flags.initpos += 1;
 }
 
