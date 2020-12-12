@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/08 13:50:22 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/12 14:36:47 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 //	pene = mlx_init();
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	mlx->config = config;
+	mlx->sprite = config->sprite;
 	mlx->prueba = 0;
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
@@ -90,7 +91,7 @@ int		print_sprites(t_config *config){
 	i = 0;
 	printf("sprites-----:\n");
 	while(i < config->spritecount){
-		printf("\tel sprite [%i] tiene la posicion : x = [%i]; y = [%i];\n", i, config->sprite[i].pos.x, config->sprite[i].pos.y);
+		printf("\tel sprite [%i] tiene la posicion : x = [%i]; y = [%i];\n", config->sprite[i].id,(int) config->sprite[i].x,(int)config->sprite[i].y);
 		i++;
 	}
 	printf("El numero de sprties son : -%i-\n", i);

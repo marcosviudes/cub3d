@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/08 13:59:24 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/12 14:36:10 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,11 @@ typedef struct		s_plane
 
 typedef struct		s_sprite
 {
-	t_dir			pos;
+	int				id;
+	double			dist;
+	double			x;
+	double			y;
+	//t_dir			pos;
 }					t_sprite;
 
 typedef struct 		s_lstbuff
@@ -202,6 +206,8 @@ typedef struct		s_mlx
 	int 		    line_lenght;
 	int		    	endian;
 	int				prueba;
+	int				enablesprite;
+	t_sprite		*sprite;
 	t_tex			tex[5];
 	t_ray			ray;
 	t_config		*config;

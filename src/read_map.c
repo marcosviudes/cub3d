@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/05 10:24:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/12 14:37:01 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,8 +252,9 @@ void		get_sprites(t_config *config)
 		i = 0;
 		while (i < config->map.max_widht){
 			if(config->map.map[j][i] == 2 && k < config->spritecount){
-				config->sprite[k].pos.x = i + 1;
-				config->sprite[k].pos.y = j + 1;
+				config->sprite[k].x = (i + 1) + 0.5;
+				config->sprite[k].y = (j + 1) + 0.5;
+				config->sprite[k].id = k;
 				k++;
 			}
 			i++;

@@ -1,9 +1,11 @@
 #####################################
 ### CONFIG
 #####################################
+.DELETE_ON_ERROR:
+
 NAME		:= cub3D
 CC 			:= gcc  
-CFLAGS		:= -Wall -Wextra -Werror -Wpedantic -O3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror #-Wpedantic -O3 #-Wall -Wextra -Werror # -O3 -Wall -Wextra -Werror
 DFLAGS		:= -g #-fsanitize=address 
 LIBFT 		:= ./libft/libft.a
 LIBFTSRC	:= $(wildcard libft/*.c)
@@ -36,11 +38,12 @@ libft/%.o: libft/%.c
 
 obj/%.o: src/%.c
 	$(MKDIR) obj/
-	$(CC) -I includes -c $< -o $@
+	$(CC)-I includes -c $< -o $@
 
-normi:
+normi: fclean
 	norminette src/*
-
+	norminette incldues/*
+	norminette libft/*.c libft/*.h
 clean:
 	$(RM) libft/*.o obj/* mlx/*.o
 

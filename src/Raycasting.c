@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/08 14:41:35 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/12 10:52:38 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void	raycasting(t_mlx *mlx){
 		/*ray position and direction*/
 		mapx =  mlx->player.mapx;
 		mapy =  mlx->player.mapy;
-		camerax = (2 * x / (double)(widht)) - 1;
-		mlx->ray.dirx = mlx->player.dir.x + (mlx->plane.x * camerax);
-		mlx->ray.diry = mlx->player.dir.y + (mlx->plane.y * camerax);
-		mlx->ray.deltadistx = fabs(1 / mlx->ray.dirx);
-		mlx->ray.deltadisty = fabs(1 / mlx->ray.diry);
+		camerax = 2 * x / (double)widht - 1;
+		mlx->ray.dirx = mlx->player.dir.x + mlx->plane.x * camerax;
+		mlx->ray.diry = mlx->player.dir.y + mlx->plane.y * camerax;
+		//mlx->ray.deltadistx = fabs(1 / mlx->ray.dirx);
+		//mlx->ray.deltadisty = fabs(1 / mlx->ray.diry);
+
+		mlx->ray.deltadistx = (mlx->ray.diry == 0) ? 0 : ((mlx->ray.dirx == 0) ? 1 : fabs(1 / mlx->ray.dirx));
+      	mlx->ray.deltadisty = (mlx->ray.dirx == 0) ? 0 : ((mlx->ray.diry == 0) ? 1 : fabs(1 / mlx->ray.diry));
 		mlx->ray.hit = 0;
 		lineheight = 0;
 		/*Dist calculation*/
@@ -77,9 +80,11 @@ void	raycasting(t_mlx *mlx){
 				mapy += mlx->ray.stepy;
 				mlx->ray.side = 1;
 			}
-			if(mlx->config->map.map[mapx][mapy] > 0)
-			//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, mlx->ray.sidedistx, mlx->ray.sidedisty, 0x0004FF00);
+			if(mlx->config->map.map[mapx][mapy] == 1)
 				mlx->ray.hit = 1;
+			if(mlx->enablesprite == 0 &&
+					mlx->config->map.map[mapx][mapy] == 2)
+					mlx->enablesprite = 1;
 		}
 		/*DDA Distance*/
 	
@@ -92,7 +97,7 @@ void	raycasting(t_mlx *mlx){
 		mlx->ray.walldist = fabs(mlx->ray.walldist);
 		/*wall calculation*/
 		/*calculate first last pix*/
-		lineheight = (int)(height / mlx->ray.walldist);
+		lineheight = abs((int)(height / mlx->ray.walldist));
 		//lineheight *= DEF_HIGHT;
 		firstpix = (-lineheight / 2) + (height / 2);
 		if(firstpix < 0)
@@ -102,7 +107,7 @@ void	raycasting(t_mlx *mlx){
 			lastpix = height - 1;
 //		draw_line(mlx, mlx->win,x,0,x, firstpix, 0x0002EFD9);
 		draw_verline(mlx, mlx->win, x, 0, firstpix,  0x0002EFD9);
-		draw_verline(mlx, mlx->win, x, lastpix, height -1,  0x00786202);
+		//draw_verline(mlx, mlx->win, x, lastpix, height -1,  0x00786202);
 //		draw_line(mlx, mlx->win,x,height -1,x,lastpix , 0x00786202);
 	//	draw_line(mlx, mlx->win,x,lastpix,x, height -1, 0x00786202);
 		//Wall color
@@ -121,6 +126,7 @@ void	raycasting(t_mlx *mlx){
 		}
 		draw_line(mlx, mlx->win,x, firstpix, x, lastpix, color);
 		/*-------------*/
+		
 		i= firstpix;
 		int tex_y;
 		int tex_x;
@@ -146,9 +152,6 @@ void	raycasting(t_mlx *mlx){
 			i++;
 		}
 		/*--------------*/
-
-		
-
 		//printf("%f\n", walldist);
 		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
 		//printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));

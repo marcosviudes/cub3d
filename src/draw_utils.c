@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/08 14:00:47 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/12 10:44:57 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void	draw_player(t_mlx *mlx)
 {
 	//double xdir = mlx->player.dir.x * 20 + (mlx->player.posx + 5);
 	//double ydir = - mlx->player.dir.y * 20 + (mlx->player.posy + 5);
-	int draw_posx = mlx->player.posx;
-	int draw_posy = mlx->player.posy;
+	int draw_posx = mlx->player.posy;
+	int draw_posy = mlx->player.posx;
 	draw_square(mlx, mlx->win,draw_posx , draw_posy, 10, 0x00000000);
 	//draw_line(mlx, mlx->win, mlx->player.posx + 5 , mlx->player.posy + 5 , (int)xdir, (int)ydir, 0x00F100FC);
 }
@@ -166,42 +166,39 @@ int		engine(t_mlx *mlx)
 
 void	start_dir(char init_dir, t_mlx *mlx){
 	if(init_dir == 'N'){
-		mlx->player.dir.x = -1;
-		mlx->player.dir.y = 0;
-		mlx->plane.x = 0;
+		mlx->player.dir.x = -1.0;
+		mlx->player.dir.y = 0.0;
+		mlx->plane.x = 0.0;
 		mlx->plane.y = 0.66;
 	}
 	else if(init_dir == 'S'){
-		mlx->player.dir.x = 1;
-		mlx->player.dir.y = 0;
-		mlx->plane.x = 0;
+		mlx->player.dir.x = 1.0;
+		mlx->player.dir.y = 0.0;
+		mlx->plane.x = 0.0;
 		mlx->plane.y = -0.66;
 	}
 	else if(init_dir == 'W'){
-		mlx->player.dir.x = 0;
-		mlx->player.dir.y = -1;
+		mlx->player.dir.x = 0.0;
+		mlx->player.dir.y = -1.0;
 		mlx->plane.x = -0.66;
-		mlx->plane.y = 0;
+		mlx->plane.y = 0.0;
 	}
 	else if(init_dir == 'E'){
-		mlx->player.dir.x = 0;
-		mlx->player.dir.y = 1;
+		mlx->player.dir.x = 0.0;
+		mlx->player.dir.y = 1.0;
 		mlx->plane.x = 0.66;
-		mlx->plane.y = 0;
+		mlx->plane.y = 0.0;
 	}
 }
 
 int		init_player(t_config *config, t_mlx *mlx)
 {
 	start_dir(config->init_dir, mlx);
-	
-	mlx->player.height = P_HEIGHT;
 	mlx->player.speed = MOV_DEF * MOV_SPEED;
 	mlx->player.mapx = mlx->config->init_pos.x;
 	mlx->player.mapy = mlx->config->init_pos.y;
-	mlx->player.posx = mlx->player.mapx + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2; // 	el 5 es temporal para dibujaar al jugador
-	mlx->player.posy = mlx->player.mapy + 0.5;//* CHUNK_SIZE + CHUNK_SIZE/2;//	en el mapa de pruebas;
- 
+	mlx->player.posx = mlx->player.mapx + 0.5;
+	mlx->player.posy = mlx->player.mapy + 0.5;
 	return (0);
 }
 void	move_player(t_mlx *mlx)
@@ -210,28 +207,28 @@ void	move_player(t_mlx *mlx)
 	
 	speed = mlx->player.speed;
 	if(mlx->move.forward == 1){
-		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.x * speed)][(int)mlx->player.posy] == 0)
+		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.x * speed)][mlx->player.mapy] != 1)
 			mlx->player.posx += mlx->player.dir.x * speed;
-		if(mlx->config->map.map[(int)mlx->player.posx][(int)(mlx->player.posy + mlx->player.dir.y * speed)] == 0)
+		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy + mlx->player.dir.y * speed)] != 1)
 			mlx->player.posy += mlx->player.dir.y * speed;
 	}
 	if(mlx->move.backwards == 1){
-		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.x * speed)][mlx->player.mapy] == 0)
+		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.x * speed)][mlx->player.mapy] != 1)
 			mlx->player.posx -= mlx->player.dir.x * speed;
-		if(mlx->config->map.map[(int)mlx->player.posx][(int)(mlx->player.posy - mlx->player.dir.y * speed)] == 0)
+		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy - mlx->player.dir.y * speed)] != 1)
 			mlx->player.posy -= mlx->player.dir.y * speed;
 	}
 	if(mlx->move.left == 1){
-		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
+		if(mlx->config->map.map[(int)(mlx->player.posx - mlx->player.dir.y * speed)][mlx->player.mapy] != 1)
 			mlx->player.posx -= mlx->player.dir.y * speed;
-		if(mlx->config->map.map[(int)(mlx->player.posx)][(int)(mlx->player.posy + mlx->player.dir.x * speed)] == 0)
+		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy + mlx->player.dir.x * speed)] != 1)
 			mlx->player.posy += mlx->player.dir.x * speed;
 	}
 	if(mlx->move.right == 1){
-		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.y * speed)][(int)(mlx->player.posy)] == 0)
-			mlx->player.posx += sin(mlx->player.dir.y) * speed;
-		if(mlx->config->map.map[(int)(mlx->player.posx)][(int)(mlx->player.posy - mlx->player.dir.x * speed)] == 0)
-			mlx->player.posy -= sin(mlx->player.dir.x) * speed;
+		if(mlx->config->map.map[(int)(mlx->player.posx + mlx->player.dir.y * speed)][mlx->player.mapy] != 1)
+			mlx->player.posx += mlx->player.dir.y * speed;
+		if(mlx->config->map.map[mlx->player.mapx][(int)(mlx->player.posy - mlx->player.dir.x * speed)] != 1)
+			mlx->player.posy -= mlx->player.dir.x * speed;
 	}
 	if(mlx->move.rotright == 1)
 	{
@@ -271,7 +268,7 @@ int		get_text_id(int side, float dirx, float diry){
 		}
 		else
 		{
-			if(diry> 0)
+			if(diry > 0)
 				return(2);
 			else
 				return(3);
