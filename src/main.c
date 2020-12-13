@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/12 14:36:47 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/13 14:50:29 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ int main(int argc, char *argv[])
 	#endif
 //	void *pene;
 //	pene = mlx_init();
+	mlx->mlx = mlx_init();
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	mlx->config = config;
 	mlx->sprite = config->sprite;
 	mlx->prueba = 0;
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
-	init_player(mlx->config, mlx);
 	get_textures(mlx->config, mlx);
+	init_player(mlx->config, mlx);
+	if(argc == 3)
+		screenshot(mlx);
+	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
 	mlx_loop_hook(mlx->mlx, engine, mlx);
 	mlx_hook(mlx->win, KEY_PRESS, (1L << 0), press_key,mlx);
 	mlx_hook(mlx->win, KEY_RELEASE, (1L << 1), 	release_key , mlx);

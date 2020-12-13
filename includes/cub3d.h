@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/12 14:36:10 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/13 14:49:38 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,25 @@ typedef struct		s_plane
 	double				y;
 }					t_plane;
 
+typedef struct		s_tex
+{
+	void			*img;
+	char			*img_addr;
+	int     		bpp;
+	int		    	endian;
+	int 		    line_lenght;
+	int				img_widht;
+	int				img_height;
+
+}					t_tex;
+
 typedef struct		s_sprite
 {
 	int				id;
 	double			dist;
 	double			x;
 	double			y;
+	t_tex			tex;
 	//t_dir			pos;
 }					t_sprite;
 
@@ -184,17 +197,6 @@ typedef struct		s_ray
 
 }					t_ray;
 
-typedef struct		s_tex
-{
-	void			*img;
-	char			*img_addr;
-	int     		bpp;
-	int		    	endian;
-	int 		    line_lenght;
-	int				img_widht;
-	int				img_height;
-
-}					t_tex;
 
 typedef struct		s_mlx
 {
@@ -207,6 +209,7 @@ typedef struct		s_mlx
 	int		    	endian;
 	int				prueba;
 	int				enablesprite;
+	double			*sprite_buff;
 	t_sprite		*sprite;
 	t_tex			tex[5];
 	t_ray			ray;
@@ -251,4 +254,6 @@ void				raycasting(t_mlx *mlx);
 int					get_text_id(int side, float dirx, float diry);
 
 void   				draw_sprites(t_mlx *mlx);
+
+void				screenshot(t_mlx *mlx);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/12 10:52:38 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/13 13:44:50 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void	raycasting(t_mlx *mlx){
 		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
 		//printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
 		//printf("%f\n", walldist);
+		mlx->sprite_buff = &wallx;
 		x++;
 	}
 }

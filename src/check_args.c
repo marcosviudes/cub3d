@@ -21,6 +21,3 @@ void    check_args(int argc, char *argv[], int fd){
 			return;
 		}
 }
-
-//maps/test_maps/
-//maps/map1.cub
