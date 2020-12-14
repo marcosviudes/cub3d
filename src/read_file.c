@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/12 10:34:31 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 09:38:33 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ int				read_line(t_config *config, char *line)
 		}
 	i = 0;
 	if (ft_isdigit(line[i]) || config->flags.readingmap == 1)
+	{
 		read_map(config, line);
+		return(0);
+	}
 	if(!(spline = ft_split(line, ' ')) || line[0] == '\0'){
 		free(spline);
 		return(0);

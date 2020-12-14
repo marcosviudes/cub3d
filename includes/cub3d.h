@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/13 14:49:38 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 14:50:12 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@
 # define KEY_RELEASE	3
 
 //0.00872665
-# define ROT_CONST		0.00872665 * 3
+# define ROT_CONST		0.00872665 * 4
 # define ROT_SPEED		1.8
 # define MOV_DEF		.33
-# define MOV_SPEED		.5
+# define MOV_SPEED		1
 # define DEF_HIGHT		0.5
 
 # define FOV			60
@@ -256,4 +256,6 @@ int					get_text_id(int side, float dirx, float diry);
 void   				draw_sprites(t_mlx *mlx);
 
 void				screenshot(t_mlx *mlx);
+void				write_data_header(t_mlx *mlx, int size, int fd);
+void				take_screenshot(t_mlx *mlx);
 #endif

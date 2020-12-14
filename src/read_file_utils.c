@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviudes <mviudes@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/07 16:55:51 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 09:38:44 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int		get_key(char *spline)
 		return (K_F);
 	if (ft_cmpstr(spline, "C"))
 		return (K_C);
+	else
+		printf("key invalida");
+		exit(-1);
 	return (0);
 }
 

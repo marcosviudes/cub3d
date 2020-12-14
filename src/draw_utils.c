@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/13 13:33:49 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 14:47:12 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ int		engine(t_mlx *mlx)
 	mlx->player.mapy = (int)mlx->player.posy;
 	move_player(mlx);
 	raycasting(mlx);
-	draw_sprites(mlx);
+	if(mlx->enablesprite)
+		draw_sprites(mlx);
 	//draw_map(mlx);
 	//draw_player(mlx);
 	//printf("x = %f, y = %f,\n", mlx->player.posx, mlx->player.posy);
@@ -282,25 +283,3 @@ int		get_text_id(int side, float dirx, float diry){
 				return(3);
 		}
 }
-/*
-void	draw_wall(t_mlx *mlx, int firstpix, int lastpix, int x)
-{
-	int i;
-	int id;
-
-	i = firstpix;
-	id = get_text_id(mlx->ray.side, mlx->ray.dirx, mlx->ray.diry);
-	while (i <= lastpix)
-	{
-		rc->tex_y = abs((((i * 256 - rc->win_y * 128 +
-						rc->line_height * 128) *
-						64) /
-						rc->line_height) /
-						256);
-		ft_memcpy(rc->img_data + 4 * rc->win_x * i + x * 4,
-					&rc->tex[rc->tex_id].data[rc->tex_y % rc->tex_height *
-					rc->tex[rc->tex_id].size_l + rc->tex_x % rc->tex_width *
-					rc->tex[rc->tex_id].bpp / 8], sizeof(int));
-		i++;
-	}
-}*/

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/13 14:50:29 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 09:26:15 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int main(int argc, char *argv[])
 {
 	int         fd;
 	char        *line;
-	int			screenshot;
 	t_config    *config;
 	t_mlx		*mlx;
 
+	config = ft_calloc(1, sizeof(t_config));
+	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	fd = open(argv[1] ,O_RDONLY);
 	check_args(argc, argv, fd);
 	check_extension(argv[1], F_EXT);
-	config = ft_calloc(1, sizeof(t_config));
 	while((config->lastline = get_next_line(fd, &line)) > EOF)
 	{
 		read_line(config, line);
@@ -62,16 +62,14 @@ int main(int argc, char *argv[])
 	check_direction(config);
 	print_map(config);
 	#if MAP_DEBUG
-		//system("leaks cub3D");
+		getchar();
+		//system("leaks ./cub3D");
 		return(0);
 	#endif
-//	void *pene;
-//	pene = mlx_init();
+
 	mlx->mlx = mlx_init();
-	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
 	mlx->config = config;
 	mlx->sprite = config->sprite;
-	mlx->prueba = 0;
 	get_textures(mlx->config, mlx);
 	init_player(mlx->config, mlx);
 	if(argc == 3)
@@ -80,10 +78,7 @@ int main(int argc, char *argv[])
 	mlx_loop_hook(mlx->mlx, engine, mlx);
 	mlx_hook(mlx->win, KEY_PRESS, (1L << 0), press_key,mlx);
 	mlx_hook(mlx->win, KEY_RELEASE, (1L << 1), 	release_key , mlx);
-//	mlx_loop_hook(pene,prueba,mlx);
-	//mlx_hook(mlx->win, 17, 1L << 17, error_exit, "");
 	mlx_loop(mlx->mlx);
-//	mlx_loop(pene);
 	return (0);
 }
 

@@ -12,11 +12,12 @@ LIBFTSRC	:= $(wildcard libft/*.c)
 LIBFTOBJ	:= $(patsubst libft/%.c, libft/%.o, $(LIBFTSRC))
 RM			:= rm -rf
 MKDIR		:= mkdir -p
+SHOT		:= screenshot.bmp
 
 
-SRCS := $(shell find src/ -type f -iname *.c)
-OBJ := $(patsubst src/%.c, obj/%.o, $(SRCS))
-MLX = ./mlx
+SRCS 		:= $(shell find src/ -type f -iname *.c)
+OBJ 		:= $(patsubst src/%.c, obj/%.o, $(SRCS))
+MLX 		= ./mlx
 INCLUDES 	:= -I includes -Imlx -Llibft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 
 #####################################
@@ -48,7 +49,7 @@ clean:
 	$(RM) libft/*.o obj/* mlx/*.o
 
 fclean: clean
-	$(RM) $(NAME) *.dSYM $(LIBFT) a.out obj
+	$(RM) $(NAME) *.dSYM $(LIBFT) a.out obj $(SHOT)
 	make -C $(MLX) clean
 
 re: fclean all
@@ -61,12 +62,3 @@ debugmlx:	fclean
 	$(CC) $(DFLAGS) $(INCLUDES) $(SRCS) libft/*.c -I includes -o $(NAME)
 
 .PHONY:	all clean fclean re debug
-
-#####################################
-#$(INCLUDES)
-#run: $(NAME)
-#	@./$(NAME) ./res/map1.cub
-#runs: $(NAME)
-#	@./$(NAME) ./res/map1.cub -save
-#rerun: re run
-#$(RM) screenshot.bmp

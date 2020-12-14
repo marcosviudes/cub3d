@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/13 10:28:40 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/14 10:29:05 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,29 @@ int			check_map_walls(t_config *config)
 		j++;
 		i = 0;
 	}
-
 	i = 0;
 	j = 0;
+	while (i < width)
+	{
+		if(config->map.map[0][i] != 1)
+			if(config->map.map[0][i] != 4)
+				printf("mapa abierto\n");
+		if(config->map.map[0][i] != 1)
+			if(config->map.map[0][i] != 4)
+				printf("mapa abierto\n");
+		i++;
+	}
+	while (j < heigh)
+	{
+		if(config->map.map[j][0] != 1)
+			if(config->map.map[j][0] != 4)
+				printf("mapa abierto\n");
+		if(config->map.map[j][0] != 1)
+			if(config->map.map[j][0] != 4)
+				printf("mapa abierto\n");
+		j++;
+	}
+	
 	return (0);
 }
 void		get_sprites(t_config *config)
