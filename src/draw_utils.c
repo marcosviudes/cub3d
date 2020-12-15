@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 14:47:12 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:29:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ int	draw_map(t_mlx *mlx)
 
 void	draw_player(t_mlx *mlx)
 {
-	//double xdir = mlx->player.dir.x * 20 + (mlx->player.posx + 5);
-	//double ydir = - mlx->player.dir.y * 20 + (mlx->player.posy + 5);
 	int draw_posx = mlx->player.posy;
 	int draw_posy = mlx->player.posx;
 	draw_square(mlx, mlx->win,draw_posx , draw_posy, 10, 0x00000000);
@@ -161,7 +159,6 @@ int		engine(t_mlx *mlx)
 	//printf("x = %f, y = %f,\n", mlx->player.posx, mlx->player.posy);
 	//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
-	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
 }
 
@@ -208,6 +205,7 @@ int		init_player(t_config *config, t_mlx *mlx)
 			mlx->sprite[i].tex = mlx->tex[4];
 			i++;
 		}
+	
 	return (0);
 }
 void	move_player(t_mlx *mlx)

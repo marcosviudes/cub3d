@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 13:16:09 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:15:08 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,10 @@ void	raycasting(t_mlx *mlx){
 		lastpix = (lineheight / 2) + (height / 2);
 		if(lastpix >= height)
 			lastpix = height - 1;
-//		draw_line(mlx, mlx->win,x,0,x, firstpix, 0x0002EFD9);
-		draw_verline(mlx, mlx->win, x, 0, firstpix,  0x0002EFD9);
-		//draw_verline(mlx, mlx->win, x, lastpix, height -1,  0x00786202);
-//		draw_line(mlx, mlx->win,x,height -1,x,lastpix , 0x00786202);
-	//	draw_line(mlx, mlx->win,x,lastpix,x, height -1, 0x00786202);
+
+		draw_verline(mlx, mlx->win, x, 0, firstpix,  mlx->ceilcolor);
+		draw_verline(mlx, mlx->win, x, lastpix + 1, height -1, mlx->floorcolor);
+
 		//Wall color
 		if(mlx->ray.side == 0){
 			if(mlx->ray.dirx > 0)
@@ -151,11 +150,6 @@ void	raycasting(t_mlx *mlx){
 			&mlx->tex[id].img_addr[tex_y % mlx->tex[id].img_height * mlx->tex[id].line_lenght + tex_x % mlx->tex[id].img_widht * mlx->tex[id].bpp / 8], sizeof(int));
 			i++;
 		}
-		/*--------------*/
-		//printf("%f\n", walldist);
-		//draw_line(mlx, mlx->win, mlx->player.posx + 5, mlx->player.posy + 5, ray_x, ray_y, 	0x00001FFF);
-		//printf("%f	%f   %f\n", ray_x, ray_y, ft_todeg(angle));
-		//printf("%f\n", walldist);
 		mlx->sprite_buff[x] = mlx->ray.walldist;
 		x++;
 	}

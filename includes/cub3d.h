@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 14:50:12 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:05:51 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ typedef struct		s_mlx
 	int		    	endian;
 	int				prueba;
 	int				enablesprite;
+	int				ceilcolor;
+	int				floorcolor;
 	double			*sprite_buff;
 	t_sprite		*sprite;
 	t_tex			tex[5];
@@ -258,4 +260,7 @@ void   				draw_sprites(t_mlx *mlx);
 void				screenshot(t_mlx *mlx);
 void				write_data_header(t_mlx *mlx, int size, int fd);
 void				take_screenshot(t_mlx *mlx);
+
+void				get_colors(t_config *config, t_mlx *mlx);
+unsigned long 		rgbtohex(int r, int g, int b);
 #endif

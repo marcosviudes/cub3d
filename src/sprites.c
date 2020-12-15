@@ -6,12 +6,41 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:57:03 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 14:35:01 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:17:13 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <draw_utils.h>
+
+void		order_sprites(t_mlx *mlx)
+{
+	int i;
+	int		j;
+	t_sprite	tmp;
+
+	i = 0;
+	while(i < mlx->config->spritecount){
+		    mlx->sprite[i].dist = pow((mlx->player.posx - mlx->sprite[i].x), 2) + pow((mlx->player.posy - mlx->sprite[i].y), 2);
+		i++;
+	}
+	i = 0;
+	while (i < mlx->config->spritecount)
+	{
+		j = i + 1;
+		while (j < mlx->config->spritecount)
+		{
+			if (mlx->sprite[i].dist < mlx->sprite[j].dist)
+			{
+				tmp = mlx->sprite[i];
+				mlx->sprite[i] = mlx->sprite[j];
+				mlx->sprite[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void    draw_sprites(t_mlx *mlx)
 {
@@ -30,6 +59,7 @@ void    draw_sprites(t_mlx *mlx)
     int y;
     int i;
 
+	order_sprites(mlx);
     i = 0;
     while(i < mlx->config->spritecount){
     spritex = mlx->sprite[i].x - mlx->player.posx;

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 09:26:15 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:35:23 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <draw_map.h>
 #include <math.h>
 
-int	prueba(t_mlx *mlx);
 int main(int argc, char *argv[])
 {
 	int         fd;
@@ -62,8 +61,7 @@ int main(int argc, char *argv[])
 	check_direction(config);
 	print_map(config);
 	#if MAP_DEBUG
-		getchar();
-		//system("leaks ./cub3D");
+		system("leaks cub3D");
 		return(0);
 	#endif
 
@@ -71,7 +69,9 @@ int main(int argc, char *argv[])
 	mlx->config = config;
 	mlx->sprite = config->sprite;
 	get_textures(mlx->config, mlx);
+	get_colors(mlx->config, mlx);
 	init_player(mlx->config, mlx);
+
 	if(argc == 3)
 		screenshot(mlx);
 	mlx->win = mlx_new_window(mlx->mlx, config->resolutionwidht, config->resolutionheight, WIN_NAME);
@@ -120,22 +120,5 @@ int		print_map(t_config *config)
 	}
 	printf("\n");
 	printf("El map printeado mide %ix%i\n", k, j);
-	return(0);
-}
-
-void		ft_nullfree(void *ptr){
-	ptr = NULL;
-	free(ptr);
-}
-
-void error_exit(char *error){
-	ft_putstr_fd("Error\n", 1);
-	ft_putstr_fd(error,1);
-	exit(-1);
-}
-
-int	prueba(t_mlx *mlx){
-	mlx->prueba++;
-	//printf("esto funcioina\n");
 	return(0);
 }

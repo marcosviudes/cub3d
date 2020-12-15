@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 09:38:33 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/15 13:08:20 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int				select_ambient(t_config *config, char *line, char **spline, int key)
 	}
 		return (0);
 }
-/*
+
 int				fill_ambientcolor(int *color, char **spline)
 {
 	int			rgb[3];
@@ -149,7 +149,6 @@ int				fill_ambientcolor(int *color, char **spline)
 	char		**numbers;
 
 	i = 0;
-//	ft_remchar(spline[1], ' ');
 	numbers = ft_split(spline[1], ',');
 	while (i < 3)
 	{
@@ -157,34 +156,22 @@ int				fill_ambientcolor(int *color, char **spline)
 		free(numbers[i]);
 		i++;
 	}
-	i = -1;
-	while (i++ < 3)
+	i = 0;
+	while (i < 3)
+	{
 		color[i] = rgb[i];
+		i++;
+	}
 	free(numbers);
 	return (0);
 }
-*/
-int				fill_ambientcolor(int *color, char **spline)
-{
-	int			rgb[3];
-	int			i;
-	char		**numbers;
 
-	i = 0;
-//	ft_remchar(spline[1], ' ');
-	numbers = ft_split(spline[1], ',');
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(numbers[i]);
-		free(numbers[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		color[i] = rgb[i];
-		i++;
-	}
-	free(numbers);
-	return (0);
+unsigned long rgbtohex(int r, int g, int b)
+{
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}
+
+void		get_colors(t_config *config, t_mlx *mlx){
+	mlx->ceilcolor = rgbtohex(config->ceilingcolor[0], config->ceilingcolor[1], config->ceilingcolor[2]);
+	mlx->floorcolor = rgbtohex(config->floorcolor[0],config->floorcolor[1],config->floorcolor[2]);
 }
