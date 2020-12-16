@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/15 13:08:20 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/16 14:53:00 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int				fill_resolution(t_config *config, char **spline)
 	int			resolution[3];
 
 	i = 1;
+	config->flags.resolution += 1;
 	if (spline[3] != NULL)
 		return (1);
 	while (i < 3)
@@ -38,7 +39,6 @@ int				fill_resolution(t_config *config, char **spline)
 	i = 0;
 	config->resolutionwidht = resolution[1];
 	config->resolutionheight = resolution[2];
-	config->flags.resolution += 1;
 	return (0);
 }
 
@@ -112,7 +112,7 @@ int				read_line(t_config *config, char *line)
 	else if (key >= K_NO && key <= K_S)
 		fill_texture(config, spline, key);
 	else if (key == K_F || key == K_C)
-		select_ambient(config, line, spline, key);
+		select_ambient(config, line, key);
 	i = 0;
 	while(spline[i]){
 		free(spline[i]);
@@ -124,7 +124,7 @@ int				read_line(t_config *config, char *line)
 }
 
 
-int				select_ambient(t_config *config, char *line, char **spline, int key)
+int				select_ambient(t_config *config, char *line, int key)
 {
 	int i;
 
@@ -132,24 +132,24 @@ int				select_ambient(t_config *config, char *line, char **spline, int key)
 	if (key == K_F)
 	{
 		config->flags.floor += 1;
-		fill_ambientcolor(config->floorcolor, spline);
+		fill_ambientcolor(config->floorcolor, line);
 	}
 	else if (key == K_C)
 	{
 		config->flags.cealing += 1;
-		fill_ambientcolor(config->ceilingcolor, spline);
+		fill_ambientcolor(config->ceilingcolor, line);
 	}
 		return (0);
 }
-
-int				fill_ambientcolor(int *color, char **spline)
+/*
+int				fill_ambientcolor(int *color, char *line)
 {
 	int			rgb[3];
 	int			i;
 	char		**numbers;
 
 	i = 0;
-	numbers = ft_split(spline[1], ',');
+	//numbers = ft_split(spline[1], ',');
 	while (i < 3)
 	{
 		rgb[i] = ft_atoi(numbers[i]);
@@ -164,8 +164,51 @@ int				fill_ambientcolor(int *color, char **spline)
 	}
 	free(numbers);
 	return (0);
-}
+}*/
+int				fill_ambientcolor(int *color, char *line)
+{
+	int i;
+	int pos;
+	int len;
+	char		**numbers;
+	int			rgb[3];
+	i = 0;
+	pos = 0;
 
+	len = ft_strlen(line);
+	len--;
+	while(line[len] == ' ')
+	{
+		line[len] = '\0';
+		len--;
+	}
+	while(*line == ' ')
+			line++;
+	line += 2;
+	while(line[i] != '\0'){
+			if(!ft_isdigit(line[i]) && line[i]!= ',')
+				printf("Formato de color invalido\n");
+			i++;
+	}
+
+	i = 0;
+	numbers = ft_split(line, ',');
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(numbers[i]);
+		free(numbers[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		color[i] = rgb[i];
+		i++;
+	}
+	free(numbers);
+	return (0);
+	return(0);
+}
 unsigned long rgbtohex(int r, int g, int b)
 {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);

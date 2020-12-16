@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:57:03 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/15 13:17:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/16 11:05:58 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void    draw_sprites(t_mlx *mlx)
     }
     i++;
     }
-    //printf("%d\n", mlx->tex[4].img_height);
     return;
 }

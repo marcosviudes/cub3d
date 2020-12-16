@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 10:29:05 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/16 11:55:44 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,21 +196,21 @@ int			check_map_walls(t_config *config)
 	{
 		while (i < width)
 			{
-				if (config->map.map[j][i] == 4)
+				if (config->map.map[j][i] == 0)
 				{
-					if (config->map.map[j+1][i] == 0)
+					if (config->map.map[j+1][i] == 4)
 					{
 						printf("mapa abierto\n");
 					}
-					if (config->map.map[j][i+1] == 0)
+					if (config->map.map[j][i+1] == 4)
 					{
 						printf("mapa abierto\n");
 					}
-					if (config->map.map[j-1][i] == 0)
+					if (config->map.map[j-1][i] == 4)
 					{
 						printf("mapa abierto\n");
 					}
-					if (config->map.map[j][i-1] == 0)
+					if (config->map.map[j][i-1] == 4)
 					{
 						printf("mapa abierto\n");
 					}
@@ -227,8 +227,8 @@ int			check_map_walls(t_config *config)
 		if(config->map.map[0][i] != 1)
 			if(config->map.map[0][i] != 4)
 				printf("mapa abierto\n");
-		if(config->map.map[0][i] != 1)
-			if(config->map.map[0][i] != 4)
+		if(config->map.map[heigh][i] != 1)
+			if(config->map.map[heigh][i] != 4)
 				printf("mapa abierto\n");
 		i++;
 	}
@@ -237,12 +237,11 @@ int			check_map_walls(t_config *config)
 		if(config->map.map[j][0] != 1)
 			if(config->map.map[j][0] != 4)
 				printf("mapa abierto\n");
-		if(config->map.map[j][0] != 1)
-			if(config->map.map[j][0] != 4)
+		if(config->map.map[j][width] != 1)
+			if(config->map.map[j][width] != 4)
 				printf("mapa abierto\n");
 		j++;
 	}
-	
 	return (0);
 }
 void		get_sprites(t_config *config)
@@ -272,8 +271,8 @@ void		get_sprites(t_config *config)
 		i = 0;
 		while (i < config->map.max_widht){
 			if(config->map.map[j][i] == 2 && k < config->spritecount){
-				config->sprite[k].x = (j + 1) + 0.5;
-				config->sprite[k].y = (i + 1) + 0.5;
+				config->sprite[k].x = j + 0.5;
+				config->sprite[k].y = i + 0.5;
 				config->sprite[k].id = k;
 				k++;
 			}

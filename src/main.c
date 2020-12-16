@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/15 13:35:23 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/16 11:38:32 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	check_direction(config);
 	print_map(config);
 	#if MAP_DEBUG
-		system("leaks cub3D");
+		//system("leaks cub3D");
 		return(0);
 	#endif
 

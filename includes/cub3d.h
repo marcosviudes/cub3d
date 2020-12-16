@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/15 13:05:51 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/16 12:12:54 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,8 +237,8 @@ int					check_textures_north(t_config *config);
 void 				get_textures(t_config *config, t_mlx *mlx);	
 
 void				get_init_position(t_config *config, int widht, int height);
-int					fill_ambientcolor(int *color, char **spline);
-int					select_ambient(t_config *config, char *line, char **spline, int key);
+int					fill_ambientcolor(int *color, char *line);
+int					select_ambient(t_config *config, char *line, int key);
 void				free_all_config(t_config  *config);
 int					map_fill_with(t_config *config, char c);
 int					check_map_walls(t_config *config);

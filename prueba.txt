@@ -1,0 +1,49 @@
+hasta aqui funciona
+El valor del width es:  -1920-
+El valor del height es: -1080-
+Los colores del suelo son: -220- -849- -6-
+Los colores del techo son: -225- -30- -4-
+La textura del norte es  : ./textures/fuhrer.xpm
+La textura del sur es    : ./textures/bluestone.xpm
+La textura del este es   : ./textures/mossy.xpm
+La textura del oeste es  : ./textures/colorstone.xpm
+La textura del sprinte es: ./textures/barrel.xpm
+El tamaño del mapa es    : |24x12|
+La posicion  inicial es  : |2x6|
+la dirccion inicial es 	 : S
+sprites-----:
+	el sprite [0] tiene la posicion : x = [1]; y = [11];
+	el sprite [1] tiene la posicion : x = [2]; y = [11];
+	el sprite [2] tiene la posicion : x = [2]; y = [22];
+	el sprite [3] tiene la posicion : x = [3]; y = [1];
+	el sprite [4] tiene la posicion : x = [3]; y = [2];
+	el sprite [5] tiene la posicion : x = [3]; y = [3];
+	el sprite [6] tiene la posicion : x = [3]; y = [4];
+	el sprite [7] tiene la posicion : x = [3]; y = [5];
+	el sprite [8] tiene la posicion : x = [3]; y = [6];
+	el sprite [9] tiene la posicion : x = [3]; y = [7];
+	el sprite [10] tiene la posicion : x = [3]; y = [8];
+	el sprite [11] tiene la posicion : x = [3]; y = [9];
+	el sprite [12] tiene la posicion : x = [3]; y = [10];
+El numero de sprties son : -13-
+
+Checks----------:
+
+los colores de suelo no pueden ser mayor a 255
+
+map---------:
+
+111111111111444444444444
+100000000002111111111111
+100000000002000000000021
+122222222221111111111111
+111111111111444444444444
+444444444444444444444444
+444444444444444444444444
+111114444444444444444444
+100014444444444444444444
+100014444444444444444444
+111114444444444444444444
+444444444444444444444444
+
+El map printeado mide 24x12
