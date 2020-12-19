@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/15 11:49:28 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 11:50:06 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		ft_strisnum(char *string)
 	int i;
 
 	i = 0;
+	if(!string)
+		return (0);
 	while (string[i] != '\0')
 	{
 		if (!(string[i] >= '0' && string[i] <= '9'))
@@ -73,7 +75,7 @@ int		get_key(char *spline)
 	if (ft_cmpstr(spline, "C"))
 		return (K_C);
 	else
-		printf("key invalida");
+		error_exit("key invalida");
 		exit(-1);
 	return (0);
 }

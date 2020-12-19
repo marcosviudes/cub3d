@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 14:50:01 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/14 10:57:23 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/17 12:15:03 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	take_screenshot(t_mlx *mlx)
     int     widht;
 
 	if ((fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777)) < 0)
-		printf("no se pudo hacer la captura de pantalla");
+		error_exit("no se pudo hacer la captura de pantalla");
 	widht = mlx->config->resolutionwidht;
 	size = 54 + (widht + mlx->config->resolutionheight) * 4;
 	write_data_header(mlx, size, fd);

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:10:15 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/06 11:07:36 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 11:20:04 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,24 @@
 void		check_resolution(t_config *config)
 {
 	if (config->flags.resolution > 1)
-		printf("se ha encontrado mas de un resolucion\n");
+		error_exit("Found more than one resolution.");
 	if (config->flags.resolution <= 0)
-		printf("No se ha encontrado resolucion\n");
+		error_exit("Resolution not found.");
 	if (config->resolutionwidht == 0 || config->resolutionheight == 0)
-		printf("Resolucion invalida\n");
+		error_exit("Invalid Resolution");
 	if (config->resolutionwidht == -1 || config->resolutionheight == -1)
-		printf("Falta numeros de resolución\n");
+		error_exit("Missed resolution Numbers");
 	if (config->resolutionwidht > MAX_WIDHT
 		|| config->resolutionheight > MAX_HEIGHT)
 	{
 		config->resolutionwidht = MAX_WIDHT;
 		config->resolutionheight = MAX_HEIGHT;
+	}
+	if (config->resolutionwidht <= MIN_RES
+		|| config->resolutionheight <= MIN_RES)
+	{
+		config->resolutionwidht = MIN_RES;
+		config->resolutionheight = MIN_RES;
 	}
 }
 
@@ -38,15 +44,15 @@ int			check_floor(t_config *config)
 
 	i = 0;
 	if (config->flags.floor > 1)
-		printf("se han encontrado mas de una configuracion pra el suelo\n");
+		error_exit("Found more than one Floor color");
 	if (config->flags.floor <= 0)
-		printf("No se ha encontrado colores para el suelo\n");
+		error_exit("Floor color not Found");
 	while (i < 3)
 	{
 		if (config->floorcolor[i] < 0)
-			printf("los colores del suelo deben ser mayor o igual a 0\n");
+			error_exit("Floor colors should be grater than 0");
 		if (config->floorcolor[i] > MAX_COLOR_RANGE)
-			printf("los colores de suelo no pueden ser mayor a 255\n");
+			error_exit("Floor colors shouldn't be graer than 255");
 		i++;
 	}
 	return (0);
@@ -58,15 +64,15 @@ int			check_ceiling(t_config *config)
 
 	i = 0;
 	if (config->flags.cealing > 1)
-		printf("se han encontrad mas de una configuracion para el techo\n");
+		error_exit("Found more than one Ceil color");
 	if (config->flags.cealing <= 0)
-		printf("No se ha encontrado colores para el techo\n");
+		error_exit("Ceil color not Found");
 	while (i < 3)
 	{
 		if (config->ceilingcolor[i] < 0)
-			printf("los colores del techo deben ser mayor o igual a 0\n");
+			error_exit("Ceil colors should be grater than 0");
 		if (config->ceilingcolor[i] > MAX_COLOR_RANGE)
-			printf("los colores techo no pueden ser mayor a 255\n");
+			error_exit("Ceil colors shouldn't be graer than 255");
 		i++;
 	}
 	return (0);
@@ -75,13 +81,13 @@ int			check_ceiling(t_config *config)
 int			check_textures_north(t_config *config)
 {
 	if (config->flags.texturenorth > 1)
-		printf("se ha encontrado mas de una textura N\n");
+		error_exit("more than one NO texture");
 	else if (config->flags.texturenorth <= 0)
-		printf("no se ha encontrado textura NO\n");
+		error_exit("NO texture not fund");
 	else if (config->flags.texturenorth == 1 && !config->tex_path_north)
-		printf ("textura N invalida\n");
+		error_exit ("Invalid NO texture");
 	else if (!config->tex_path_north)
-		printf ("debe introducir una textura N\n");
+		error_exit ("Introduce a NO texture");
 	check_extension(config->tex_path_north, TEX_EXT);
 	return (1);
 }
@@ -89,50 +95,54 @@ int			check_textures_north(t_config *config)
 int			check_textures_south(t_config *config)
 {
 	if (config->flags.texturesouth > 1)
-		printf("se ha encontrado mas de una textura SO\n");
+		error_exit("more than one SO texture");
 	else if (config->flags.texturesouth <= 0)
-		printf("no se ha encontrado textura SO\n");
+		error_exit("SO texture not fund");
 	else if (config->flags.texturesouth == 1 && !config->tex_path_south)
-		printf ("textura SO invalida\n");
+		error_exit ("Invalid SO texture");
 	else if (!config->tex_path_south)
-		printf ("debe introducir una textura SO\n");
+		error_exit ("Introduce a SO texture");
+	check_extension(config->tex_path_south, TEX_EXT);
 	return (1);
 }
 int			check_textures_west(t_config *config)
 {
 	if (config->flags.texturewest > 1)
-		printf("se ha encontrado mas de una textura WE\n");
+		error_exit("More than one W texture");
 	else if (config->flags.texturewest <= 0)
-		printf("no se ha encontrado textura WE\n");
+		error_exit("W texture not fund");
 	else if (config->flags.texturewest == 1 && !config->tex_path_west)
-		printf ("textura WE invalida\n");
+		error_exit ("Invalid W texture");
 	else if (!config->tex_path_west)
-		printf ("debe introducir una Textura W\n");
+		error_exit ("Introduce a W texture");
+	check_extension(config->tex_path_west, TEX_EXT);
 	return (1);
 }
 int			check_textures_east(t_config *config)
 {
 	if (config->flags.textureeast > 1)
-		printf("se ha encontrado mas de una textura EA\n");
+		error_exit("More than one EA texture");
 	else if (config->flags.textureeast <= 0)
-		printf("no se ha encontrado textura EA\n");
+		error_exit("EA texture not fund");
 	else if (config->flags.textureeast == 1 && !config->tex_path_east)
-		printf ("Textura EA invalida\n");
+		error_exit ("Textura EA invalida");
 	else if (!config->tex_path_east)
-		printf ("debe introducir una textura EA\n");
+		error_exit ("Introduce a EA texture");
+	check_extension(config->tex_path_east, TEX_EXT);
 	return (1);
 }
 
 int			check_textures_sprite(t_config *config)
 {
 	if (config->flags.texturesprite > 1)
-		printf("se ha encontrado mas de una textura S\n");
+		error_exit("More than one S texture");
 	else if (config->flags.texturesprite <= 0)
-		printf("no se ha encontrado textura S\n");
+		error_exit("S texture not fund");
 	else if (config->flags.texturesprite == 1 && !config->tex_sprite)
-		printf ("textura S invalida\n");
+		error_exit ("Textura s invalida");
 	else if (!config->tex_sprite)
-		printf ("debe introducir una textura S\n");
+		error_exit ("Introduce a s texture");
+	check_extension(config->tex_sprite, TEX_EXT);
 	return (1);
 }
 void		check_textures(t_config *config)
@@ -143,9 +153,6 @@ void		check_textures(t_config *config)
 	check_textures_east(config);
 	check_textures_sprite(config);
 }
-void		free_map(t_map map){
-	return; 
-}
 void		check_direction(t_config *config)
 {
 	char c;
@@ -153,12 +160,12 @@ void		check_direction(t_config *config)
 	c = '\0';
 	c = config->init_dir;
 	if(config->flags.initpos == 0)
-		printf("No se ha encontrado Jugador\n");
+		error_exit("Player not found");
 	if(config->flags.initpos > 1)
-		printf("Se ha encontrado mas de una Jugador\n");
+		error_exit("Found more than one player");
 	if((c == 'N' || c == 'S' || c == 'W' || c == 'E') && c != '\0')
 		return;	
-	printf("Direccion invalida\n");
+	error_exit("Invalid direction");
 }
 
 void		check_extension(char *path, char *ext){
@@ -177,6 +184,8 @@ void		check_extension(char *path, char *ext){
 	extlen = ft_strlen(ext);
 	if(ptr_ext != NULL && ft_strncmp(ptr_ext, ext, extlen +1) == 0)
 		return;
-	printf("Error: Archivo con extension invalida\n");
-	//exit(-1);
+	error_exit("Not valid extension");
+}
+void		free_map(t_map map){
+	return; 
 }

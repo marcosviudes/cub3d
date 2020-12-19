@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 10:37:40 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/12 10:37:44 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/17 13:20:40 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void get_textures(t_config *config, t_mlx *mlx){
     {
         mlx->tex[i].img = mlx_xpm_file_to_image(mlx->mlx, tex_paths[i], &mlx->tex[i].img_widht, &mlx->tex[i].img_height);
         if(!mlx->tex[i].img){
-            printf("No se ha podido abrir la textura %s\n", tex_paths[i]);
+            error_exit("No se ha podido abrir la textura");
             exit(-1);
         }
         mlx->tex[i].img_addr = mlx_get_data_addr(mlx->tex[i].img, &mlx->tex[i].bpp, &mlx->tex[i].line_lenght, &mlx->tex[i].endian);

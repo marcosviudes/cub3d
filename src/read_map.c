@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 11:55:44 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/18 11:13:15 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,23 +196,24 @@ int			check_map_walls(t_config *config)
 	{
 		while (i < width)
 			{
-				if (config->map.map[j][i] == 0)
+				if (config->map.map[j][i] == 0 ||
+					config->map.map[j][i] == 2)
 				{
 					if (config->map.map[j+1][i] == 4)
 					{
-						printf("mapa abierto\n");
+						error_exit("mapa abierto");
 					}
 					if (config->map.map[j][i+1] == 4)
 					{
-						printf("mapa abierto\n");
+						error_exit("mapa abierto");
 					}
 					if (config->map.map[j-1][i] == 4)
 					{
-						printf("mapa abierto\n");
+						error_exit("mapa abierto");
 					}
 					if (config->map.map[j][i-1] == 4)
 					{
-						printf("mapa abierto\n");
+						error_exit("mapa abierto");
 					}
 				}
 				i++;
@@ -226,20 +227,20 @@ int			check_map_walls(t_config *config)
 	{
 		if(config->map.map[0][i] != 1)
 			if(config->map.map[0][i] != 4)
-				printf("mapa abierto\n");
+				error_exit("mapa abierto");
 		if(config->map.map[heigh][i] != 1)
 			if(config->map.map[heigh][i] != 4)
-				printf("mapa abierto\n");
+				error_exit("mapa abierto");
 		i++;
 	}
 	while (j < heigh)
 	{
 		if(config->map.map[j][0] != 1)
 			if(config->map.map[j][0] != 4)
-				printf("mapa abierto\n");
+				error_exit("mapa abierto");
 		if(config->map.map[j][width] != 1)
 			if(config->map.map[j][width] != 4)
-				printf("mapa abierto\n");
+				error_exit("mapa abierto");
 		j++;
 	}
 	return (0);

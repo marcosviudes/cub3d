@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:21:05 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 14:53:00 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 12:01:27 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,19 @@ void			fill_texture(t_config *config, char **spline, int key)
 {
 	char *texture;
 
-	if(spline[2] != NULL)
+	if(spline[2] != NULL){
+		if (key == K_NO)
+			config->flags.texturenorth += 1;
+		if (key == K_SO)
+			config->flags.texturesouth += 1;
+		if (key == K_WE)
+			config->flags.texturewest += 1;
+		if (key == K_EA)
+			config->flags.textureeast += 1;
+		if (key == K_S)
+			config->flags.texturesprite += 1;
 		return;
+	}
 	texture = ft_strdup(spline[1]);
 	while(ft_iswhitespace(*texture)){
 		texture++;
@@ -88,6 +99,22 @@ int				read_line(t_config *config, char *line)
 	int		key;
 
 	i = 0;
+	while(line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (ft_isdigit(line[i]) || config->flags.readingmap == 1)
+	{
+		i = 0;
+		while(line[i] != '\0'){
+			if(line[i] == '\t')
+			{
+				error_exit("tabs on map");
+			}
+			i++;
+		}
+		read_map(config, line);
+		return(0);
+	}
+	i = 0;
 	while(line[i] != '\0'){
 		if(ft_iswhitespace(line[i])){
 			line[i] = ' ';
@@ -95,11 +122,6 @@ int				read_line(t_config *config, char *line)
 		i++;
 		}
 	i = 0;
-	if (ft_isdigit(line[i]) || config->flags.readingmap == 1)
-	{
-		read_map(config, line);
-		return(0);
-	}
 	if(!(spline = ft_split(line, ' ')) || line[0] == '\0'){
 		free(spline);
 		return(0);
@@ -141,30 +163,7 @@ int				select_ambient(t_config *config, char *line, int key)
 	}
 		return (0);
 }
-/*
-int				fill_ambientcolor(int *color, char *line)
-{
-	int			rgb[3];
-	int			i;
-	char		**numbers;
 
-	i = 0;
-	//numbers = ft_split(spline[1], ',');
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(numbers[i]);
-		free(numbers[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		color[i] = rgb[i];
-		i++;
-	}
-	free(numbers);
-	return (0);
-}*/
 int				fill_ambientcolor(int *color, char *line)
 {
 	int i;
@@ -175,6 +174,7 @@ int				fill_ambientcolor(int *color, char *line)
 	i = 0;
 	pos = 0;
 
+	
 	len = ft_strlen(line);
 	len--;
 	while(line[len] == ' ')
@@ -185,17 +185,30 @@ int				fill_ambientcolor(int *color, char *line)
 	while(*line == ' ')
 			line++;
 	line += 2;
+	while(*line == ' ')
+			line++;
+	i = 0;
+	if(ft_charcount(line, ',') != 2)
+		error_exit("Not valid color format");
+	i = 0;
 	while(line[i] != '\0'){
 			if(!ft_isdigit(line[i]) && line[i]!= ',')
-				printf("Formato de color invalido\n");
+				error_exit("Formato de color invalido");
 			i++;
 	}
 
 	i = 0;
 	numbers = ft_split(line, ',');
+	if (!numbers[0] || !numbers[1] || !numbers[2] || numbers[3])
+		error_exit("Not valid colro format");
 	while (i < 3)
 	{
-		rgb[i] = ft_atoi(numbers[i]);
+		if(!numbers[i])
+			rgb[i] = -1;
+		else if(ft_strisnum(numbers[i]))
+			rgb[i] = ft_atoi(numbers[i]);
+		else
+			rgb[i] = -1;
 		free(numbers[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 12:53:04 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 10:26:39 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/18 14:26:52 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	draw_player(t_mlx *mlx)
 	int draw_posx = mlx->player.posy;
 	int draw_posy = mlx->player.posx;
 	draw_square(mlx, mlx->win,draw_posx , draw_posy, 10, 0x00000000);
-	//draw_line(mlx, mlx->win, mlx->player.posx + 5 , mlx->player.posy + 5 , (int)xdir, (int)ydir, 0x00F100FC);
 }
 
 int		engine(t_mlx *mlx)
@@ -154,11 +153,8 @@ int		engine(t_mlx *mlx)
 	raycasting(mlx);
 	if(mlx->enablesprite)
 		draw_sprites(mlx);
-	//draw_map(mlx);
-	//draw_player(mlx);
-	//printf("x = %f, y = %f,\n", mlx->player.posx, mlx->player.posy);
-	//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	mlx_destroy_image(mlx->mlx, mlx->img);
 	return (0);
 }
 
@@ -258,25 +254,19 @@ void	move_player(t_mlx *mlx)
 		mlx->plane.x = mlx->plane.x * cos(ROT_CONST) - mlx->plane.y * sin(ROT_CONST);
 		mlx->plane.y = mlx->plane.oldx * sin(ROT_CONST) + mlx->plane.y * cos(ROT_CONST);
 	}
-		//printf("%f , %f\n", mlx->player.dir.x, mlx->player.dir.y);
-	//	float angle = atan2f(mlx->player.dir.y, mlx->player.dir.x) * 180/M_PI;
-//	printf("%f	%f\n", mlx->player.posx, mlx->player.posy);
-	//printf("%d	%d\n", mlx->player.mapx, mlx->player.mapy);
-	//	printf("%i\n", (int)angle);
 }
-//printf("%i\n", (int)atan2f(mlx->player.dir.x, mlx->player.dir.y) * 180/M_PI);
 
 int		get_text_id(int side, float dirx, float diry){
 	if(side == 0){
 			if(dirx > 0)
-				return(0);
+				return(2);
 			else
 				return(1);
 		}
 		else
 		{
 			if(diry > 0)
-				return(2);
+				return(0);
 			else
 				return(3);
 		}

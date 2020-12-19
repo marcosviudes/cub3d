@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 11:15:01 by mviudes           #+#    #+#             */
-/*   Updated: 2020/08/11 12:36:19 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 11:08:21 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 # define K_F	7
 # define K_C	8
 # define K_MAP	9
-
-# define MAX_WIDHT 2560
-# define MAX_HEIGHT 1395
-# define MAX_COLOR_RANGE 255
-
-# define VALID_CHAR_MAP " 012NSEW" //Esto no lo utilizo por ahora
 
 int					read_map(t_config *config, char	*line);
 int					copy_map(t_config *config, char *line);

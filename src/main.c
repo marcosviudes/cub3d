@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:24:28 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 11:38:32 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/18 09:52:07 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,26 @@ int main(int argc, char *argv[])
 {
 	int         fd;
 	char        *line;
+	int			readcount;
 	t_config    *config;
 	t_mlx		*mlx;
 
+	fd = open(argv[1] ,O_RDONLY);
+  	check_args(argc, argv, fd);
+	check_extension(argv[1], F_EXT);
 	config = ft_calloc(1, sizeof(t_config));
 	mlx = (t_mlx*)calloc(1, sizeof(t_mlx));
-	fd = open(argv[1] ,O_RDONLY);
-	check_args(argc, argv, fd);
-	check_extension(argv[1], F_EXT);
+	readcount = 0;
 	while((config->lastline = get_next_line(fd, &line)) > EOF)
 	{
 		read_line(config, line);
 		free(line);
+		readcount++;
 		if (!config->lastline)
 			break ;
 	}
+	if(readcount < 8)
+		error_exit("Not valid file");
 	printf("hasta aqui funciona\n");
 	printf("El valor del width es:  -%i-\n", config->resolutionwidht);
 	printf("El valor del height es: -%i-\n", config->resolutionheight);

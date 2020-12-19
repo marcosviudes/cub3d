@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:28:41 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 10:30:04 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 11:18:11 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	raycasting(t_mlx *mlx){
 		camerax = 2 * x / (double)widht - 1;
 		mlx->ray.dirx = mlx->player.dir.x + mlx->plane.x * camerax;
 		mlx->ray.diry = mlx->player.dir.y + mlx->plane.y * camerax;
-		//mlx->ray.deltadistx = fabs(1 / mlx->ray.dirx);
-		//mlx->ray.deltadisty = fabs(1 / mlx->ray.diry);
 
 		mlx->ray.deltadistx = (mlx->ray.diry == 0) ? 0 : ((mlx->ray.dirx == 0) ? 1 : fabs(1 / mlx->ray.dirx));
       	mlx->ray.deltadisty = (mlx->ray.dirx == 0) ? 0 : ((mlx->ray.diry == 0) ? 1 : fabs(1 / mlx->ray.diry));

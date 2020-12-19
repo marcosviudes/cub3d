@@ -2,22 +2,11 @@
 
 void    check_args(int argc, char *argv[], int fd){
 	if(argc != 2 && argc != 3)
-		{
-			printf("Numero de argumentos invalidos\n");
-			return;
-		}
+			error_exit("Invalid Num of Args");
 	if(argc == 3)
-	{
 		if(ft_strncmp(argv[2], SAVE, SAVE_LEN))
-			{
-				printf("Argumento invalido\n");
-				return;
-			}
-		
-	}
+			error_exit("Invalid args use: --save");
     if(fd <= 0)
-		{
-			printf("no se encontro archivo\n");
-			return;
-		}
+			error_exit("File not found.");
+
 }

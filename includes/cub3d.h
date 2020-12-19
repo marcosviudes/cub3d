@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 12:16:54 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/16 12:12:54 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/19 11:19:53 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@
 # define KEY_ESC		53
 # define KEY_SHIFT		257
 
+# define MIN_RES 50
+# define MAX_WIDHT 2560
+# define MAX_HEIGHT 1395
+# define MAX_COLOR_RANGE 255
+
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
 
@@ -47,7 +52,7 @@
 # define ROT_CONST		0.00872665 * 4
 # define ROT_SPEED		1.8
 # define MOV_DEF		.33
-# define MOV_SPEED		1
+# define MOV_SPEED		0.3
 # define DEF_HIGHT		0.5
 
 # define FOV			60

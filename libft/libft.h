@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 19:42:25 by mviudes           #+#    #+#             */
-/*   Updated: 2019/12/07 10:41:33 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/18 11:23:20 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void				ft_lstiter(t_list *lst, void (*f)(void*));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 void				ft_putchar(int a);
+int					ft_charcount(char *string, int c);
 #endif
