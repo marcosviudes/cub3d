@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args2.c                                      :+:      :+:    :+:   */
+/*   read_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/20 12:25:21 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/20 12:27:32 by mviudes          ###   ########.fr       */
+/*   Created: 2020/12/21 20:54:22 by mviudes           #+#    #+#             */
+/*   Updated: 2020/12/21 20:54:41 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include <read_map.h>
+#include <ft_utils.h>
 
-void	check_args(int argc, char *argv[], int fd)
+void				fill_map_sub(t_config *config, int row, int i, char c)
 {
-	if (argc != 2 && argc != 3)
-		error_exit("Invalid Num of Args");
-	if (argc == 3 && ft_strncmp(argv[2], SAVE, SAVE_LEN))
-		error_exit("Invalid args use: --save");
-	if (fd <= 0)
-		error_exit("File not found.");
+	if (ft_iswhitespace(c))
+		config->map.map[row][i] = 4;
+	else if (ft_isdigit(c))
+		config->map.map[row][i] = c - '0';
+	else if (ft_isascii(c))
+	{
+		config->init_dir = c;
+		get_init_position(config, i, row);
+		config->map.map[row][i] = 0;
+	}
+	else
+		config->map.map[row][i] = 4;
 }

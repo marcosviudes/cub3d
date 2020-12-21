@@ -6,15 +6,15 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 11:15:01 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/19 11:08:21 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/21 14:19:57 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _READ_MAP_H_
-# define _READ_MAP_H_
+#ifndef READ_MAP_H
+# define READ_MAP_H
 # include <cub3d.h>
 
-# define K_R 	1
+# define K_R	1
 # define K_NO	2
 # define K_SO	3
 # define K_WE	4

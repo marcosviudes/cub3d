@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:44:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/10/21 11:54:13 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/20 11:59:08 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 
 float	ft_torad(float degree)
 {
-	return(degree * (M_PI / 180.0));
+	return (degree * (M_PI / 180.0));
 }
 
 float	ft_todeg(float radians)
 {
-	return(radians * (180.0 / M_PI));
+	return (radians * (180.0 / M_PI));
 }
 
-int 	ft_sign(int number){
-	if(number < 0)
-		return(-1);
-	if(number > 0)
-		return(1);
-	return(0);
-	}
+int		ft_sign(int number)
+{
+	if (number < 0)
+		return (-1);
+	if (number > 0)
+		return (1);
+	return (0);
+}

@@ -1,9 +1,9 @@
 R 800 400
-NO tests/textures/grass.xpm
-SO tests/textures/brownstone.xpm
-WE tests/textures/brick.xpm
-EA tests/textures/whitestone.xpm
-S tests/textures/sprite/42.xpm
+NO ./textures/murt.xpm
+SO ./textures/colorstone.xpm
+WE ./textures/eagle.xpm
+EA ./textures/wood.xpm
+S ./textures/caballeroBlack_1.xpm
 
 F 220,100,0
 C 225,30,0

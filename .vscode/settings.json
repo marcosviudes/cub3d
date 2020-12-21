@@ -4,6 +4,12 @@
         "math.h": "c",
         "get_next_line.h": "c",
         "locale": "c",
-        "mlx.h": "c"
+        "mlx.h": "c",
+        "libft.h": "c",
+        "ios": "c",
+        "ft_utils.h": "c",
+        "read_map.h": "c",
+        "chrono": "c",
+        "complex": "c"
     }
 }

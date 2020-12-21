@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 10:40:51 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/19 11:50:06 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/21 18:35:39 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <read_map.h>
 
-int		ft_iswhitespace(int c)
+int			ft_iswhitespace(int c)
 {
 	if ((c == ' ') || (c == '\t') || (c == '\n')
 			|| (c == '\r') || (c == '\v') || (c == '\f'))
@@ -24,12 +24,12 @@ int		ft_iswhitespace(int c)
 	return (0);
 }
 
-int		ft_strisnum(char *string)
+int			ft_strisnum(char *string)
 {
-	int i;
+	int		i;
 
 	i = 0;
-	if(!string)
+	if (!string)
 		return (0);
 	while (string[i] != '\0')
 	{
@@ -40,9 +40,9 @@ int		ft_strisnum(char *string)
 	return (1);
 }
 
-int		ft_cmpstr(char *string1, char *string2)
+int			ft_cmpstr(char *string1, char *string2)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (!string1 || !string2)
@@ -56,7 +56,7 @@ int		ft_cmpstr(char *string1, char *string2)
 	return (1);
 }
 
-int		get_key(char *spline)
+int			get_key(char *spline)
 {
 	if (ft_cmpstr(spline, "R"))
 		return (K_R);
@@ -76,7 +76,6 @@ int		get_key(char *spline)
 		return (K_C);
 	else
 		error_exit("key invalida");
-		exit(-1);
 	return (0);
 }
 
@@ -85,27 +84,11 @@ int			find_char_str(char c, char const *string)
 	int		i;
 
 	i = 0;
-	while(string[i] != '\0')
-		{
-			if (string[i] == c)
-				return (c);
-			i++;
-		}
+	while (string[i] != '\0')
+	{
+		if (string[i] == c)
+			return (c);
+		i++;
+	}
 	return (0);
-}
-
-void ft_remchar(char *string, char c)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (string[i])
-    {
-        if (string[i] != c) 
-            string[j++] = string[i];
-        i++;       
-    }
-    string[j]=0;
 }
