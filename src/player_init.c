@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 19:09:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/21 19:10:11 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/22 11:00:33 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int				init_player(t_config *config, t_mlx *mlx)
 		mlx->sprite[i].tex = mlx->tex[4];
 		i++;
 	}
+	get_colors(mlx->config, mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mviudes <mviudes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 13:15:12 by mviudes           #+#    #+#             */
-/*   Updated: 2020/12/21 20:55:02 by mviudes          ###   ########.fr       */
+/*   Updated: 2020/12/22 10:38:25 by mviudes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void				check_map_walls(t_config *config)
 		i = 0;
 		while (i < config->map.max_width - 1)
 		{
-			if (config->map.map[j][i] < 0 || config->map.map[j][i] > 4)
+			if (config->map.map[j][i] < 0 || config->map.map[j][i] > 4
+				|| config->map.map[j][i] == 3)
 				error_exit("Invalid map");
 			if (config->map.map[j][i] == 0 ||
 				config->map.map[j][i] == 2)
